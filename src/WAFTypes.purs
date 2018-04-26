@@ -5,7 +5,6 @@ import Prelude
 import Data.Foreign.Class (class Decode, class Encode)
 import Data.Foreign.Generic (defaultOptions, genericDecode, genericEncode)
 import Data.Foreign.Generic.Types (Options)
-import Data.Foreign.NullOrUndefined (NullOrUndefined(..))
 import Data.Generic.Rep (class Generic)
 import Data.Generic.Rep.Show (genericShow)
 import Data.Maybe (Maybe(..))
@@ -31,9 +30,9 @@ instance encodeAction :: Encode Action where encode = genericEncode options
 newtype ActivatedRule = ActivatedRule 
   { "Priority" :: (RulePriority)
   , "RuleId" :: (ResourceId)
-  , "Action" :: NullOrUndefined (WafAction)
-  , "OverrideAction" :: NullOrUndefined (WafOverrideAction)
-  , "Type" :: NullOrUndefined (WafRuleType)
+  , "Action" :: Maybe (WafAction)
+  , "OverrideAction" :: Maybe (WafOverrideAction)
+  , "Type" :: Maybe (WafRuleType)
   }
 derive instance newtypeActivatedRule :: Newtype ActivatedRule _
 derive instance repGenericActivatedRule :: Generic ActivatedRule _
@@ -43,12 +42,12 @@ instance encodeActivatedRule :: Encode ActivatedRule where encode = genericEncod
 
 -- | Constructs ActivatedRule from required parameters
 newActivatedRule :: RulePriority -> ResourceId -> ActivatedRule
-newActivatedRule _Priority _RuleId = ActivatedRule { "Priority": _Priority, "RuleId": _RuleId, "Action": (NullOrUndefined Nothing), "OverrideAction": (NullOrUndefined Nothing), "Type": (NullOrUndefined Nothing) }
+newActivatedRule _Priority _RuleId = ActivatedRule { "Priority": _Priority, "RuleId": _RuleId, "Action": Nothing, "OverrideAction": Nothing, "Type": Nothing }
 
 -- | Constructs ActivatedRule's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newActivatedRule' :: RulePriority -> ResourceId -> ( { "Priority" :: (RulePriority) , "RuleId" :: (ResourceId) , "Action" :: NullOrUndefined (WafAction) , "OverrideAction" :: NullOrUndefined (WafOverrideAction) , "Type" :: NullOrUndefined (WafRuleType) } -> {"Priority" :: (RulePriority) , "RuleId" :: (ResourceId) , "Action" :: NullOrUndefined (WafAction) , "OverrideAction" :: NullOrUndefined (WafOverrideAction) , "Type" :: NullOrUndefined (WafRuleType) } ) -> ActivatedRule
-newActivatedRule' _Priority _RuleId customize = (ActivatedRule <<< customize) { "Priority": _Priority, "RuleId": _RuleId, "Action": (NullOrUndefined Nothing), "OverrideAction": (NullOrUndefined Nothing), "Type": (NullOrUndefined Nothing) }
+newActivatedRule' :: RulePriority -> ResourceId -> ( { "Priority" :: (RulePriority) , "RuleId" :: (ResourceId) , "Action" :: Maybe (WafAction) , "OverrideAction" :: Maybe (WafOverrideAction) , "Type" :: Maybe (WafRuleType) } -> {"Priority" :: (RulePriority) , "RuleId" :: (ResourceId) , "Action" :: Maybe (WafAction) , "OverrideAction" :: Maybe (WafOverrideAction) , "Type" :: Maybe (WafRuleType) } ) -> ActivatedRule
+newActivatedRule' _Priority _RuleId customize = (ActivatedRule <<< customize) { "Priority": _Priority, "RuleId": _RuleId, "Action": Nothing, "OverrideAction": Nothing, "Type": Nothing }
 
 
 
@@ -64,7 +63,7 @@ instance encodeActivatedRules :: Encode ActivatedRules where encode = genericEnc
 -- | <p>In a <a>GetByteMatchSet</a> request, <code>ByteMatchSet</code> is a complex type that contains the <code>ByteMatchSetId</code> and <code>Name</code> of a <code>ByteMatchSet</code>, and the values that you specified when you updated the <code>ByteMatchSet</code>. </p> <p>A complex type that contains <code>ByteMatchTuple</code> objects, which specify the parts of web requests that you want AWS WAF to inspect and the values that you want AWS WAF to search for. If a <code>ByteMatchSet</code> contains more than one <code>ByteMatchTuple</code> object, a request needs to match the settings in only one <code>ByteMatchTuple</code> to be considered a match.</p>
 newtype ByteMatchSet = ByteMatchSet 
   { "ByteMatchSetId" :: (ResourceId)
-  , "Name" :: NullOrUndefined (ResourceName)
+  , "Name" :: Maybe (ResourceName)
   , "ByteMatchTuples" :: (ByteMatchTuples)
   }
 derive instance newtypeByteMatchSet :: Newtype ByteMatchSet _
@@ -75,12 +74,12 @@ instance encodeByteMatchSet :: Encode ByteMatchSet where encode = genericEncode 
 
 -- | Constructs ByteMatchSet from required parameters
 newByteMatchSet :: ResourceId -> ByteMatchTuples -> ByteMatchSet
-newByteMatchSet _ByteMatchSetId _ByteMatchTuples = ByteMatchSet { "ByteMatchSetId": _ByteMatchSetId, "ByteMatchTuples": _ByteMatchTuples, "Name": (NullOrUndefined Nothing) }
+newByteMatchSet _ByteMatchSetId _ByteMatchTuples = ByteMatchSet { "ByteMatchSetId": _ByteMatchSetId, "ByteMatchTuples": _ByteMatchTuples, "Name": Nothing }
 
 -- | Constructs ByteMatchSet's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newByteMatchSet' :: ResourceId -> ByteMatchTuples -> ( { "ByteMatchSetId" :: (ResourceId) , "Name" :: NullOrUndefined (ResourceName) , "ByteMatchTuples" :: (ByteMatchTuples) } -> {"ByteMatchSetId" :: (ResourceId) , "Name" :: NullOrUndefined (ResourceName) , "ByteMatchTuples" :: (ByteMatchTuples) } ) -> ByteMatchSet
-newByteMatchSet' _ByteMatchSetId _ByteMatchTuples customize = (ByteMatchSet <<< customize) { "ByteMatchSetId": _ByteMatchSetId, "ByteMatchTuples": _ByteMatchTuples, "Name": (NullOrUndefined Nothing) }
+newByteMatchSet' :: ResourceId -> ByteMatchTuples -> ( { "ByteMatchSetId" :: (ResourceId) , "Name" :: Maybe (ResourceName) , "ByteMatchTuples" :: (ByteMatchTuples) } -> {"ByteMatchSetId" :: (ResourceId) , "Name" :: Maybe (ResourceName) , "ByteMatchTuples" :: (ByteMatchTuples) } ) -> ByteMatchSet
+newByteMatchSet' _ByteMatchSetId _ByteMatchTuples customize = (ByteMatchSet <<< customize) { "ByteMatchSetId": _ByteMatchSetId, "ByteMatchTuples": _ByteMatchTuples, "Name": Nothing }
 
 
 
@@ -255,8 +254,8 @@ newCreateByteMatchSetRequest' _ChangeToken _Name customize = (CreateByteMatchSet
 
 
 newtype CreateByteMatchSetResponse = CreateByteMatchSetResponse 
-  { "ByteMatchSet" :: NullOrUndefined (ByteMatchSet)
-  , "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "ByteMatchSet" :: Maybe (ByteMatchSet)
+  , "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeCreateByteMatchSetResponse :: Newtype CreateByteMatchSetResponse _
 derive instance repGenericCreateByteMatchSetResponse :: Generic CreateByteMatchSetResponse _
@@ -266,12 +265,12 @@ instance encodeCreateByteMatchSetResponse :: Encode CreateByteMatchSetResponse w
 
 -- | Constructs CreateByteMatchSetResponse from required parameters
 newCreateByteMatchSetResponse :: CreateByteMatchSetResponse
-newCreateByteMatchSetResponse  = CreateByteMatchSetResponse { "ByteMatchSet": (NullOrUndefined Nothing), "ChangeToken": (NullOrUndefined Nothing) }
+newCreateByteMatchSetResponse  = CreateByteMatchSetResponse { "ByteMatchSet": Nothing, "ChangeToken": Nothing }
 
 -- | Constructs CreateByteMatchSetResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newCreateByteMatchSetResponse' :: ( { "ByteMatchSet" :: NullOrUndefined (ByteMatchSet) , "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"ByteMatchSet" :: NullOrUndefined (ByteMatchSet) , "ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> CreateByteMatchSetResponse
-newCreateByteMatchSetResponse'  customize = (CreateByteMatchSetResponse <<< customize) { "ByteMatchSet": (NullOrUndefined Nothing), "ChangeToken": (NullOrUndefined Nothing) }
+newCreateByteMatchSetResponse' :: ( { "ByteMatchSet" :: Maybe (ByteMatchSet) , "ChangeToken" :: Maybe (ChangeToken) } -> {"ByteMatchSet" :: Maybe (ByteMatchSet) , "ChangeToken" :: Maybe (ChangeToken) } ) -> CreateByteMatchSetResponse
+newCreateByteMatchSetResponse'  customize = (CreateByteMatchSetResponse <<< customize) { "ByteMatchSet": Nothing, "ChangeToken": Nothing }
 
 
 
@@ -297,8 +296,8 @@ newCreateGeoMatchSetRequest' _ChangeToken _Name customize = (CreateGeoMatchSetRe
 
 
 newtype CreateGeoMatchSetResponse = CreateGeoMatchSetResponse 
-  { "GeoMatchSet" :: NullOrUndefined (GeoMatchSet)
-  , "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "GeoMatchSet" :: Maybe (GeoMatchSet)
+  , "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeCreateGeoMatchSetResponse :: Newtype CreateGeoMatchSetResponse _
 derive instance repGenericCreateGeoMatchSetResponse :: Generic CreateGeoMatchSetResponse _
@@ -308,12 +307,12 @@ instance encodeCreateGeoMatchSetResponse :: Encode CreateGeoMatchSetResponse whe
 
 -- | Constructs CreateGeoMatchSetResponse from required parameters
 newCreateGeoMatchSetResponse :: CreateGeoMatchSetResponse
-newCreateGeoMatchSetResponse  = CreateGeoMatchSetResponse { "ChangeToken": (NullOrUndefined Nothing), "GeoMatchSet": (NullOrUndefined Nothing) }
+newCreateGeoMatchSetResponse  = CreateGeoMatchSetResponse { "ChangeToken": Nothing, "GeoMatchSet": Nothing }
 
 -- | Constructs CreateGeoMatchSetResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newCreateGeoMatchSetResponse' :: ( { "GeoMatchSet" :: NullOrUndefined (GeoMatchSet) , "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"GeoMatchSet" :: NullOrUndefined (GeoMatchSet) , "ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> CreateGeoMatchSetResponse
-newCreateGeoMatchSetResponse'  customize = (CreateGeoMatchSetResponse <<< customize) { "ChangeToken": (NullOrUndefined Nothing), "GeoMatchSet": (NullOrUndefined Nothing) }
+newCreateGeoMatchSetResponse' :: ( { "GeoMatchSet" :: Maybe (GeoMatchSet) , "ChangeToken" :: Maybe (ChangeToken) } -> {"GeoMatchSet" :: Maybe (GeoMatchSet) , "ChangeToken" :: Maybe (ChangeToken) } ) -> CreateGeoMatchSetResponse
+newCreateGeoMatchSetResponse'  customize = (CreateGeoMatchSetResponse <<< customize) { "ChangeToken": Nothing, "GeoMatchSet": Nothing }
 
 
 
@@ -339,8 +338,8 @@ newCreateIPSetRequest' _ChangeToken _Name customize = (CreateIPSetRequest <<< cu
 
 
 newtype CreateIPSetResponse = CreateIPSetResponse 
-  { "IPSet" :: NullOrUndefined (IPSet)
-  , "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "IPSet" :: Maybe (IPSet)
+  , "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeCreateIPSetResponse :: Newtype CreateIPSetResponse _
 derive instance repGenericCreateIPSetResponse :: Generic CreateIPSetResponse _
@@ -350,12 +349,12 @@ instance encodeCreateIPSetResponse :: Encode CreateIPSetResponse where encode = 
 
 -- | Constructs CreateIPSetResponse from required parameters
 newCreateIPSetResponse :: CreateIPSetResponse
-newCreateIPSetResponse  = CreateIPSetResponse { "ChangeToken": (NullOrUndefined Nothing), "IPSet": (NullOrUndefined Nothing) }
+newCreateIPSetResponse  = CreateIPSetResponse { "ChangeToken": Nothing, "IPSet": Nothing }
 
 -- | Constructs CreateIPSetResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newCreateIPSetResponse' :: ( { "IPSet" :: NullOrUndefined (IPSet) , "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"IPSet" :: NullOrUndefined (IPSet) , "ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> CreateIPSetResponse
-newCreateIPSetResponse'  customize = (CreateIPSetResponse <<< customize) { "ChangeToken": (NullOrUndefined Nothing), "IPSet": (NullOrUndefined Nothing) }
+newCreateIPSetResponse' :: ( { "IPSet" :: Maybe (IPSet) , "ChangeToken" :: Maybe (ChangeToken) } -> {"IPSet" :: Maybe (IPSet) , "ChangeToken" :: Maybe (ChangeToken) } ) -> CreateIPSetResponse
+newCreateIPSetResponse'  customize = (CreateIPSetResponse <<< customize) { "ChangeToken": Nothing, "IPSet": Nothing }
 
 
 
@@ -384,8 +383,8 @@ newCreateRateBasedRuleRequest' _ChangeToken _MetricName _Name _RateKey _RateLimi
 
 
 newtype CreateRateBasedRuleResponse = CreateRateBasedRuleResponse 
-  { "Rule" :: NullOrUndefined (RateBasedRule)
-  , "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "Rule" :: Maybe (RateBasedRule)
+  , "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeCreateRateBasedRuleResponse :: Newtype CreateRateBasedRuleResponse _
 derive instance repGenericCreateRateBasedRuleResponse :: Generic CreateRateBasedRuleResponse _
@@ -395,12 +394,12 @@ instance encodeCreateRateBasedRuleResponse :: Encode CreateRateBasedRuleResponse
 
 -- | Constructs CreateRateBasedRuleResponse from required parameters
 newCreateRateBasedRuleResponse :: CreateRateBasedRuleResponse
-newCreateRateBasedRuleResponse  = CreateRateBasedRuleResponse { "ChangeToken": (NullOrUndefined Nothing), "Rule": (NullOrUndefined Nothing) }
+newCreateRateBasedRuleResponse  = CreateRateBasedRuleResponse { "ChangeToken": Nothing, "Rule": Nothing }
 
 -- | Constructs CreateRateBasedRuleResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newCreateRateBasedRuleResponse' :: ( { "Rule" :: NullOrUndefined (RateBasedRule) , "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"Rule" :: NullOrUndefined (RateBasedRule) , "ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> CreateRateBasedRuleResponse
-newCreateRateBasedRuleResponse'  customize = (CreateRateBasedRuleResponse <<< customize) { "ChangeToken": (NullOrUndefined Nothing), "Rule": (NullOrUndefined Nothing) }
+newCreateRateBasedRuleResponse' :: ( { "Rule" :: Maybe (RateBasedRule) , "ChangeToken" :: Maybe (ChangeToken) } -> {"Rule" :: Maybe (RateBasedRule) , "ChangeToken" :: Maybe (ChangeToken) } ) -> CreateRateBasedRuleResponse
+newCreateRateBasedRuleResponse'  customize = (CreateRateBasedRuleResponse <<< customize) { "ChangeToken": Nothing, "Rule": Nothing }
 
 
 
@@ -426,8 +425,8 @@ newCreateRegexMatchSetRequest' _ChangeToken _Name customize = (CreateRegexMatchS
 
 
 newtype CreateRegexMatchSetResponse = CreateRegexMatchSetResponse 
-  { "RegexMatchSet" :: NullOrUndefined (RegexMatchSet)
-  , "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "RegexMatchSet" :: Maybe (RegexMatchSet)
+  , "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeCreateRegexMatchSetResponse :: Newtype CreateRegexMatchSetResponse _
 derive instance repGenericCreateRegexMatchSetResponse :: Generic CreateRegexMatchSetResponse _
@@ -437,12 +436,12 @@ instance encodeCreateRegexMatchSetResponse :: Encode CreateRegexMatchSetResponse
 
 -- | Constructs CreateRegexMatchSetResponse from required parameters
 newCreateRegexMatchSetResponse :: CreateRegexMatchSetResponse
-newCreateRegexMatchSetResponse  = CreateRegexMatchSetResponse { "ChangeToken": (NullOrUndefined Nothing), "RegexMatchSet": (NullOrUndefined Nothing) }
+newCreateRegexMatchSetResponse  = CreateRegexMatchSetResponse { "ChangeToken": Nothing, "RegexMatchSet": Nothing }
 
 -- | Constructs CreateRegexMatchSetResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newCreateRegexMatchSetResponse' :: ( { "RegexMatchSet" :: NullOrUndefined (RegexMatchSet) , "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"RegexMatchSet" :: NullOrUndefined (RegexMatchSet) , "ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> CreateRegexMatchSetResponse
-newCreateRegexMatchSetResponse'  customize = (CreateRegexMatchSetResponse <<< customize) { "ChangeToken": (NullOrUndefined Nothing), "RegexMatchSet": (NullOrUndefined Nothing) }
+newCreateRegexMatchSetResponse' :: ( { "RegexMatchSet" :: Maybe (RegexMatchSet) , "ChangeToken" :: Maybe (ChangeToken) } -> {"RegexMatchSet" :: Maybe (RegexMatchSet) , "ChangeToken" :: Maybe (ChangeToken) } ) -> CreateRegexMatchSetResponse
+newCreateRegexMatchSetResponse'  customize = (CreateRegexMatchSetResponse <<< customize) { "ChangeToken": Nothing, "RegexMatchSet": Nothing }
 
 
 
@@ -468,8 +467,8 @@ newCreateRegexPatternSetRequest' _ChangeToken _Name customize = (CreateRegexPatt
 
 
 newtype CreateRegexPatternSetResponse = CreateRegexPatternSetResponse 
-  { "RegexPatternSet" :: NullOrUndefined (RegexPatternSet)
-  , "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "RegexPatternSet" :: Maybe (RegexPatternSet)
+  , "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeCreateRegexPatternSetResponse :: Newtype CreateRegexPatternSetResponse _
 derive instance repGenericCreateRegexPatternSetResponse :: Generic CreateRegexPatternSetResponse _
@@ -479,12 +478,12 @@ instance encodeCreateRegexPatternSetResponse :: Encode CreateRegexPatternSetResp
 
 -- | Constructs CreateRegexPatternSetResponse from required parameters
 newCreateRegexPatternSetResponse :: CreateRegexPatternSetResponse
-newCreateRegexPatternSetResponse  = CreateRegexPatternSetResponse { "ChangeToken": (NullOrUndefined Nothing), "RegexPatternSet": (NullOrUndefined Nothing) }
+newCreateRegexPatternSetResponse  = CreateRegexPatternSetResponse { "ChangeToken": Nothing, "RegexPatternSet": Nothing }
 
 -- | Constructs CreateRegexPatternSetResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newCreateRegexPatternSetResponse' :: ( { "RegexPatternSet" :: NullOrUndefined (RegexPatternSet) , "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"RegexPatternSet" :: NullOrUndefined (RegexPatternSet) , "ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> CreateRegexPatternSetResponse
-newCreateRegexPatternSetResponse'  customize = (CreateRegexPatternSetResponse <<< customize) { "ChangeToken": (NullOrUndefined Nothing), "RegexPatternSet": (NullOrUndefined Nothing) }
+newCreateRegexPatternSetResponse' :: ( { "RegexPatternSet" :: Maybe (RegexPatternSet) , "ChangeToken" :: Maybe (ChangeToken) } -> {"RegexPatternSet" :: Maybe (RegexPatternSet) , "ChangeToken" :: Maybe (ChangeToken) } ) -> CreateRegexPatternSetResponse
+newCreateRegexPatternSetResponse'  customize = (CreateRegexPatternSetResponse <<< customize) { "ChangeToken": Nothing, "RegexPatternSet": Nothing }
 
 
 
@@ -511,8 +510,8 @@ newCreateRuleGroupRequest' _ChangeToken _MetricName _Name customize = (CreateRul
 
 
 newtype CreateRuleGroupResponse = CreateRuleGroupResponse 
-  { "RuleGroup" :: NullOrUndefined (RuleGroup)
-  , "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "RuleGroup" :: Maybe (RuleGroup)
+  , "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeCreateRuleGroupResponse :: Newtype CreateRuleGroupResponse _
 derive instance repGenericCreateRuleGroupResponse :: Generic CreateRuleGroupResponse _
@@ -522,12 +521,12 @@ instance encodeCreateRuleGroupResponse :: Encode CreateRuleGroupResponse where e
 
 -- | Constructs CreateRuleGroupResponse from required parameters
 newCreateRuleGroupResponse :: CreateRuleGroupResponse
-newCreateRuleGroupResponse  = CreateRuleGroupResponse { "ChangeToken": (NullOrUndefined Nothing), "RuleGroup": (NullOrUndefined Nothing) }
+newCreateRuleGroupResponse  = CreateRuleGroupResponse { "ChangeToken": Nothing, "RuleGroup": Nothing }
 
 -- | Constructs CreateRuleGroupResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newCreateRuleGroupResponse' :: ( { "RuleGroup" :: NullOrUndefined (RuleGroup) , "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"RuleGroup" :: NullOrUndefined (RuleGroup) , "ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> CreateRuleGroupResponse
-newCreateRuleGroupResponse'  customize = (CreateRuleGroupResponse <<< customize) { "ChangeToken": (NullOrUndefined Nothing), "RuleGroup": (NullOrUndefined Nothing) }
+newCreateRuleGroupResponse' :: ( { "RuleGroup" :: Maybe (RuleGroup) , "ChangeToken" :: Maybe (ChangeToken) } -> {"RuleGroup" :: Maybe (RuleGroup) , "ChangeToken" :: Maybe (ChangeToken) } ) -> CreateRuleGroupResponse
+newCreateRuleGroupResponse'  customize = (CreateRuleGroupResponse <<< customize) { "ChangeToken": Nothing, "RuleGroup": Nothing }
 
 
 
@@ -554,8 +553,8 @@ newCreateRuleRequest' _ChangeToken _MetricName _Name customize = (CreateRuleRequ
 
 
 newtype CreateRuleResponse = CreateRuleResponse 
-  { "Rule" :: NullOrUndefined (Rule)
-  , "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "Rule" :: Maybe (Rule)
+  , "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeCreateRuleResponse :: Newtype CreateRuleResponse _
 derive instance repGenericCreateRuleResponse :: Generic CreateRuleResponse _
@@ -565,12 +564,12 @@ instance encodeCreateRuleResponse :: Encode CreateRuleResponse where encode = ge
 
 -- | Constructs CreateRuleResponse from required parameters
 newCreateRuleResponse :: CreateRuleResponse
-newCreateRuleResponse  = CreateRuleResponse { "ChangeToken": (NullOrUndefined Nothing), "Rule": (NullOrUndefined Nothing) }
+newCreateRuleResponse  = CreateRuleResponse { "ChangeToken": Nothing, "Rule": Nothing }
 
 -- | Constructs CreateRuleResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newCreateRuleResponse' :: ( { "Rule" :: NullOrUndefined (Rule) , "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"Rule" :: NullOrUndefined (Rule) , "ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> CreateRuleResponse
-newCreateRuleResponse'  customize = (CreateRuleResponse <<< customize) { "ChangeToken": (NullOrUndefined Nothing), "Rule": (NullOrUndefined Nothing) }
+newCreateRuleResponse' :: ( { "Rule" :: Maybe (Rule) , "ChangeToken" :: Maybe (ChangeToken) } -> {"Rule" :: Maybe (Rule) , "ChangeToken" :: Maybe (ChangeToken) } ) -> CreateRuleResponse
+newCreateRuleResponse'  customize = (CreateRuleResponse <<< customize) { "ChangeToken": Nothing, "Rule": Nothing }
 
 
 
@@ -596,8 +595,8 @@ newCreateSizeConstraintSetRequest' _ChangeToken _Name customize = (CreateSizeCon
 
 
 newtype CreateSizeConstraintSetResponse = CreateSizeConstraintSetResponse 
-  { "SizeConstraintSet" :: NullOrUndefined (SizeConstraintSet)
-  , "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "SizeConstraintSet" :: Maybe (SizeConstraintSet)
+  , "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeCreateSizeConstraintSetResponse :: Newtype CreateSizeConstraintSetResponse _
 derive instance repGenericCreateSizeConstraintSetResponse :: Generic CreateSizeConstraintSetResponse _
@@ -607,12 +606,12 @@ instance encodeCreateSizeConstraintSetResponse :: Encode CreateSizeConstraintSet
 
 -- | Constructs CreateSizeConstraintSetResponse from required parameters
 newCreateSizeConstraintSetResponse :: CreateSizeConstraintSetResponse
-newCreateSizeConstraintSetResponse  = CreateSizeConstraintSetResponse { "ChangeToken": (NullOrUndefined Nothing), "SizeConstraintSet": (NullOrUndefined Nothing) }
+newCreateSizeConstraintSetResponse  = CreateSizeConstraintSetResponse { "ChangeToken": Nothing, "SizeConstraintSet": Nothing }
 
 -- | Constructs CreateSizeConstraintSetResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newCreateSizeConstraintSetResponse' :: ( { "SizeConstraintSet" :: NullOrUndefined (SizeConstraintSet) , "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"SizeConstraintSet" :: NullOrUndefined (SizeConstraintSet) , "ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> CreateSizeConstraintSetResponse
-newCreateSizeConstraintSetResponse'  customize = (CreateSizeConstraintSetResponse <<< customize) { "ChangeToken": (NullOrUndefined Nothing), "SizeConstraintSet": (NullOrUndefined Nothing) }
+newCreateSizeConstraintSetResponse' :: ( { "SizeConstraintSet" :: Maybe (SizeConstraintSet) , "ChangeToken" :: Maybe (ChangeToken) } -> {"SizeConstraintSet" :: Maybe (SizeConstraintSet) , "ChangeToken" :: Maybe (ChangeToken) } ) -> CreateSizeConstraintSetResponse
+newCreateSizeConstraintSetResponse'  customize = (CreateSizeConstraintSetResponse <<< customize) { "ChangeToken": Nothing, "SizeConstraintSet": Nothing }
 
 
 
@@ -640,8 +639,8 @@ newCreateSqlInjectionMatchSetRequest' _ChangeToken _Name customize = (CreateSqlI
 
 -- | <p>The response to a <code>CreateSqlInjectionMatchSet</code> request.</p>
 newtype CreateSqlInjectionMatchSetResponse = CreateSqlInjectionMatchSetResponse 
-  { "SqlInjectionMatchSet" :: NullOrUndefined (SqlInjectionMatchSet)
-  , "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "SqlInjectionMatchSet" :: Maybe (SqlInjectionMatchSet)
+  , "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeCreateSqlInjectionMatchSetResponse :: Newtype CreateSqlInjectionMatchSetResponse _
 derive instance repGenericCreateSqlInjectionMatchSetResponse :: Generic CreateSqlInjectionMatchSetResponse _
@@ -651,12 +650,12 @@ instance encodeCreateSqlInjectionMatchSetResponse :: Encode CreateSqlInjectionMa
 
 -- | Constructs CreateSqlInjectionMatchSetResponse from required parameters
 newCreateSqlInjectionMatchSetResponse :: CreateSqlInjectionMatchSetResponse
-newCreateSqlInjectionMatchSetResponse  = CreateSqlInjectionMatchSetResponse { "ChangeToken": (NullOrUndefined Nothing), "SqlInjectionMatchSet": (NullOrUndefined Nothing) }
+newCreateSqlInjectionMatchSetResponse  = CreateSqlInjectionMatchSetResponse { "ChangeToken": Nothing, "SqlInjectionMatchSet": Nothing }
 
 -- | Constructs CreateSqlInjectionMatchSetResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newCreateSqlInjectionMatchSetResponse' :: ( { "SqlInjectionMatchSet" :: NullOrUndefined (SqlInjectionMatchSet) , "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"SqlInjectionMatchSet" :: NullOrUndefined (SqlInjectionMatchSet) , "ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> CreateSqlInjectionMatchSetResponse
-newCreateSqlInjectionMatchSetResponse'  customize = (CreateSqlInjectionMatchSetResponse <<< customize) { "ChangeToken": (NullOrUndefined Nothing), "SqlInjectionMatchSet": (NullOrUndefined Nothing) }
+newCreateSqlInjectionMatchSetResponse' :: ( { "SqlInjectionMatchSet" :: Maybe (SqlInjectionMatchSet) , "ChangeToken" :: Maybe (ChangeToken) } -> {"SqlInjectionMatchSet" :: Maybe (SqlInjectionMatchSet) , "ChangeToken" :: Maybe (ChangeToken) } ) -> CreateSqlInjectionMatchSetResponse
+newCreateSqlInjectionMatchSetResponse'  customize = (CreateSqlInjectionMatchSetResponse <<< customize) { "ChangeToken": Nothing, "SqlInjectionMatchSet": Nothing }
 
 
 
@@ -684,8 +683,8 @@ newCreateWebACLRequest' _ChangeToken _DefaultAction _MetricName _Name customize 
 
 
 newtype CreateWebACLResponse = CreateWebACLResponse 
-  { "WebACL" :: NullOrUndefined (WebACL)
-  , "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "WebACL" :: Maybe (WebACL)
+  , "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeCreateWebACLResponse :: Newtype CreateWebACLResponse _
 derive instance repGenericCreateWebACLResponse :: Generic CreateWebACLResponse _
@@ -695,12 +694,12 @@ instance encodeCreateWebACLResponse :: Encode CreateWebACLResponse where encode 
 
 -- | Constructs CreateWebACLResponse from required parameters
 newCreateWebACLResponse :: CreateWebACLResponse
-newCreateWebACLResponse  = CreateWebACLResponse { "ChangeToken": (NullOrUndefined Nothing), "WebACL": (NullOrUndefined Nothing) }
+newCreateWebACLResponse  = CreateWebACLResponse { "ChangeToken": Nothing, "WebACL": Nothing }
 
 -- | Constructs CreateWebACLResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newCreateWebACLResponse' :: ( { "WebACL" :: NullOrUndefined (WebACL) , "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"WebACL" :: NullOrUndefined (WebACL) , "ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> CreateWebACLResponse
-newCreateWebACLResponse'  customize = (CreateWebACLResponse <<< customize) { "ChangeToken": (NullOrUndefined Nothing), "WebACL": (NullOrUndefined Nothing) }
+newCreateWebACLResponse' :: ( { "WebACL" :: Maybe (WebACL) , "ChangeToken" :: Maybe (ChangeToken) } -> {"WebACL" :: Maybe (WebACL) , "ChangeToken" :: Maybe (ChangeToken) } ) -> CreateWebACLResponse
+newCreateWebACLResponse'  customize = (CreateWebACLResponse <<< customize) { "ChangeToken": Nothing, "WebACL": Nothing }
 
 
 
@@ -728,8 +727,8 @@ newCreateXssMatchSetRequest' _ChangeToken _Name customize = (CreateXssMatchSetRe
 
 -- | <p>The response to a <code>CreateXssMatchSet</code> request.</p>
 newtype CreateXssMatchSetResponse = CreateXssMatchSetResponse 
-  { "XssMatchSet" :: NullOrUndefined (XssMatchSet)
-  , "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "XssMatchSet" :: Maybe (XssMatchSet)
+  , "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeCreateXssMatchSetResponse :: Newtype CreateXssMatchSetResponse _
 derive instance repGenericCreateXssMatchSetResponse :: Generic CreateXssMatchSetResponse _
@@ -739,12 +738,12 @@ instance encodeCreateXssMatchSetResponse :: Encode CreateXssMatchSetResponse whe
 
 -- | Constructs CreateXssMatchSetResponse from required parameters
 newCreateXssMatchSetResponse :: CreateXssMatchSetResponse
-newCreateXssMatchSetResponse  = CreateXssMatchSetResponse { "ChangeToken": (NullOrUndefined Nothing), "XssMatchSet": (NullOrUndefined Nothing) }
+newCreateXssMatchSetResponse  = CreateXssMatchSetResponse { "ChangeToken": Nothing, "XssMatchSet": Nothing }
 
 -- | Constructs CreateXssMatchSetResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newCreateXssMatchSetResponse' :: ( { "XssMatchSet" :: NullOrUndefined (XssMatchSet) , "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"XssMatchSet" :: NullOrUndefined (XssMatchSet) , "ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> CreateXssMatchSetResponse
-newCreateXssMatchSetResponse'  customize = (CreateXssMatchSetResponse <<< customize) { "ChangeToken": (NullOrUndefined Nothing), "XssMatchSet": (NullOrUndefined Nothing) }
+newCreateXssMatchSetResponse' :: ( { "XssMatchSet" :: Maybe (XssMatchSet) , "ChangeToken" :: Maybe (ChangeToken) } -> {"XssMatchSet" :: Maybe (XssMatchSet) , "ChangeToken" :: Maybe (ChangeToken) } ) -> CreateXssMatchSetResponse
+newCreateXssMatchSetResponse'  customize = (CreateXssMatchSetResponse <<< customize) { "ChangeToken": Nothing, "XssMatchSet": Nothing }
 
 
 
@@ -770,7 +769,7 @@ newDeleteByteMatchSetRequest' _ByteMatchSetId _ChangeToken customize = (DeleteBy
 
 
 newtype DeleteByteMatchSetResponse = DeleteByteMatchSetResponse 
-  { "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeDeleteByteMatchSetResponse :: Newtype DeleteByteMatchSetResponse _
 derive instance repGenericDeleteByteMatchSetResponse :: Generic DeleteByteMatchSetResponse _
@@ -780,12 +779,12 @@ instance encodeDeleteByteMatchSetResponse :: Encode DeleteByteMatchSetResponse w
 
 -- | Constructs DeleteByteMatchSetResponse from required parameters
 newDeleteByteMatchSetResponse :: DeleteByteMatchSetResponse
-newDeleteByteMatchSetResponse  = DeleteByteMatchSetResponse { "ChangeToken": (NullOrUndefined Nothing) }
+newDeleteByteMatchSetResponse  = DeleteByteMatchSetResponse { "ChangeToken": Nothing }
 
 -- | Constructs DeleteByteMatchSetResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newDeleteByteMatchSetResponse' :: ( { "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> DeleteByteMatchSetResponse
-newDeleteByteMatchSetResponse'  customize = (DeleteByteMatchSetResponse <<< customize) { "ChangeToken": (NullOrUndefined Nothing) }
+newDeleteByteMatchSetResponse' :: ( { "ChangeToken" :: Maybe (ChangeToken) } -> {"ChangeToken" :: Maybe (ChangeToken) } ) -> DeleteByteMatchSetResponse
+newDeleteByteMatchSetResponse'  customize = (DeleteByteMatchSetResponse <<< customize) { "ChangeToken": Nothing }
 
 
 
@@ -811,7 +810,7 @@ newDeleteGeoMatchSetRequest' _ChangeToken _GeoMatchSetId customize = (DeleteGeoM
 
 
 newtype DeleteGeoMatchSetResponse = DeleteGeoMatchSetResponse 
-  { "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeDeleteGeoMatchSetResponse :: Newtype DeleteGeoMatchSetResponse _
 derive instance repGenericDeleteGeoMatchSetResponse :: Generic DeleteGeoMatchSetResponse _
@@ -821,12 +820,12 @@ instance encodeDeleteGeoMatchSetResponse :: Encode DeleteGeoMatchSetResponse whe
 
 -- | Constructs DeleteGeoMatchSetResponse from required parameters
 newDeleteGeoMatchSetResponse :: DeleteGeoMatchSetResponse
-newDeleteGeoMatchSetResponse  = DeleteGeoMatchSetResponse { "ChangeToken": (NullOrUndefined Nothing) }
+newDeleteGeoMatchSetResponse  = DeleteGeoMatchSetResponse { "ChangeToken": Nothing }
 
 -- | Constructs DeleteGeoMatchSetResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newDeleteGeoMatchSetResponse' :: ( { "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> DeleteGeoMatchSetResponse
-newDeleteGeoMatchSetResponse'  customize = (DeleteGeoMatchSetResponse <<< customize) { "ChangeToken": (NullOrUndefined Nothing) }
+newDeleteGeoMatchSetResponse' :: ( { "ChangeToken" :: Maybe (ChangeToken) } -> {"ChangeToken" :: Maybe (ChangeToken) } ) -> DeleteGeoMatchSetResponse
+newDeleteGeoMatchSetResponse'  customize = (DeleteGeoMatchSetResponse <<< customize) { "ChangeToken": Nothing }
 
 
 
@@ -852,7 +851,7 @@ newDeleteIPSetRequest' _ChangeToken _IPSetId customize = (DeleteIPSetRequest <<<
 
 
 newtype DeleteIPSetResponse = DeleteIPSetResponse 
-  { "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeDeleteIPSetResponse :: Newtype DeleteIPSetResponse _
 derive instance repGenericDeleteIPSetResponse :: Generic DeleteIPSetResponse _
@@ -862,12 +861,12 @@ instance encodeDeleteIPSetResponse :: Encode DeleteIPSetResponse where encode = 
 
 -- | Constructs DeleteIPSetResponse from required parameters
 newDeleteIPSetResponse :: DeleteIPSetResponse
-newDeleteIPSetResponse  = DeleteIPSetResponse { "ChangeToken": (NullOrUndefined Nothing) }
+newDeleteIPSetResponse  = DeleteIPSetResponse { "ChangeToken": Nothing }
 
 -- | Constructs DeleteIPSetResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newDeleteIPSetResponse' :: ( { "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> DeleteIPSetResponse
-newDeleteIPSetResponse'  customize = (DeleteIPSetResponse <<< customize) { "ChangeToken": (NullOrUndefined Nothing) }
+newDeleteIPSetResponse' :: ( { "ChangeToken" :: Maybe (ChangeToken) } -> {"ChangeToken" :: Maybe (ChangeToken) } ) -> DeleteIPSetResponse
+newDeleteIPSetResponse'  customize = (DeleteIPSetResponse <<< customize) { "ChangeToken": Nothing }
 
 
 
@@ -922,7 +921,7 @@ newDeleteRateBasedRuleRequest' _ChangeToken _RuleId customize = (DeleteRateBased
 
 
 newtype DeleteRateBasedRuleResponse = DeleteRateBasedRuleResponse 
-  { "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeDeleteRateBasedRuleResponse :: Newtype DeleteRateBasedRuleResponse _
 derive instance repGenericDeleteRateBasedRuleResponse :: Generic DeleteRateBasedRuleResponse _
@@ -932,12 +931,12 @@ instance encodeDeleteRateBasedRuleResponse :: Encode DeleteRateBasedRuleResponse
 
 -- | Constructs DeleteRateBasedRuleResponse from required parameters
 newDeleteRateBasedRuleResponse :: DeleteRateBasedRuleResponse
-newDeleteRateBasedRuleResponse  = DeleteRateBasedRuleResponse { "ChangeToken": (NullOrUndefined Nothing) }
+newDeleteRateBasedRuleResponse  = DeleteRateBasedRuleResponse { "ChangeToken": Nothing }
 
 -- | Constructs DeleteRateBasedRuleResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newDeleteRateBasedRuleResponse' :: ( { "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> DeleteRateBasedRuleResponse
-newDeleteRateBasedRuleResponse'  customize = (DeleteRateBasedRuleResponse <<< customize) { "ChangeToken": (NullOrUndefined Nothing) }
+newDeleteRateBasedRuleResponse' :: ( { "ChangeToken" :: Maybe (ChangeToken) } -> {"ChangeToken" :: Maybe (ChangeToken) } ) -> DeleteRateBasedRuleResponse
+newDeleteRateBasedRuleResponse'  customize = (DeleteRateBasedRuleResponse <<< customize) { "ChangeToken": Nothing }
 
 
 
@@ -963,7 +962,7 @@ newDeleteRegexMatchSetRequest' _ChangeToken _RegexMatchSetId customize = (Delete
 
 
 newtype DeleteRegexMatchSetResponse = DeleteRegexMatchSetResponse 
-  { "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeDeleteRegexMatchSetResponse :: Newtype DeleteRegexMatchSetResponse _
 derive instance repGenericDeleteRegexMatchSetResponse :: Generic DeleteRegexMatchSetResponse _
@@ -973,12 +972,12 @@ instance encodeDeleteRegexMatchSetResponse :: Encode DeleteRegexMatchSetResponse
 
 -- | Constructs DeleteRegexMatchSetResponse from required parameters
 newDeleteRegexMatchSetResponse :: DeleteRegexMatchSetResponse
-newDeleteRegexMatchSetResponse  = DeleteRegexMatchSetResponse { "ChangeToken": (NullOrUndefined Nothing) }
+newDeleteRegexMatchSetResponse  = DeleteRegexMatchSetResponse { "ChangeToken": Nothing }
 
 -- | Constructs DeleteRegexMatchSetResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newDeleteRegexMatchSetResponse' :: ( { "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> DeleteRegexMatchSetResponse
-newDeleteRegexMatchSetResponse'  customize = (DeleteRegexMatchSetResponse <<< customize) { "ChangeToken": (NullOrUndefined Nothing) }
+newDeleteRegexMatchSetResponse' :: ( { "ChangeToken" :: Maybe (ChangeToken) } -> {"ChangeToken" :: Maybe (ChangeToken) } ) -> DeleteRegexMatchSetResponse
+newDeleteRegexMatchSetResponse'  customize = (DeleteRegexMatchSetResponse <<< customize) { "ChangeToken": Nothing }
 
 
 
@@ -1004,7 +1003,7 @@ newDeleteRegexPatternSetRequest' _ChangeToken _RegexPatternSetId customize = (De
 
 
 newtype DeleteRegexPatternSetResponse = DeleteRegexPatternSetResponse 
-  { "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeDeleteRegexPatternSetResponse :: Newtype DeleteRegexPatternSetResponse _
 derive instance repGenericDeleteRegexPatternSetResponse :: Generic DeleteRegexPatternSetResponse _
@@ -1014,12 +1013,12 @@ instance encodeDeleteRegexPatternSetResponse :: Encode DeleteRegexPatternSetResp
 
 -- | Constructs DeleteRegexPatternSetResponse from required parameters
 newDeleteRegexPatternSetResponse :: DeleteRegexPatternSetResponse
-newDeleteRegexPatternSetResponse  = DeleteRegexPatternSetResponse { "ChangeToken": (NullOrUndefined Nothing) }
+newDeleteRegexPatternSetResponse  = DeleteRegexPatternSetResponse { "ChangeToken": Nothing }
 
 -- | Constructs DeleteRegexPatternSetResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newDeleteRegexPatternSetResponse' :: ( { "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> DeleteRegexPatternSetResponse
-newDeleteRegexPatternSetResponse'  customize = (DeleteRegexPatternSetResponse <<< customize) { "ChangeToken": (NullOrUndefined Nothing) }
+newDeleteRegexPatternSetResponse' :: ( { "ChangeToken" :: Maybe (ChangeToken) } -> {"ChangeToken" :: Maybe (ChangeToken) } ) -> DeleteRegexPatternSetResponse
+newDeleteRegexPatternSetResponse'  customize = (DeleteRegexPatternSetResponse <<< customize) { "ChangeToken": Nothing }
 
 
 
@@ -1045,7 +1044,7 @@ newDeleteRuleGroupRequest' _ChangeToken _RuleGroupId customize = (DeleteRuleGrou
 
 
 newtype DeleteRuleGroupResponse = DeleteRuleGroupResponse 
-  { "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeDeleteRuleGroupResponse :: Newtype DeleteRuleGroupResponse _
 derive instance repGenericDeleteRuleGroupResponse :: Generic DeleteRuleGroupResponse _
@@ -1055,12 +1054,12 @@ instance encodeDeleteRuleGroupResponse :: Encode DeleteRuleGroupResponse where e
 
 -- | Constructs DeleteRuleGroupResponse from required parameters
 newDeleteRuleGroupResponse :: DeleteRuleGroupResponse
-newDeleteRuleGroupResponse  = DeleteRuleGroupResponse { "ChangeToken": (NullOrUndefined Nothing) }
+newDeleteRuleGroupResponse  = DeleteRuleGroupResponse { "ChangeToken": Nothing }
 
 -- | Constructs DeleteRuleGroupResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newDeleteRuleGroupResponse' :: ( { "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> DeleteRuleGroupResponse
-newDeleteRuleGroupResponse'  customize = (DeleteRuleGroupResponse <<< customize) { "ChangeToken": (NullOrUndefined Nothing) }
+newDeleteRuleGroupResponse' :: ( { "ChangeToken" :: Maybe (ChangeToken) } -> {"ChangeToken" :: Maybe (ChangeToken) } ) -> DeleteRuleGroupResponse
+newDeleteRuleGroupResponse'  customize = (DeleteRuleGroupResponse <<< customize) { "ChangeToken": Nothing }
 
 
 
@@ -1086,7 +1085,7 @@ newDeleteRuleRequest' _ChangeToken _RuleId customize = (DeleteRuleRequest <<< cu
 
 
 newtype DeleteRuleResponse = DeleteRuleResponse 
-  { "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeDeleteRuleResponse :: Newtype DeleteRuleResponse _
 derive instance repGenericDeleteRuleResponse :: Generic DeleteRuleResponse _
@@ -1096,12 +1095,12 @@ instance encodeDeleteRuleResponse :: Encode DeleteRuleResponse where encode = ge
 
 -- | Constructs DeleteRuleResponse from required parameters
 newDeleteRuleResponse :: DeleteRuleResponse
-newDeleteRuleResponse  = DeleteRuleResponse { "ChangeToken": (NullOrUndefined Nothing) }
+newDeleteRuleResponse  = DeleteRuleResponse { "ChangeToken": Nothing }
 
 -- | Constructs DeleteRuleResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newDeleteRuleResponse' :: ( { "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> DeleteRuleResponse
-newDeleteRuleResponse'  customize = (DeleteRuleResponse <<< customize) { "ChangeToken": (NullOrUndefined Nothing) }
+newDeleteRuleResponse' :: ( { "ChangeToken" :: Maybe (ChangeToken) } -> {"ChangeToken" :: Maybe (ChangeToken) } ) -> DeleteRuleResponse
+newDeleteRuleResponse'  customize = (DeleteRuleResponse <<< customize) { "ChangeToken": Nothing }
 
 
 
@@ -1127,7 +1126,7 @@ newDeleteSizeConstraintSetRequest' _ChangeToken _SizeConstraintSetId customize =
 
 
 newtype DeleteSizeConstraintSetResponse = DeleteSizeConstraintSetResponse 
-  { "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeDeleteSizeConstraintSetResponse :: Newtype DeleteSizeConstraintSetResponse _
 derive instance repGenericDeleteSizeConstraintSetResponse :: Generic DeleteSizeConstraintSetResponse _
@@ -1137,12 +1136,12 @@ instance encodeDeleteSizeConstraintSetResponse :: Encode DeleteSizeConstraintSet
 
 -- | Constructs DeleteSizeConstraintSetResponse from required parameters
 newDeleteSizeConstraintSetResponse :: DeleteSizeConstraintSetResponse
-newDeleteSizeConstraintSetResponse  = DeleteSizeConstraintSetResponse { "ChangeToken": (NullOrUndefined Nothing) }
+newDeleteSizeConstraintSetResponse  = DeleteSizeConstraintSetResponse { "ChangeToken": Nothing }
 
 -- | Constructs DeleteSizeConstraintSetResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newDeleteSizeConstraintSetResponse' :: ( { "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> DeleteSizeConstraintSetResponse
-newDeleteSizeConstraintSetResponse'  customize = (DeleteSizeConstraintSetResponse <<< customize) { "ChangeToken": (NullOrUndefined Nothing) }
+newDeleteSizeConstraintSetResponse' :: ( { "ChangeToken" :: Maybe (ChangeToken) } -> {"ChangeToken" :: Maybe (ChangeToken) } ) -> DeleteSizeConstraintSetResponse
+newDeleteSizeConstraintSetResponse'  customize = (DeleteSizeConstraintSetResponse <<< customize) { "ChangeToken": Nothing }
 
 
 
@@ -1170,7 +1169,7 @@ newDeleteSqlInjectionMatchSetRequest' _ChangeToken _SqlInjectionMatchSetId custo
 
 -- | <p>The response to a request to delete a <a>SqlInjectionMatchSet</a> from AWS WAF.</p>
 newtype DeleteSqlInjectionMatchSetResponse = DeleteSqlInjectionMatchSetResponse 
-  { "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeDeleteSqlInjectionMatchSetResponse :: Newtype DeleteSqlInjectionMatchSetResponse _
 derive instance repGenericDeleteSqlInjectionMatchSetResponse :: Generic DeleteSqlInjectionMatchSetResponse _
@@ -1180,12 +1179,12 @@ instance encodeDeleteSqlInjectionMatchSetResponse :: Encode DeleteSqlInjectionMa
 
 -- | Constructs DeleteSqlInjectionMatchSetResponse from required parameters
 newDeleteSqlInjectionMatchSetResponse :: DeleteSqlInjectionMatchSetResponse
-newDeleteSqlInjectionMatchSetResponse  = DeleteSqlInjectionMatchSetResponse { "ChangeToken": (NullOrUndefined Nothing) }
+newDeleteSqlInjectionMatchSetResponse  = DeleteSqlInjectionMatchSetResponse { "ChangeToken": Nothing }
 
 -- | Constructs DeleteSqlInjectionMatchSetResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newDeleteSqlInjectionMatchSetResponse' :: ( { "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> DeleteSqlInjectionMatchSetResponse
-newDeleteSqlInjectionMatchSetResponse'  customize = (DeleteSqlInjectionMatchSetResponse <<< customize) { "ChangeToken": (NullOrUndefined Nothing) }
+newDeleteSqlInjectionMatchSetResponse' :: ( { "ChangeToken" :: Maybe (ChangeToken) } -> {"ChangeToken" :: Maybe (ChangeToken) } ) -> DeleteSqlInjectionMatchSetResponse
+newDeleteSqlInjectionMatchSetResponse'  customize = (DeleteSqlInjectionMatchSetResponse <<< customize) { "ChangeToken": Nothing }
 
 
 
@@ -1211,7 +1210,7 @@ newDeleteWebACLRequest' _ChangeToken _WebACLId customize = (DeleteWebACLRequest 
 
 
 newtype DeleteWebACLResponse = DeleteWebACLResponse 
-  { "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeDeleteWebACLResponse :: Newtype DeleteWebACLResponse _
 derive instance repGenericDeleteWebACLResponse :: Generic DeleteWebACLResponse _
@@ -1221,12 +1220,12 @@ instance encodeDeleteWebACLResponse :: Encode DeleteWebACLResponse where encode 
 
 -- | Constructs DeleteWebACLResponse from required parameters
 newDeleteWebACLResponse :: DeleteWebACLResponse
-newDeleteWebACLResponse  = DeleteWebACLResponse { "ChangeToken": (NullOrUndefined Nothing) }
+newDeleteWebACLResponse  = DeleteWebACLResponse { "ChangeToken": Nothing }
 
 -- | Constructs DeleteWebACLResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newDeleteWebACLResponse' :: ( { "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> DeleteWebACLResponse
-newDeleteWebACLResponse'  customize = (DeleteWebACLResponse <<< customize) { "ChangeToken": (NullOrUndefined Nothing) }
+newDeleteWebACLResponse' :: ( { "ChangeToken" :: Maybe (ChangeToken) } -> {"ChangeToken" :: Maybe (ChangeToken) } ) -> DeleteWebACLResponse
+newDeleteWebACLResponse'  customize = (DeleteWebACLResponse <<< customize) { "ChangeToken": Nothing }
 
 
 
@@ -1254,7 +1253,7 @@ newDeleteXssMatchSetRequest' _ChangeToken _XssMatchSetId customize = (DeleteXssM
 
 -- | <p>The response to a request to delete an <a>XssMatchSet</a> from AWS WAF.</p>
 newtype DeleteXssMatchSetResponse = DeleteXssMatchSetResponse 
-  { "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeDeleteXssMatchSetResponse :: Newtype DeleteXssMatchSetResponse _
 derive instance repGenericDeleteXssMatchSetResponse :: Generic DeleteXssMatchSetResponse _
@@ -1264,19 +1263,19 @@ instance encodeDeleteXssMatchSetResponse :: Encode DeleteXssMatchSetResponse whe
 
 -- | Constructs DeleteXssMatchSetResponse from required parameters
 newDeleteXssMatchSetResponse :: DeleteXssMatchSetResponse
-newDeleteXssMatchSetResponse  = DeleteXssMatchSetResponse { "ChangeToken": (NullOrUndefined Nothing) }
+newDeleteXssMatchSetResponse  = DeleteXssMatchSetResponse { "ChangeToken": Nothing }
 
 -- | Constructs DeleteXssMatchSetResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newDeleteXssMatchSetResponse' :: ( { "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> DeleteXssMatchSetResponse
-newDeleteXssMatchSetResponse'  customize = (DeleteXssMatchSetResponse <<< customize) { "ChangeToken": (NullOrUndefined Nothing) }
+newDeleteXssMatchSetResponse' :: ( { "ChangeToken" :: Maybe (ChangeToken) } -> {"ChangeToken" :: Maybe (ChangeToken) } ) -> DeleteXssMatchSetResponse
+newDeleteXssMatchSetResponse'  customize = (DeleteXssMatchSetResponse <<< customize) { "ChangeToken": Nothing }
 
 
 
 -- | <p>Specifies where in a web request to look for <code>TargetString</code>.</p>
 newtype FieldToMatch = FieldToMatch 
   { "Type" :: (MatchFieldType)
-  , "Data" :: NullOrUndefined (MatchFieldData)
+  , "Data" :: Maybe (MatchFieldData)
   }
 derive instance newtypeFieldToMatch :: Newtype FieldToMatch _
 derive instance repGenericFieldToMatch :: Generic FieldToMatch _
@@ -1286,12 +1285,12 @@ instance encodeFieldToMatch :: Encode FieldToMatch where encode = genericEncode 
 
 -- | Constructs FieldToMatch from required parameters
 newFieldToMatch :: MatchFieldType -> FieldToMatch
-newFieldToMatch _Type = FieldToMatch { "Type": _Type, "Data": (NullOrUndefined Nothing) }
+newFieldToMatch _Type = FieldToMatch { "Type": _Type, "Data": Nothing }
 
 -- | Constructs FieldToMatch's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newFieldToMatch' :: MatchFieldType -> ( { "Type" :: (MatchFieldType) , "Data" :: NullOrUndefined (MatchFieldData) } -> {"Type" :: (MatchFieldType) , "Data" :: NullOrUndefined (MatchFieldData) } ) -> FieldToMatch
-newFieldToMatch' _Type customize = (FieldToMatch <<< customize) { "Type": _Type, "Data": (NullOrUndefined Nothing) }
+newFieldToMatch' :: MatchFieldType -> ( { "Type" :: (MatchFieldType) , "Data" :: Maybe (MatchFieldData) } -> {"Type" :: (MatchFieldType) , "Data" :: Maybe (MatchFieldData) } ) -> FieldToMatch
+newFieldToMatch' _Type customize = (FieldToMatch <<< customize) { "Type": _Type, "Data": Nothing }
 
 
 
@@ -1347,7 +1346,7 @@ instance encodeGeoMatchConstraints :: Encode GeoMatchConstraints where encode = 
 -- | <p>Contains one or more countries that AWS WAF will search for.</p>
 newtype GeoMatchSet = GeoMatchSet 
   { "GeoMatchSetId" :: (ResourceId)
-  , "Name" :: NullOrUndefined (ResourceName)
+  , "Name" :: Maybe (ResourceName)
   , "GeoMatchConstraints" :: (GeoMatchConstraints)
   }
 derive instance newtypeGeoMatchSet :: Newtype GeoMatchSet _
@@ -1358,12 +1357,12 @@ instance encodeGeoMatchSet :: Encode GeoMatchSet where encode = genericEncode op
 
 -- | Constructs GeoMatchSet from required parameters
 newGeoMatchSet :: GeoMatchConstraints -> ResourceId -> GeoMatchSet
-newGeoMatchSet _GeoMatchConstraints _GeoMatchSetId = GeoMatchSet { "GeoMatchConstraints": _GeoMatchConstraints, "GeoMatchSetId": _GeoMatchSetId, "Name": (NullOrUndefined Nothing) }
+newGeoMatchSet _GeoMatchConstraints _GeoMatchSetId = GeoMatchSet { "GeoMatchConstraints": _GeoMatchConstraints, "GeoMatchSetId": _GeoMatchSetId, "Name": Nothing }
 
 -- | Constructs GeoMatchSet's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGeoMatchSet' :: GeoMatchConstraints -> ResourceId -> ( { "GeoMatchSetId" :: (ResourceId) , "Name" :: NullOrUndefined (ResourceName) , "GeoMatchConstraints" :: (GeoMatchConstraints) } -> {"GeoMatchSetId" :: (ResourceId) , "Name" :: NullOrUndefined (ResourceName) , "GeoMatchConstraints" :: (GeoMatchConstraints) } ) -> GeoMatchSet
-newGeoMatchSet' _GeoMatchConstraints _GeoMatchSetId customize = (GeoMatchSet <<< customize) { "GeoMatchConstraints": _GeoMatchConstraints, "GeoMatchSetId": _GeoMatchSetId, "Name": (NullOrUndefined Nothing) }
+newGeoMatchSet' :: GeoMatchConstraints -> ResourceId -> ( { "GeoMatchSetId" :: (ResourceId) , "Name" :: Maybe (ResourceName) , "GeoMatchConstraints" :: (GeoMatchConstraints) } -> {"GeoMatchSetId" :: (ResourceId) , "Name" :: Maybe (ResourceName) , "GeoMatchConstraints" :: (GeoMatchConstraints) } ) -> GeoMatchSet
+newGeoMatchSet' _GeoMatchConstraints _GeoMatchSetId customize = (GeoMatchSet <<< customize) { "GeoMatchConstraints": _GeoMatchConstraints, "GeoMatchSetId": _GeoMatchSetId, "Name": Nothing }
 
 
 
@@ -1450,7 +1449,7 @@ newGetByteMatchSetRequest' _ByteMatchSetId customize = (GetByteMatchSetRequest <
 
 
 newtype GetByteMatchSetResponse = GetByteMatchSetResponse 
-  { "ByteMatchSet" :: NullOrUndefined (ByteMatchSet)
+  { "ByteMatchSet" :: Maybe (ByteMatchSet)
   }
 derive instance newtypeGetByteMatchSetResponse :: Newtype GetByteMatchSetResponse _
 derive instance repGenericGetByteMatchSetResponse :: Generic GetByteMatchSetResponse _
@@ -1460,12 +1459,12 @@ instance encodeGetByteMatchSetResponse :: Encode GetByteMatchSetResponse where e
 
 -- | Constructs GetByteMatchSetResponse from required parameters
 newGetByteMatchSetResponse :: GetByteMatchSetResponse
-newGetByteMatchSetResponse  = GetByteMatchSetResponse { "ByteMatchSet": (NullOrUndefined Nothing) }
+newGetByteMatchSetResponse  = GetByteMatchSetResponse { "ByteMatchSet": Nothing }
 
 -- | Constructs GetByteMatchSetResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGetByteMatchSetResponse' :: ( { "ByteMatchSet" :: NullOrUndefined (ByteMatchSet) } -> {"ByteMatchSet" :: NullOrUndefined (ByteMatchSet) } ) -> GetByteMatchSetResponse
-newGetByteMatchSetResponse'  customize = (GetByteMatchSetResponse <<< customize) { "ByteMatchSet": (NullOrUndefined Nothing) }
+newGetByteMatchSetResponse' :: ( { "ByteMatchSet" :: Maybe (ByteMatchSet) } -> {"ByteMatchSet" :: Maybe (ByteMatchSet) } ) -> GetByteMatchSetResponse
+newGetByteMatchSetResponse'  customize = (GetByteMatchSetResponse <<< customize) { "ByteMatchSet": Nothing }
 
 
 
@@ -1479,7 +1478,7 @@ instance encodeGetChangeTokenRequest :: Encode GetChangeTokenRequest where encod
 
 
 newtype GetChangeTokenResponse = GetChangeTokenResponse 
-  { "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeGetChangeTokenResponse :: Newtype GetChangeTokenResponse _
 derive instance repGenericGetChangeTokenResponse :: Generic GetChangeTokenResponse _
@@ -1489,12 +1488,12 @@ instance encodeGetChangeTokenResponse :: Encode GetChangeTokenResponse where enc
 
 -- | Constructs GetChangeTokenResponse from required parameters
 newGetChangeTokenResponse :: GetChangeTokenResponse
-newGetChangeTokenResponse  = GetChangeTokenResponse { "ChangeToken": (NullOrUndefined Nothing) }
+newGetChangeTokenResponse  = GetChangeTokenResponse { "ChangeToken": Nothing }
 
 -- | Constructs GetChangeTokenResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGetChangeTokenResponse' :: ( { "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> GetChangeTokenResponse
-newGetChangeTokenResponse'  customize = (GetChangeTokenResponse <<< customize) { "ChangeToken": (NullOrUndefined Nothing) }
+newGetChangeTokenResponse' :: ( { "ChangeToken" :: Maybe (ChangeToken) } -> {"ChangeToken" :: Maybe (ChangeToken) } ) -> GetChangeTokenResponse
+newGetChangeTokenResponse'  customize = (GetChangeTokenResponse <<< customize) { "ChangeToken": Nothing }
 
 
 
@@ -1519,7 +1518,7 @@ newGetChangeTokenStatusRequest' _ChangeToken customize = (GetChangeTokenStatusRe
 
 
 newtype GetChangeTokenStatusResponse = GetChangeTokenStatusResponse 
-  { "ChangeTokenStatus" :: NullOrUndefined (ChangeTokenStatus)
+  { "ChangeTokenStatus" :: Maybe (ChangeTokenStatus)
   }
 derive instance newtypeGetChangeTokenStatusResponse :: Newtype GetChangeTokenStatusResponse _
 derive instance repGenericGetChangeTokenStatusResponse :: Generic GetChangeTokenStatusResponse _
@@ -1529,12 +1528,12 @@ instance encodeGetChangeTokenStatusResponse :: Encode GetChangeTokenStatusRespon
 
 -- | Constructs GetChangeTokenStatusResponse from required parameters
 newGetChangeTokenStatusResponse :: GetChangeTokenStatusResponse
-newGetChangeTokenStatusResponse  = GetChangeTokenStatusResponse { "ChangeTokenStatus": (NullOrUndefined Nothing) }
+newGetChangeTokenStatusResponse  = GetChangeTokenStatusResponse { "ChangeTokenStatus": Nothing }
 
 -- | Constructs GetChangeTokenStatusResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGetChangeTokenStatusResponse' :: ( { "ChangeTokenStatus" :: NullOrUndefined (ChangeTokenStatus) } -> {"ChangeTokenStatus" :: NullOrUndefined (ChangeTokenStatus) } ) -> GetChangeTokenStatusResponse
-newGetChangeTokenStatusResponse'  customize = (GetChangeTokenStatusResponse <<< customize) { "ChangeTokenStatus": (NullOrUndefined Nothing) }
+newGetChangeTokenStatusResponse' :: ( { "ChangeTokenStatus" :: Maybe (ChangeTokenStatus) } -> {"ChangeTokenStatus" :: Maybe (ChangeTokenStatus) } ) -> GetChangeTokenStatusResponse
+newGetChangeTokenStatusResponse'  customize = (GetChangeTokenStatusResponse <<< customize) { "ChangeTokenStatus": Nothing }
 
 
 
@@ -1559,7 +1558,7 @@ newGetGeoMatchSetRequest' _GeoMatchSetId customize = (GetGeoMatchSetRequest <<< 
 
 
 newtype GetGeoMatchSetResponse = GetGeoMatchSetResponse 
-  { "GeoMatchSet" :: NullOrUndefined (GeoMatchSet)
+  { "GeoMatchSet" :: Maybe (GeoMatchSet)
   }
 derive instance newtypeGetGeoMatchSetResponse :: Newtype GetGeoMatchSetResponse _
 derive instance repGenericGetGeoMatchSetResponse :: Generic GetGeoMatchSetResponse _
@@ -1569,12 +1568,12 @@ instance encodeGetGeoMatchSetResponse :: Encode GetGeoMatchSetResponse where enc
 
 -- | Constructs GetGeoMatchSetResponse from required parameters
 newGetGeoMatchSetResponse :: GetGeoMatchSetResponse
-newGetGeoMatchSetResponse  = GetGeoMatchSetResponse { "GeoMatchSet": (NullOrUndefined Nothing) }
+newGetGeoMatchSetResponse  = GetGeoMatchSetResponse { "GeoMatchSet": Nothing }
 
 -- | Constructs GetGeoMatchSetResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGetGeoMatchSetResponse' :: ( { "GeoMatchSet" :: NullOrUndefined (GeoMatchSet) } -> {"GeoMatchSet" :: NullOrUndefined (GeoMatchSet) } ) -> GetGeoMatchSetResponse
-newGetGeoMatchSetResponse'  customize = (GetGeoMatchSetResponse <<< customize) { "GeoMatchSet": (NullOrUndefined Nothing) }
+newGetGeoMatchSetResponse' :: ( { "GeoMatchSet" :: Maybe (GeoMatchSet) } -> {"GeoMatchSet" :: Maybe (GeoMatchSet) } ) -> GetGeoMatchSetResponse
+newGetGeoMatchSetResponse'  customize = (GetGeoMatchSetResponse <<< customize) { "GeoMatchSet": Nothing }
 
 
 
@@ -1599,7 +1598,7 @@ newGetIPSetRequest' _IPSetId customize = (GetIPSetRequest <<< customize) { "IPSe
 
 
 newtype GetIPSetResponse = GetIPSetResponse 
-  { "IPSet" :: NullOrUndefined (IPSet)
+  { "IPSet" :: Maybe (IPSet)
   }
 derive instance newtypeGetIPSetResponse :: Newtype GetIPSetResponse _
 derive instance repGenericGetIPSetResponse :: Generic GetIPSetResponse _
@@ -1609,12 +1608,12 @@ instance encodeGetIPSetResponse :: Encode GetIPSetResponse where encode = generi
 
 -- | Constructs GetIPSetResponse from required parameters
 newGetIPSetResponse :: GetIPSetResponse
-newGetIPSetResponse  = GetIPSetResponse { "IPSet": (NullOrUndefined Nothing) }
+newGetIPSetResponse  = GetIPSetResponse { "IPSet": Nothing }
 
 -- | Constructs GetIPSetResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGetIPSetResponse' :: ( { "IPSet" :: NullOrUndefined (IPSet) } -> {"IPSet" :: NullOrUndefined (IPSet) } ) -> GetIPSetResponse
-newGetIPSetResponse'  customize = (GetIPSetResponse <<< customize) { "IPSet": (NullOrUndefined Nothing) }
+newGetIPSetResponse' :: ( { "IPSet" :: Maybe (IPSet) } -> {"IPSet" :: Maybe (IPSet) } ) -> GetIPSetResponse
+newGetIPSetResponse'  customize = (GetIPSetResponse <<< customize) { "IPSet": Nothing }
 
 
 
@@ -1639,7 +1638,7 @@ newGetPermissionPolicyRequest' _ResourceArn customize = (GetPermissionPolicyRequ
 
 
 newtype GetPermissionPolicyResponse = GetPermissionPolicyResponse 
-  { "Policy" :: NullOrUndefined (PolicyString)
+  { "Policy" :: Maybe (PolicyString)
   }
 derive instance newtypeGetPermissionPolicyResponse :: Newtype GetPermissionPolicyResponse _
 derive instance repGenericGetPermissionPolicyResponse :: Generic GetPermissionPolicyResponse _
@@ -1649,18 +1648,18 @@ instance encodeGetPermissionPolicyResponse :: Encode GetPermissionPolicyResponse
 
 -- | Constructs GetPermissionPolicyResponse from required parameters
 newGetPermissionPolicyResponse :: GetPermissionPolicyResponse
-newGetPermissionPolicyResponse  = GetPermissionPolicyResponse { "Policy": (NullOrUndefined Nothing) }
+newGetPermissionPolicyResponse  = GetPermissionPolicyResponse { "Policy": Nothing }
 
 -- | Constructs GetPermissionPolicyResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGetPermissionPolicyResponse' :: ( { "Policy" :: NullOrUndefined (PolicyString) } -> {"Policy" :: NullOrUndefined (PolicyString) } ) -> GetPermissionPolicyResponse
-newGetPermissionPolicyResponse'  customize = (GetPermissionPolicyResponse <<< customize) { "Policy": (NullOrUndefined Nothing) }
+newGetPermissionPolicyResponse' :: ( { "Policy" :: Maybe (PolicyString) } -> {"Policy" :: Maybe (PolicyString) } ) -> GetPermissionPolicyResponse
+newGetPermissionPolicyResponse'  customize = (GetPermissionPolicyResponse <<< customize) { "Policy": Nothing }
 
 
 
 newtype GetRateBasedRuleManagedKeysRequest = GetRateBasedRuleManagedKeysRequest 
   { "RuleId" :: (ResourceId)
-  , "NextMarker" :: NullOrUndefined (NextMarker)
+  , "NextMarker" :: Maybe (NextMarker)
   }
 derive instance newtypeGetRateBasedRuleManagedKeysRequest :: Newtype GetRateBasedRuleManagedKeysRequest _
 derive instance repGenericGetRateBasedRuleManagedKeysRequest :: Generic GetRateBasedRuleManagedKeysRequest _
@@ -1670,18 +1669,18 @@ instance encodeGetRateBasedRuleManagedKeysRequest :: Encode GetRateBasedRuleMana
 
 -- | Constructs GetRateBasedRuleManagedKeysRequest from required parameters
 newGetRateBasedRuleManagedKeysRequest :: ResourceId -> GetRateBasedRuleManagedKeysRequest
-newGetRateBasedRuleManagedKeysRequest _RuleId = GetRateBasedRuleManagedKeysRequest { "RuleId": _RuleId, "NextMarker": (NullOrUndefined Nothing) }
+newGetRateBasedRuleManagedKeysRequest _RuleId = GetRateBasedRuleManagedKeysRequest { "RuleId": _RuleId, "NextMarker": Nothing }
 
 -- | Constructs GetRateBasedRuleManagedKeysRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGetRateBasedRuleManagedKeysRequest' :: ResourceId -> ( { "RuleId" :: (ResourceId) , "NextMarker" :: NullOrUndefined (NextMarker) } -> {"RuleId" :: (ResourceId) , "NextMarker" :: NullOrUndefined (NextMarker) } ) -> GetRateBasedRuleManagedKeysRequest
-newGetRateBasedRuleManagedKeysRequest' _RuleId customize = (GetRateBasedRuleManagedKeysRequest <<< customize) { "RuleId": _RuleId, "NextMarker": (NullOrUndefined Nothing) }
+newGetRateBasedRuleManagedKeysRequest' :: ResourceId -> ( { "RuleId" :: (ResourceId) , "NextMarker" :: Maybe (NextMarker) } -> {"RuleId" :: (ResourceId) , "NextMarker" :: Maybe (NextMarker) } ) -> GetRateBasedRuleManagedKeysRequest
+newGetRateBasedRuleManagedKeysRequest' _RuleId customize = (GetRateBasedRuleManagedKeysRequest <<< customize) { "RuleId": _RuleId, "NextMarker": Nothing }
 
 
 
 newtype GetRateBasedRuleManagedKeysResponse = GetRateBasedRuleManagedKeysResponse 
-  { "ManagedKeys" :: NullOrUndefined (ManagedKeys)
-  , "NextMarker" :: NullOrUndefined (NextMarker)
+  { "ManagedKeys" :: Maybe (ManagedKeys)
+  , "NextMarker" :: Maybe (NextMarker)
   }
 derive instance newtypeGetRateBasedRuleManagedKeysResponse :: Newtype GetRateBasedRuleManagedKeysResponse _
 derive instance repGenericGetRateBasedRuleManagedKeysResponse :: Generic GetRateBasedRuleManagedKeysResponse _
@@ -1691,12 +1690,12 @@ instance encodeGetRateBasedRuleManagedKeysResponse :: Encode GetRateBasedRuleMan
 
 -- | Constructs GetRateBasedRuleManagedKeysResponse from required parameters
 newGetRateBasedRuleManagedKeysResponse :: GetRateBasedRuleManagedKeysResponse
-newGetRateBasedRuleManagedKeysResponse  = GetRateBasedRuleManagedKeysResponse { "ManagedKeys": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing) }
+newGetRateBasedRuleManagedKeysResponse  = GetRateBasedRuleManagedKeysResponse { "ManagedKeys": Nothing, "NextMarker": Nothing }
 
 -- | Constructs GetRateBasedRuleManagedKeysResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGetRateBasedRuleManagedKeysResponse' :: ( { "ManagedKeys" :: NullOrUndefined (ManagedKeys) , "NextMarker" :: NullOrUndefined (NextMarker) } -> {"ManagedKeys" :: NullOrUndefined (ManagedKeys) , "NextMarker" :: NullOrUndefined (NextMarker) } ) -> GetRateBasedRuleManagedKeysResponse
-newGetRateBasedRuleManagedKeysResponse'  customize = (GetRateBasedRuleManagedKeysResponse <<< customize) { "ManagedKeys": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing) }
+newGetRateBasedRuleManagedKeysResponse' :: ( { "ManagedKeys" :: Maybe (ManagedKeys) , "NextMarker" :: Maybe (NextMarker) } -> {"ManagedKeys" :: Maybe (ManagedKeys) , "NextMarker" :: Maybe (NextMarker) } ) -> GetRateBasedRuleManagedKeysResponse
+newGetRateBasedRuleManagedKeysResponse'  customize = (GetRateBasedRuleManagedKeysResponse <<< customize) { "ManagedKeys": Nothing, "NextMarker": Nothing }
 
 
 
@@ -1721,7 +1720,7 @@ newGetRateBasedRuleRequest' _RuleId customize = (GetRateBasedRuleRequest <<< cus
 
 
 newtype GetRateBasedRuleResponse = GetRateBasedRuleResponse 
-  { "Rule" :: NullOrUndefined (RateBasedRule)
+  { "Rule" :: Maybe (RateBasedRule)
   }
 derive instance newtypeGetRateBasedRuleResponse :: Newtype GetRateBasedRuleResponse _
 derive instance repGenericGetRateBasedRuleResponse :: Generic GetRateBasedRuleResponse _
@@ -1731,12 +1730,12 @@ instance encodeGetRateBasedRuleResponse :: Encode GetRateBasedRuleResponse where
 
 -- | Constructs GetRateBasedRuleResponse from required parameters
 newGetRateBasedRuleResponse :: GetRateBasedRuleResponse
-newGetRateBasedRuleResponse  = GetRateBasedRuleResponse { "Rule": (NullOrUndefined Nothing) }
+newGetRateBasedRuleResponse  = GetRateBasedRuleResponse { "Rule": Nothing }
 
 -- | Constructs GetRateBasedRuleResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGetRateBasedRuleResponse' :: ( { "Rule" :: NullOrUndefined (RateBasedRule) } -> {"Rule" :: NullOrUndefined (RateBasedRule) } ) -> GetRateBasedRuleResponse
-newGetRateBasedRuleResponse'  customize = (GetRateBasedRuleResponse <<< customize) { "Rule": (NullOrUndefined Nothing) }
+newGetRateBasedRuleResponse' :: ( { "Rule" :: Maybe (RateBasedRule) } -> {"Rule" :: Maybe (RateBasedRule) } ) -> GetRateBasedRuleResponse
+newGetRateBasedRuleResponse'  customize = (GetRateBasedRuleResponse <<< customize) { "Rule": Nothing }
 
 
 
@@ -1761,7 +1760,7 @@ newGetRegexMatchSetRequest' _RegexMatchSetId customize = (GetRegexMatchSetReques
 
 
 newtype GetRegexMatchSetResponse = GetRegexMatchSetResponse 
-  { "RegexMatchSet" :: NullOrUndefined (RegexMatchSet)
+  { "RegexMatchSet" :: Maybe (RegexMatchSet)
   }
 derive instance newtypeGetRegexMatchSetResponse :: Newtype GetRegexMatchSetResponse _
 derive instance repGenericGetRegexMatchSetResponse :: Generic GetRegexMatchSetResponse _
@@ -1771,12 +1770,12 @@ instance encodeGetRegexMatchSetResponse :: Encode GetRegexMatchSetResponse where
 
 -- | Constructs GetRegexMatchSetResponse from required parameters
 newGetRegexMatchSetResponse :: GetRegexMatchSetResponse
-newGetRegexMatchSetResponse  = GetRegexMatchSetResponse { "RegexMatchSet": (NullOrUndefined Nothing) }
+newGetRegexMatchSetResponse  = GetRegexMatchSetResponse { "RegexMatchSet": Nothing }
 
 -- | Constructs GetRegexMatchSetResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGetRegexMatchSetResponse' :: ( { "RegexMatchSet" :: NullOrUndefined (RegexMatchSet) } -> {"RegexMatchSet" :: NullOrUndefined (RegexMatchSet) } ) -> GetRegexMatchSetResponse
-newGetRegexMatchSetResponse'  customize = (GetRegexMatchSetResponse <<< customize) { "RegexMatchSet": (NullOrUndefined Nothing) }
+newGetRegexMatchSetResponse' :: ( { "RegexMatchSet" :: Maybe (RegexMatchSet) } -> {"RegexMatchSet" :: Maybe (RegexMatchSet) } ) -> GetRegexMatchSetResponse
+newGetRegexMatchSetResponse'  customize = (GetRegexMatchSetResponse <<< customize) { "RegexMatchSet": Nothing }
 
 
 
@@ -1801,7 +1800,7 @@ newGetRegexPatternSetRequest' _RegexPatternSetId customize = (GetRegexPatternSet
 
 
 newtype GetRegexPatternSetResponse = GetRegexPatternSetResponse 
-  { "RegexPatternSet" :: NullOrUndefined (RegexPatternSet)
+  { "RegexPatternSet" :: Maybe (RegexPatternSet)
   }
 derive instance newtypeGetRegexPatternSetResponse :: Newtype GetRegexPatternSetResponse _
 derive instance repGenericGetRegexPatternSetResponse :: Generic GetRegexPatternSetResponse _
@@ -1811,12 +1810,12 @@ instance encodeGetRegexPatternSetResponse :: Encode GetRegexPatternSetResponse w
 
 -- | Constructs GetRegexPatternSetResponse from required parameters
 newGetRegexPatternSetResponse :: GetRegexPatternSetResponse
-newGetRegexPatternSetResponse  = GetRegexPatternSetResponse { "RegexPatternSet": (NullOrUndefined Nothing) }
+newGetRegexPatternSetResponse  = GetRegexPatternSetResponse { "RegexPatternSet": Nothing }
 
 -- | Constructs GetRegexPatternSetResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGetRegexPatternSetResponse' :: ( { "RegexPatternSet" :: NullOrUndefined (RegexPatternSet) } -> {"RegexPatternSet" :: NullOrUndefined (RegexPatternSet) } ) -> GetRegexPatternSetResponse
-newGetRegexPatternSetResponse'  customize = (GetRegexPatternSetResponse <<< customize) { "RegexPatternSet": (NullOrUndefined Nothing) }
+newGetRegexPatternSetResponse' :: ( { "RegexPatternSet" :: Maybe (RegexPatternSet) } -> {"RegexPatternSet" :: Maybe (RegexPatternSet) } ) -> GetRegexPatternSetResponse
+newGetRegexPatternSetResponse'  customize = (GetRegexPatternSetResponse <<< customize) { "RegexPatternSet": Nothing }
 
 
 
@@ -1841,7 +1840,7 @@ newGetRuleGroupRequest' _RuleGroupId customize = (GetRuleGroupRequest <<< custom
 
 
 newtype GetRuleGroupResponse = GetRuleGroupResponse 
-  { "RuleGroup" :: NullOrUndefined (RuleGroup)
+  { "RuleGroup" :: Maybe (RuleGroup)
   }
 derive instance newtypeGetRuleGroupResponse :: Newtype GetRuleGroupResponse _
 derive instance repGenericGetRuleGroupResponse :: Generic GetRuleGroupResponse _
@@ -1851,12 +1850,12 @@ instance encodeGetRuleGroupResponse :: Encode GetRuleGroupResponse where encode 
 
 -- | Constructs GetRuleGroupResponse from required parameters
 newGetRuleGroupResponse :: GetRuleGroupResponse
-newGetRuleGroupResponse  = GetRuleGroupResponse { "RuleGroup": (NullOrUndefined Nothing) }
+newGetRuleGroupResponse  = GetRuleGroupResponse { "RuleGroup": Nothing }
 
 -- | Constructs GetRuleGroupResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGetRuleGroupResponse' :: ( { "RuleGroup" :: NullOrUndefined (RuleGroup) } -> {"RuleGroup" :: NullOrUndefined (RuleGroup) } ) -> GetRuleGroupResponse
-newGetRuleGroupResponse'  customize = (GetRuleGroupResponse <<< customize) { "RuleGroup": (NullOrUndefined Nothing) }
+newGetRuleGroupResponse' :: ( { "RuleGroup" :: Maybe (RuleGroup) } -> {"RuleGroup" :: Maybe (RuleGroup) } ) -> GetRuleGroupResponse
+newGetRuleGroupResponse'  customize = (GetRuleGroupResponse <<< customize) { "RuleGroup": Nothing }
 
 
 
@@ -1881,7 +1880,7 @@ newGetRuleRequest' _RuleId customize = (GetRuleRequest <<< customize) { "RuleId"
 
 
 newtype GetRuleResponse = GetRuleResponse 
-  { "Rule" :: NullOrUndefined (Rule)
+  { "Rule" :: Maybe (Rule)
   }
 derive instance newtypeGetRuleResponse :: Newtype GetRuleResponse _
 derive instance repGenericGetRuleResponse :: Generic GetRuleResponse _
@@ -1891,12 +1890,12 @@ instance encodeGetRuleResponse :: Encode GetRuleResponse where encode = genericE
 
 -- | Constructs GetRuleResponse from required parameters
 newGetRuleResponse :: GetRuleResponse
-newGetRuleResponse  = GetRuleResponse { "Rule": (NullOrUndefined Nothing) }
+newGetRuleResponse  = GetRuleResponse { "Rule": Nothing }
 
 -- | Constructs GetRuleResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGetRuleResponse' :: ( { "Rule" :: NullOrUndefined (Rule) } -> {"Rule" :: NullOrUndefined (Rule) } ) -> GetRuleResponse
-newGetRuleResponse'  customize = (GetRuleResponse <<< customize) { "Rule": (NullOrUndefined Nothing) }
+newGetRuleResponse' :: ( { "Rule" :: Maybe (Rule) } -> {"Rule" :: Maybe (Rule) } ) -> GetRuleResponse
+newGetRuleResponse'  customize = (GetRuleResponse <<< customize) { "Rule": Nothing }
 
 
 
@@ -1933,9 +1932,9 @@ newGetSampledRequestsRequest' _MaxItems _RuleId _TimeWindow _WebAclId customize 
 
 
 newtype GetSampledRequestsResponse = GetSampledRequestsResponse 
-  { "SampledRequests" :: NullOrUndefined (SampledHTTPRequests)
-  , "PopulationSize" :: NullOrUndefined (PopulationSize)
-  , "TimeWindow" :: NullOrUndefined (TimeWindow)
+  { "SampledRequests" :: Maybe (SampledHTTPRequests)
+  , "PopulationSize" :: Maybe (PopulationSize)
+  , "TimeWindow" :: Maybe (TimeWindow)
   }
 derive instance newtypeGetSampledRequestsResponse :: Newtype GetSampledRequestsResponse _
 derive instance repGenericGetSampledRequestsResponse :: Generic GetSampledRequestsResponse _
@@ -1945,12 +1944,12 @@ instance encodeGetSampledRequestsResponse :: Encode GetSampledRequestsResponse w
 
 -- | Constructs GetSampledRequestsResponse from required parameters
 newGetSampledRequestsResponse :: GetSampledRequestsResponse
-newGetSampledRequestsResponse  = GetSampledRequestsResponse { "PopulationSize": (NullOrUndefined Nothing), "SampledRequests": (NullOrUndefined Nothing), "TimeWindow": (NullOrUndefined Nothing) }
+newGetSampledRequestsResponse  = GetSampledRequestsResponse { "PopulationSize": Nothing, "SampledRequests": Nothing, "TimeWindow": Nothing }
 
 -- | Constructs GetSampledRequestsResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGetSampledRequestsResponse' :: ( { "SampledRequests" :: NullOrUndefined (SampledHTTPRequests) , "PopulationSize" :: NullOrUndefined (PopulationSize) , "TimeWindow" :: NullOrUndefined (TimeWindow) } -> {"SampledRequests" :: NullOrUndefined (SampledHTTPRequests) , "PopulationSize" :: NullOrUndefined (PopulationSize) , "TimeWindow" :: NullOrUndefined (TimeWindow) } ) -> GetSampledRequestsResponse
-newGetSampledRequestsResponse'  customize = (GetSampledRequestsResponse <<< customize) { "PopulationSize": (NullOrUndefined Nothing), "SampledRequests": (NullOrUndefined Nothing), "TimeWindow": (NullOrUndefined Nothing) }
+newGetSampledRequestsResponse' :: ( { "SampledRequests" :: Maybe (SampledHTTPRequests) , "PopulationSize" :: Maybe (PopulationSize) , "TimeWindow" :: Maybe (TimeWindow) } -> {"SampledRequests" :: Maybe (SampledHTTPRequests) , "PopulationSize" :: Maybe (PopulationSize) , "TimeWindow" :: Maybe (TimeWindow) } ) -> GetSampledRequestsResponse
+newGetSampledRequestsResponse'  customize = (GetSampledRequestsResponse <<< customize) { "PopulationSize": Nothing, "SampledRequests": Nothing, "TimeWindow": Nothing }
 
 
 
@@ -1975,7 +1974,7 @@ newGetSizeConstraintSetRequest' _SizeConstraintSetId customize = (GetSizeConstra
 
 
 newtype GetSizeConstraintSetResponse = GetSizeConstraintSetResponse 
-  { "SizeConstraintSet" :: NullOrUndefined (SizeConstraintSet)
+  { "SizeConstraintSet" :: Maybe (SizeConstraintSet)
   }
 derive instance newtypeGetSizeConstraintSetResponse :: Newtype GetSizeConstraintSetResponse _
 derive instance repGenericGetSizeConstraintSetResponse :: Generic GetSizeConstraintSetResponse _
@@ -1985,12 +1984,12 @@ instance encodeGetSizeConstraintSetResponse :: Encode GetSizeConstraintSetRespon
 
 -- | Constructs GetSizeConstraintSetResponse from required parameters
 newGetSizeConstraintSetResponse :: GetSizeConstraintSetResponse
-newGetSizeConstraintSetResponse  = GetSizeConstraintSetResponse { "SizeConstraintSet": (NullOrUndefined Nothing) }
+newGetSizeConstraintSetResponse  = GetSizeConstraintSetResponse { "SizeConstraintSet": Nothing }
 
 -- | Constructs GetSizeConstraintSetResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGetSizeConstraintSetResponse' :: ( { "SizeConstraintSet" :: NullOrUndefined (SizeConstraintSet) } -> {"SizeConstraintSet" :: NullOrUndefined (SizeConstraintSet) } ) -> GetSizeConstraintSetResponse
-newGetSizeConstraintSetResponse'  customize = (GetSizeConstraintSetResponse <<< customize) { "SizeConstraintSet": (NullOrUndefined Nothing) }
+newGetSizeConstraintSetResponse' :: ( { "SizeConstraintSet" :: Maybe (SizeConstraintSet) } -> {"SizeConstraintSet" :: Maybe (SizeConstraintSet) } ) -> GetSizeConstraintSetResponse
+newGetSizeConstraintSetResponse'  customize = (GetSizeConstraintSetResponse <<< customize) { "SizeConstraintSet": Nothing }
 
 
 
@@ -2017,7 +2016,7 @@ newGetSqlInjectionMatchSetRequest' _SqlInjectionMatchSetId customize = (GetSqlIn
 
 -- | <p>The response to a <a>GetSqlInjectionMatchSet</a> request.</p>
 newtype GetSqlInjectionMatchSetResponse = GetSqlInjectionMatchSetResponse 
-  { "SqlInjectionMatchSet" :: NullOrUndefined (SqlInjectionMatchSet)
+  { "SqlInjectionMatchSet" :: Maybe (SqlInjectionMatchSet)
   }
 derive instance newtypeGetSqlInjectionMatchSetResponse :: Newtype GetSqlInjectionMatchSetResponse _
 derive instance repGenericGetSqlInjectionMatchSetResponse :: Generic GetSqlInjectionMatchSetResponse _
@@ -2027,12 +2026,12 @@ instance encodeGetSqlInjectionMatchSetResponse :: Encode GetSqlInjectionMatchSet
 
 -- | Constructs GetSqlInjectionMatchSetResponse from required parameters
 newGetSqlInjectionMatchSetResponse :: GetSqlInjectionMatchSetResponse
-newGetSqlInjectionMatchSetResponse  = GetSqlInjectionMatchSetResponse { "SqlInjectionMatchSet": (NullOrUndefined Nothing) }
+newGetSqlInjectionMatchSetResponse  = GetSqlInjectionMatchSetResponse { "SqlInjectionMatchSet": Nothing }
 
 -- | Constructs GetSqlInjectionMatchSetResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGetSqlInjectionMatchSetResponse' :: ( { "SqlInjectionMatchSet" :: NullOrUndefined (SqlInjectionMatchSet) } -> {"SqlInjectionMatchSet" :: NullOrUndefined (SqlInjectionMatchSet) } ) -> GetSqlInjectionMatchSetResponse
-newGetSqlInjectionMatchSetResponse'  customize = (GetSqlInjectionMatchSetResponse <<< customize) { "SqlInjectionMatchSet": (NullOrUndefined Nothing) }
+newGetSqlInjectionMatchSetResponse' :: ( { "SqlInjectionMatchSet" :: Maybe (SqlInjectionMatchSet) } -> {"SqlInjectionMatchSet" :: Maybe (SqlInjectionMatchSet) } ) -> GetSqlInjectionMatchSetResponse
+newGetSqlInjectionMatchSetResponse'  customize = (GetSqlInjectionMatchSetResponse <<< customize) { "SqlInjectionMatchSet": Nothing }
 
 
 
@@ -2057,7 +2056,7 @@ newGetWebACLRequest' _WebACLId customize = (GetWebACLRequest <<< customize) { "W
 
 
 newtype GetWebACLResponse = GetWebACLResponse 
-  { "WebACL" :: NullOrUndefined (WebACL)
+  { "WebACL" :: Maybe (WebACL)
   }
 derive instance newtypeGetWebACLResponse :: Newtype GetWebACLResponse _
 derive instance repGenericGetWebACLResponse :: Generic GetWebACLResponse _
@@ -2067,12 +2066,12 @@ instance encodeGetWebACLResponse :: Encode GetWebACLResponse where encode = gene
 
 -- | Constructs GetWebACLResponse from required parameters
 newGetWebACLResponse :: GetWebACLResponse
-newGetWebACLResponse  = GetWebACLResponse { "WebACL": (NullOrUndefined Nothing) }
+newGetWebACLResponse  = GetWebACLResponse { "WebACL": Nothing }
 
 -- | Constructs GetWebACLResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGetWebACLResponse' :: ( { "WebACL" :: NullOrUndefined (WebACL) } -> {"WebACL" :: NullOrUndefined (WebACL) } ) -> GetWebACLResponse
-newGetWebACLResponse'  customize = (GetWebACLResponse <<< customize) { "WebACL": (NullOrUndefined Nothing) }
+newGetWebACLResponse' :: ( { "WebACL" :: Maybe (WebACL) } -> {"WebACL" :: Maybe (WebACL) } ) -> GetWebACLResponse
+newGetWebACLResponse'  customize = (GetWebACLResponse <<< customize) { "WebACL": Nothing }
 
 
 
@@ -2099,7 +2098,7 @@ newGetXssMatchSetRequest' _XssMatchSetId customize = (GetXssMatchSetRequest <<< 
 
 -- | <p>The response to a <a>GetXssMatchSet</a> request.</p>
 newtype GetXssMatchSetResponse = GetXssMatchSetResponse 
-  { "XssMatchSet" :: NullOrUndefined (XssMatchSet)
+  { "XssMatchSet" :: Maybe (XssMatchSet)
   }
 derive instance newtypeGetXssMatchSetResponse :: Newtype GetXssMatchSetResponse _
 derive instance repGenericGetXssMatchSetResponse :: Generic GetXssMatchSetResponse _
@@ -2109,19 +2108,19 @@ instance encodeGetXssMatchSetResponse :: Encode GetXssMatchSetResponse where enc
 
 -- | Constructs GetXssMatchSetResponse from required parameters
 newGetXssMatchSetResponse :: GetXssMatchSetResponse
-newGetXssMatchSetResponse  = GetXssMatchSetResponse { "XssMatchSet": (NullOrUndefined Nothing) }
+newGetXssMatchSetResponse  = GetXssMatchSetResponse { "XssMatchSet": Nothing }
 
 -- | Constructs GetXssMatchSetResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newGetXssMatchSetResponse' :: ( { "XssMatchSet" :: NullOrUndefined (XssMatchSet) } -> {"XssMatchSet" :: NullOrUndefined (XssMatchSet) } ) -> GetXssMatchSetResponse
-newGetXssMatchSetResponse'  customize = (GetXssMatchSetResponse <<< customize) { "XssMatchSet": (NullOrUndefined Nothing) }
+newGetXssMatchSetResponse' :: ( { "XssMatchSet" :: Maybe (XssMatchSet) } -> {"XssMatchSet" :: Maybe (XssMatchSet) } ) -> GetXssMatchSetResponse
+newGetXssMatchSetResponse'  customize = (GetXssMatchSetResponse <<< customize) { "XssMatchSet": Nothing }
 
 
 
 -- | <p>The response from a <a>GetSampledRequests</a> request includes an <code>HTTPHeader</code> complex type that appears as <code>Headers</code> in the response syntax. <code>HTTPHeader</code> contains the names and values of all of the headers that appear in one of the web requests that were returned by <code>GetSampledRequests</code>. </p>
 newtype HTTPHeader = HTTPHeader 
-  { "Name" :: NullOrUndefined (HeaderName)
-  , "Value" :: NullOrUndefined (HeaderValue)
+  { "Name" :: Maybe (HeaderName)
+  , "Value" :: Maybe (HeaderValue)
   }
 derive instance newtypeHTTPHeader :: Newtype HTTPHeader _
 derive instance repGenericHTTPHeader :: Generic HTTPHeader _
@@ -2131,12 +2130,12 @@ instance encodeHTTPHeader :: Encode HTTPHeader where encode = genericEncode opti
 
 -- | Constructs HTTPHeader from required parameters
 newHTTPHeader :: HTTPHeader
-newHTTPHeader  = HTTPHeader { "Name": (NullOrUndefined Nothing), "Value": (NullOrUndefined Nothing) }
+newHTTPHeader  = HTTPHeader { "Name": Nothing, "Value": Nothing }
 
 -- | Constructs HTTPHeader's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newHTTPHeader' :: ( { "Name" :: NullOrUndefined (HeaderName) , "Value" :: NullOrUndefined (HeaderValue) } -> {"Name" :: NullOrUndefined (HeaderName) , "Value" :: NullOrUndefined (HeaderValue) } ) -> HTTPHeader
-newHTTPHeader'  customize = (HTTPHeader <<< customize) { "Name": (NullOrUndefined Nothing), "Value": (NullOrUndefined Nothing) }
+newHTTPHeader' :: ( { "Name" :: Maybe (HeaderName) , "Value" :: Maybe (HeaderValue) } -> {"Name" :: Maybe (HeaderName) , "Value" :: Maybe (HeaderValue) } ) -> HTTPHeader
+newHTTPHeader'  customize = (HTTPHeader <<< customize) { "Name": Nothing, "Value": Nothing }
 
 
 
@@ -2160,12 +2159,12 @@ instance encodeHTTPMethod :: Encode HTTPMethod where encode = genericEncode opti
 
 -- | <p>The response from a <a>GetSampledRequests</a> request includes an <code>HTTPRequest</code> complex type that appears as <code>Request</code> in the response syntax. <code>HTTPRequest</code> contains information about one of the web requests that were returned by <code>GetSampledRequests</code>. </p>
 newtype HTTPRequest = HTTPRequest 
-  { "ClientIP" :: NullOrUndefined (IPString)
-  , "Country" :: NullOrUndefined (Country)
-  , "URI" :: NullOrUndefined (URIString)
-  , "Method" :: NullOrUndefined (HTTPMethod)
-  , "HTTPVersion" :: NullOrUndefined (HTTPVersion)
-  , "Headers" :: NullOrUndefined (HTTPHeaders)
+  { "ClientIP" :: Maybe (IPString)
+  , "Country" :: Maybe (Country)
+  , "URI" :: Maybe (URIString)
+  , "Method" :: Maybe (HTTPMethod)
+  , "HTTPVersion" :: Maybe (HTTPVersion)
+  , "Headers" :: Maybe (HTTPHeaders)
   }
 derive instance newtypeHTTPRequest :: Newtype HTTPRequest _
 derive instance repGenericHTTPRequest :: Generic HTTPRequest _
@@ -2175,12 +2174,12 @@ instance encodeHTTPRequest :: Encode HTTPRequest where encode = genericEncode op
 
 -- | Constructs HTTPRequest from required parameters
 newHTTPRequest :: HTTPRequest
-newHTTPRequest  = HTTPRequest { "ClientIP": (NullOrUndefined Nothing), "Country": (NullOrUndefined Nothing), "HTTPVersion": (NullOrUndefined Nothing), "Headers": (NullOrUndefined Nothing), "Method": (NullOrUndefined Nothing), "URI": (NullOrUndefined Nothing) }
+newHTTPRequest  = HTTPRequest { "ClientIP": Nothing, "Country": Nothing, "HTTPVersion": Nothing, "Headers": Nothing, "Method": Nothing, "URI": Nothing }
 
 -- | Constructs HTTPRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newHTTPRequest' :: ( { "ClientIP" :: NullOrUndefined (IPString) , "Country" :: NullOrUndefined (Country) , "URI" :: NullOrUndefined (URIString) , "Method" :: NullOrUndefined (HTTPMethod) , "HTTPVersion" :: NullOrUndefined (HTTPVersion) , "Headers" :: NullOrUndefined (HTTPHeaders) } -> {"ClientIP" :: NullOrUndefined (IPString) , "Country" :: NullOrUndefined (Country) , "URI" :: NullOrUndefined (URIString) , "Method" :: NullOrUndefined (HTTPMethod) , "HTTPVersion" :: NullOrUndefined (HTTPVersion) , "Headers" :: NullOrUndefined (HTTPHeaders) } ) -> HTTPRequest
-newHTTPRequest'  customize = (HTTPRequest <<< customize) { "ClientIP": (NullOrUndefined Nothing), "Country": (NullOrUndefined Nothing), "HTTPVersion": (NullOrUndefined Nothing), "Headers": (NullOrUndefined Nothing), "Method": (NullOrUndefined Nothing), "URI": (NullOrUndefined Nothing) }
+newHTTPRequest' :: ( { "ClientIP" :: Maybe (IPString) , "Country" :: Maybe (Country) , "URI" :: Maybe (URIString) , "Method" :: Maybe (HTTPMethod) , "HTTPVersion" :: Maybe (HTTPVersion) , "Headers" :: Maybe (HTTPHeaders) } -> {"ClientIP" :: Maybe (IPString) , "Country" :: Maybe (Country) , "URI" :: Maybe (URIString) , "Method" :: Maybe (HTTPMethod) , "HTTPVersion" :: Maybe (HTTPVersion) , "Headers" :: Maybe (HTTPHeaders) } ) -> HTTPRequest
+newHTTPRequest'  customize = (HTTPRequest <<< customize) { "ClientIP": Nothing, "Country": Nothing, "HTTPVersion": Nothing, "Headers": Nothing, "Method": Nothing, "URI": Nothing }
 
 
 
@@ -2214,7 +2213,7 @@ instance encodeHeaderValue :: Encode HeaderValue where encode = genericEncode op
 -- | <p>Contains one or more IP addresses or blocks of IP addresses specified in Classless Inter-Domain Routing (CIDR) notation. AWS WAF supports /8, /16, /24, and /32 IP address ranges for IPv4, and /24, /32, /48, /56, /64 and /128 for IPv6.</p> <p>To specify an individual IP address, you specify the four-part IP address followed by a <code>/32</code>, for example, 192.0.2.0/31. To block a range of IP addresses, you can specify a <code>/128</code>, <code>/64</code>, <code>/56</code>, <code>/48</code>, <code>/32</code>, <code>/24</code>, <code>/16</code>, or <code>/8</code> CIDR. For more information about CIDR notation, see the Wikipedia entry <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">Classless Inter-Domain Routing</a>. </p>
 newtype IPSet = IPSet 
   { "IPSetId" :: (ResourceId)
-  , "Name" :: NullOrUndefined (ResourceName)
+  , "Name" :: Maybe (ResourceName)
   , "IPSetDescriptors" :: (IPSetDescriptors)
   }
 derive instance newtypeIPSet :: Newtype IPSet _
@@ -2225,12 +2224,12 @@ instance encodeIPSet :: Encode IPSet where encode = genericEncode options
 
 -- | Constructs IPSet from required parameters
 newIPSet :: IPSetDescriptors -> ResourceId -> IPSet
-newIPSet _IPSetDescriptors _IPSetId = IPSet { "IPSetDescriptors": _IPSetDescriptors, "IPSetId": _IPSetId, "Name": (NullOrUndefined Nothing) }
+newIPSet _IPSetDescriptors _IPSetId = IPSet { "IPSetDescriptors": _IPSetDescriptors, "IPSetId": _IPSetId, "Name": Nothing }
 
 -- | Constructs IPSet's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newIPSet' :: IPSetDescriptors -> ResourceId -> ( { "IPSetId" :: (ResourceId) , "Name" :: NullOrUndefined (ResourceName) , "IPSetDescriptors" :: (IPSetDescriptors) } -> {"IPSetId" :: (ResourceId) , "Name" :: NullOrUndefined (ResourceName) , "IPSetDescriptors" :: (IPSetDescriptors) } ) -> IPSet
-newIPSet' _IPSetDescriptors _IPSetId customize = (IPSet <<< customize) { "IPSetDescriptors": _IPSetDescriptors, "IPSetId": _IPSetId, "Name": (NullOrUndefined Nothing) }
+newIPSet' :: IPSetDescriptors -> ResourceId -> ( { "IPSetId" :: (ResourceId) , "Name" :: Maybe (ResourceName) , "IPSetDescriptors" :: (IPSetDescriptors) } -> {"IPSetId" :: (ResourceId) , "Name" :: Maybe (ResourceName) , "IPSetDescriptors" :: (IPSetDescriptors) } ) -> IPSet
+newIPSet' _IPSetDescriptors _IPSetId customize = (IPSet <<< customize) { "IPSetDescriptors": _IPSetDescriptors, "IPSetId": _IPSetId, "Name": Nothing }
 
 
 
@@ -2355,9 +2354,9 @@ instance encodeIPString :: Encode IPString where encode = genericEncode options
 
 
 newtype ListActivatedRulesInRuleGroupRequest = ListActivatedRulesInRuleGroupRequest 
-  { "RuleGroupId" :: NullOrUndefined (ResourceId)
-  , "NextMarker" :: NullOrUndefined (NextMarker)
-  , "Limit" :: NullOrUndefined (PaginationLimit)
+  { "RuleGroupId" :: Maybe (ResourceId)
+  , "NextMarker" :: Maybe (NextMarker)
+  , "Limit" :: Maybe (PaginationLimit)
   }
 derive instance newtypeListActivatedRulesInRuleGroupRequest :: Newtype ListActivatedRulesInRuleGroupRequest _
 derive instance repGenericListActivatedRulesInRuleGroupRequest :: Generic ListActivatedRulesInRuleGroupRequest _
@@ -2367,18 +2366,18 @@ instance encodeListActivatedRulesInRuleGroupRequest :: Encode ListActivatedRules
 
 -- | Constructs ListActivatedRulesInRuleGroupRequest from required parameters
 newListActivatedRulesInRuleGroupRequest :: ListActivatedRulesInRuleGroupRequest
-newListActivatedRulesInRuleGroupRequest  = ListActivatedRulesInRuleGroupRequest { "Limit": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing), "RuleGroupId": (NullOrUndefined Nothing) }
+newListActivatedRulesInRuleGroupRequest  = ListActivatedRulesInRuleGroupRequest { "Limit": Nothing, "NextMarker": Nothing, "RuleGroupId": Nothing }
 
 -- | Constructs ListActivatedRulesInRuleGroupRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListActivatedRulesInRuleGroupRequest' :: ( { "RuleGroupId" :: NullOrUndefined (ResourceId) , "NextMarker" :: NullOrUndefined (NextMarker) , "Limit" :: NullOrUndefined (PaginationLimit) } -> {"RuleGroupId" :: NullOrUndefined (ResourceId) , "NextMarker" :: NullOrUndefined (NextMarker) , "Limit" :: NullOrUndefined (PaginationLimit) } ) -> ListActivatedRulesInRuleGroupRequest
-newListActivatedRulesInRuleGroupRequest'  customize = (ListActivatedRulesInRuleGroupRequest <<< customize) { "Limit": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing), "RuleGroupId": (NullOrUndefined Nothing) }
+newListActivatedRulesInRuleGroupRequest' :: ( { "RuleGroupId" :: Maybe (ResourceId) , "NextMarker" :: Maybe (NextMarker) , "Limit" :: Maybe (PaginationLimit) } -> {"RuleGroupId" :: Maybe (ResourceId) , "NextMarker" :: Maybe (NextMarker) , "Limit" :: Maybe (PaginationLimit) } ) -> ListActivatedRulesInRuleGroupRequest
+newListActivatedRulesInRuleGroupRequest'  customize = (ListActivatedRulesInRuleGroupRequest <<< customize) { "Limit": Nothing, "NextMarker": Nothing, "RuleGroupId": Nothing }
 
 
 
 newtype ListActivatedRulesInRuleGroupResponse = ListActivatedRulesInRuleGroupResponse 
-  { "NextMarker" :: NullOrUndefined (NextMarker)
-  , "ActivatedRules" :: NullOrUndefined (ActivatedRules)
+  { "NextMarker" :: Maybe (NextMarker)
+  , "ActivatedRules" :: Maybe (ActivatedRules)
   }
 derive instance newtypeListActivatedRulesInRuleGroupResponse :: Newtype ListActivatedRulesInRuleGroupResponse _
 derive instance repGenericListActivatedRulesInRuleGroupResponse :: Generic ListActivatedRulesInRuleGroupResponse _
@@ -2388,18 +2387,18 @@ instance encodeListActivatedRulesInRuleGroupResponse :: Encode ListActivatedRule
 
 -- | Constructs ListActivatedRulesInRuleGroupResponse from required parameters
 newListActivatedRulesInRuleGroupResponse :: ListActivatedRulesInRuleGroupResponse
-newListActivatedRulesInRuleGroupResponse  = ListActivatedRulesInRuleGroupResponse { "ActivatedRules": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing) }
+newListActivatedRulesInRuleGroupResponse  = ListActivatedRulesInRuleGroupResponse { "ActivatedRules": Nothing, "NextMarker": Nothing }
 
 -- | Constructs ListActivatedRulesInRuleGroupResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListActivatedRulesInRuleGroupResponse' :: ( { "NextMarker" :: NullOrUndefined (NextMarker) , "ActivatedRules" :: NullOrUndefined (ActivatedRules) } -> {"NextMarker" :: NullOrUndefined (NextMarker) , "ActivatedRules" :: NullOrUndefined (ActivatedRules) } ) -> ListActivatedRulesInRuleGroupResponse
-newListActivatedRulesInRuleGroupResponse'  customize = (ListActivatedRulesInRuleGroupResponse <<< customize) { "ActivatedRules": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing) }
+newListActivatedRulesInRuleGroupResponse' :: ( { "NextMarker" :: Maybe (NextMarker) , "ActivatedRules" :: Maybe (ActivatedRules) } -> {"NextMarker" :: Maybe (NextMarker) , "ActivatedRules" :: Maybe (ActivatedRules) } ) -> ListActivatedRulesInRuleGroupResponse
+newListActivatedRulesInRuleGroupResponse'  customize = (ListActivatedRulesInRuleGroupResponse <<< customize) { "ActivatedRules": Nothing, "NextMarker": Nothing }
 
 
 
 newtype ListByteMatchSetsRequest = ListByteMatchSetsRequest 
-  { "NextMarker" :: NullOrUndefined (NextMarker)
-  , "Limit" :: NullOrUndefined (PaginationLimit)
+  { "NextMarker" :: Maybe (NextMarker)
+  , "Limit" :: Maybe (PaginationLimit)
   }
 derive instance newtypeListByteMatchSetsRequest :: Newtype ListByteMatchSetsRequest _
 derive instance repGenericListByteMatchSetsRequest :: Generic ListByteMatchSetsRequest _
@@ -2409,18 +2408,18 @@ instance encodeListByteMatchSetsRequest :: Encode ListByteMatchSetsRequest where
 
 -- | Constructs ListByteMatchSetsRequest from required parameters
 newListByteMatchSetsRequest :: ListByteMatchSetsRequest
-newListByteMatchSetsRequest  = ListByteMatchSetsRequest { "Limit": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing) }
+newListByteMatchSetsRequest  = ListByteMatchSetsRequest { "Limit": Nothing, "NextMarker": Nothing }
 
 -- | Constructs ListByteMatchSetsRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListByteMatchSetsRequest' :: ( { "NextMarker" :: NullOrUndefined (NextMarker) , "Limit" :: NullOrUndefined (PaginationLimit) } -> {"NextMarker" :: NullOrUndefined (NextMarker) , "Limit" :: NullOrUndefined (PaginationLimit) } ) -> ListByteMatchSetsRequest
-newListByteMatchSetsRequest'  customize = (ListByteMatchSetsRequest <<< customize) { "Limit": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing) }
+newListByteMatchSetsRequest' :: ( { "NextMarker" :: Maybe (NextMarker) , "Limit" :: Maybe (PaginationLimit) } -> {"NextMarker" :: Maybe (NextMarker) , "Limit" :: Maybe (PaginationLimit) } ) -> ListByteMatchSetsRequest
+newListByteMatchSetsRequest'  customize = (ListByteMatchSetsRequest <<< customize) { "Limit": Nothing, "NextMarker": Nothing }
 
 
 
 newtype ListByteMatchSetsResponse = ListByteMatchSetsResponse 
-  { "NextMarker" :: NullOrUndefined (NextMarker)
-  , "ByteMatchSets" :: NullOrUndefined (ByteMatchSetSummaries)
+  { "NextMarker" :: Maybe (NextMarker)
+  , "ByteMatchSets" :: Maybe (ByteMatchSetSummaries)
   }
 derive instance newtypeListByteMatchSetsResponse :: Newtype ListByteMatchSetsResponse _
 derive instance repGenericListByteMatchSetsResponse :: Generic ListByteMatchSetsResponse _
@@ -2430,18 +2429,18 @@ instance encodeListByteMatchSetsResponse :: Encode ListByteMatchSetsResponse whe
 
 -- | Constructs ListByteMatchSetsResponse from required parameters
 newListByteMatchSetsResponse :: ListByteMatchSetsResponse
-newListByteMatchSetsResponse  = ListByteMatchSetsResponse { "ByteMatchSets": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing) }
+newListByteMatchSetsResponse  = ListByteMatchSetsResponse { "ByteMatchSets": Nothing, "NextMarker": Nothing }
 
 -- | Constructs ListByteMatchSetsResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListByteMatchSetsResponse' :: ( { "NextMarker" :: NullOrUndefined (NextMarker) , "ByteMatchSets" :: NullOrUndefined (ByteMatchSetSummaries) } -> {"NextMarker" :: NullOrUndefined (NextMarker) , "ByteMatchSets" :: NullOrUndefined (ByteMatchSetSummaries) } ) -> ListByteMatchSetsResponse
-newListByteMatchSetsResponse'  customize = (ListByteMatchSetsResponse <<< customize) { "ByteMatchSets": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing) }
+newListByteMatchSetsResponse' :: ( { "NextMarker" :: Maybe (NextMarker) , "ByteMatchSets" :: Maybe (ByteMatchSetSummaries) } -> {"NextMarker" :: Maybe (NextMarker) , "ByteMatchSets" :: Maybe (ByteMatchSetSummaries) } ) -> ListByteMatchSetsResponse
+newListByteMatchSetsResponse'  customize = (ListByteMatchSetsResponse <<< customize) { "ByteMatchSets": Nothing, "NextMarker": Nothing }
 
 
 
 newtype ListGeoMatchSetsRequest = ListGeoMatchSetsRequest 
-  { "NextMarker" :: NullOrUndefined (NextMarker)
-  , "Limit" :: NullOrUndefined (PaginationLimit)
+  { "NextMarker" :: Maybe (NextMarker)
+  , "Limit" :: Maybe (PaginationLimit)
   }
 derive instance newtypeListGeoMatchSetsRequest :: Newtype ListGeoMatchSetsRequest _
 derive instance repGenericListGeoMatchSetsRequest :: Generic ListGeoMatchSetsRequest _
@@ -2451,18 +2450,18 @@ instance encodeListGeoMatchSetsRequest :: Encode ListGeoMatchSetsRequest where e
 
 -- | Constructs ListGeoMatchSetsRequest from required parameters
 newListGeoMatchSetsRequest :: ListGeoMatchSetsRequest
-newListGeoMatchSetsRequest  = ListGeoMatchSetsRequest { "Limit": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing) }
+newListGeoMatchSetsRequest  = ListGeoMatchSetsRequest { "Limit": Nothing, "NextMarker": Nothing }
 
 -- | Constructs ListGeoMatchSetsRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListGeoMatchSetsRequest' :: ( { "NextMarker" :: NullOrUndefined (NextMarker) , "Limit" :: NullOrUndefined (PaginationLimit) } -> {"NextMarker" :: NullOrUndefined (NextMarker) , "Limit" :: NullOrUndefined (PaginationLimit) } ) -> ListGeoMatchSetsRequest
-newListGeoMatchSetsRequest'  customize = (ListGeoMatchSetsRequest <<< customize) { "Limit": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing) }
+newListGeoMatchSetsRequest' :: ( { "NextMarker" :: Maybe (NextMarker) , "Limit" :: Maybe (PaginationLimit) } -> {"NextMarker" :: Maybe (NextMarker) , "Limit" :: Maybe (PaginationLimit) } ) -> ListGeoMatchSetsRequest
+newListGeoMatchSetsRequest'  customize = (ListGeoMatchSetsRequest <<< customize) { "Limit": Nothing, "NextMarker": Nothing }
 
 
 
 newtype ListGeoMatchSetsResponse = ListGeoMatchSetsResponse 
-  { "NextMarker" :: NullOrUndefined (NextMarker)
-  , "GeoMatchSets" :: NullOrUndefined (GeoMatchSetSummaries)
+  { "NextMarker" :: Maybe (NextMarker)
+  , "GeoMatchSets" :: Maybe (GeoMatchSetSummaries)
   }
 derive instance newtypeListGeoMatchSetsResponse :: Newtype ListGeoMatchSetsResponse _
 derive instance repGenericListGeoMatchSetsResponse :: Generic ListGeoMatchSetsResponse _
@@ -2472,18 +2471,18 @@ instance encodeListGeoMatchSetsResponse :: Encode ListGeoMatchSetsResponse where
 
 -- | Constructs ListGeoMatchSetsResponse from required parameters
 newListGeoMatchSetsResponse :: ListGeoMatchSetsResponse
-newListGeoMatchSetsResponse  = ListGeoMatchSetsResponse { "GeoMatchSets": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing) }
+newListGeoMatchSetsResponse  = ListGeoMatchSetsResponse { "GeoMatchSets": Nothing, "NextMarker": Nothing }
 
 -- | Constructs ListGeoMatchSetsResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListGeoMatchSetsResponse' :: ( { "NextMarker" :: NullOrUndefined (NextMarker) , "GeoMatchSets" :: NullOrUndefined (GeoMatchSetSummaries) } -> {"NextMarker" :: NullOrUndefined (NextMarker) , "GeoMatchSets" :: NullOrUndefined (GeoMatchSetSummaries) } ) -> ListGeoMatchSetsResponse
-newListGeoMatchSetsResponse'  customize = (ListGeoMatchSetsResponse <<< customize) { "GeoMatchSets": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing) }
+newListGeoMatchSetsResponse' :: ( { "NextMarker" :: Maybe (NextMarker) , "GeoMatchSets" :: Maybe (GeoMatchSetSummaries) } -> {"NextMarker" :: Maybe (NextMarker) , "GeoMatchSets" :: Maybe (GeoMatchSetSummaries) } ) -> ListGeoMatchSetsResponse
+newListGeoMatchSetsResponse'  customize = (ListGeoMatchSetsResponse <<< customize) { "GeoMatchSets": Nothing, "NextMarker": Nothing }
 
 
 
 newtype ListIPSetsRequest = ListIPSetsRequest 
-  { "NextMarker" :: NullOrUndefined (NextMarker)
-  , "Limit" :: NullOrUndefined (PaginationLimit)
+  { "NextMarker" :: Maybe (NextMarker)
+  , "Limit" :: Maybe (PaginationLimit)
   }
 derive instance newtypeListIPSetsRequest :: Newtype ListIPSetsRequest _
 derive instance repGenericListIPSetsRequest :: Generic ListIPSetsRequest _
@@ -2493,18 +2492,18 @@ instance encodeListIPSetsRequest :: Encode ListIPSetsRequest where encode = gene
 
 -- | Constructs ListIPSetsRequest from required parameters
 newListIPSetsRequest :: ListIPSetsRequest
-newListIPSetsRequest  = ListIPSetsRequest { "Limit": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing) }
+newListIPSetsRequest  = ListIPSetsRequest { "Limit": Nothing, "NextMarker": Nothing }
 
 -- | Constructs ListIPSetsRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListIPSetsRequest' :: ( { "NextMarker" :: NullOrUndefined (NextMarker) , "Limit" :: NullOrUndefined (PaginationLimit) } -> {"NextMarker" :: NullOrUndefined (NextMarker) , "Limit" :: NullOrUndefined (PaginationLimit) } ) -> ListIPSetsRequest
-newListIPSetsRequest'  customize = (ListIPSetsRequest <<< customize) { "Limit": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing) }
+newListIPSetsRequest' :: ( { "NextMarker" :: Maybe (NextMarker) , "Limit" :: Maybe (PaginationLimit) } -> {"NextMarker" :: Maybe (NextMarker) , "Limit" :: Maybe (PaginationLimit) } ) -> ListIPSetsRequest
+newListIPSetsRequest'  customize = (ListIPSetsRequest <<< customize) { "Limit": Nothing, "NextMarker": Nothing }
 
 
 
 newtype ListIPSetsResponse = ListIPSetsResponse 
-  { "NextMarker" :: NullOrUndefined (NextMarker)
-  , "IPSets" :: NullOrUndefined (IPSetSummaries)
+  { "NextMarker" :: Maybe (NextMarker)
+  , "IPSets" :: Maybe (IPSetSummaries)
   }
 derive instance newtypeListIPSetsResponse :: Newtype ListIPSetsResponse _
 derive instance repGenericListIPSetsResponse :: Generic ListIPSetsResponse _
@@ -2514,18 +2513,18 @@ instance encodeListIPSetsResponse :: Encode ListIPSetsResponse where encode = ge
 
 -- | Constructs ListIPSetsResponse from required parameters
 newListIPSetsResponse :: ListIPSetsResponse
-newListIPSetsResponse  = ListIPSetsResponse { "IPSets": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing) }
+newListIPSetsResponse  = ListIPSetsResponse { "IPSets": Nothing, "NextMarker": Nothing }
 
 -- | Constructs ListIPSetsResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListIPSetsResponse' :: ( { "NextMarker" :: NullOrUndefined (NextMarker) , "IPSets" :: NullOrUndefined (IPSetSummaries) } -> {"NextMarker" :: NullOrUndefined (NextMarker) , "IPSets" :: NullOrUndefined (IPSetSummaries) } ) -> ListIPSetsResponse
-newListIPSetsResponse'  customize = (ListIPSetsResponse <<< customize) { "IPSets": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing) }
+newListIPSetsResponse' :: ( { "NextMarker" :: Maybe (NextMarker) , "IPSets" :: Maybe (IPSetSummaries) } -> {"NextMarker" :: Maybe (NextMarker) , "IPSets" :: Maybe (IPSetSummaries) } ) -> ListIPSetsResponse
+newListIPSetsResponse'  customize = (ListIPSetsResponse <<< customize) { "IPSets": Nothing, "NextMarker": Nothing }
 
 
 
 newtype ListRateBasedRulesRequest = ListRateBasedRulesRequest 
-  { "NextMarker" :: NullOrUndefined (NextMarker)
-  , "Limit" :: NullOrUndefined (PaginationLimit)
+  { "NextMarker" :: Maybe (NextMarker)
+  , "Limit" :: Maybe (PaginationLimit)
   }
 derive instance newtypeListRateBasedRulesRequest :: Newtype ListRateBasedRulesRequest _
 derive instance repGenericListRateBasedRulesRequest :: Generic ListRateBasedRulesRequest _
@@ -2535,18 +2534,18 @@ instance encodeListRateBasedRulesRequest :: Encode ListRateBasedRulesRequest whe
 
 -- | Constructs ListRateBasedRulesRequest from required parameters
 newListRateBasedRulesRequest :: ListRateBasedRulesRequest
-newListRateBasedRulesRequest  = ListRateBasedRulesRequest { "Limit": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing) }
+newListRateBasedRulesRequest  = ListRateBasedRulesRequest { "Limit": Nothing, "NextMarker": Nothing }
 
 -- | Constructs ListRateBasedRulesRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListRateBasedRulesRequest' :: ( { "NextMarker" :: NullOrUndefined (NextMarker) , "Limit" :: NullOrUndefined (PaginationLimit) } -> {"NextMarker" :: NullOrUndefined (NextMarker) , "Limit" :: NullOrUndefined (PaginationLimit) } ) -> ListRateBasedRulesRequest
-newListRateBasedRulesRequest'  customize = (ListRateBasedRulesRequest <<< customize) { "Limit": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing) }
+newListRateBasedRulesRequest' :: ( { "NextMarker" :: Maybe (NextMarker) , "Limit" :: Maybe (PaginationLimit) } -> {"NextMarker" :: Maybe (NextMarker) , "Limit" :: Maybe (PaginationLimit) } ) -> ListRateBasedRulesRequest
+newListRateBasedRulesRequest'  customize = (ListRateBasedRulesRequest <<< customize) { "Limit": Nothing, "NextMarker": Nothing }
 
 
 
 newtype ListRateBasedRulesResponse = ListRateBasedRulesResponse 
-  { "NextMarker" :: NullOrUndefined (NextMarker)
-  , "Rules" :: NullOrUndefined (RuleSummaries)
+  { "NextMarker" :: Maybe (NextMarker)
+  , "Rules" :: Maybe (RuleSummaries)
   }
 derive instance newtypeListRateBasedRulesResponse :: Newtype ListRateBasedRulesResponse _
 derive instance repGenericListRateBasedRulesResponse :: Generic ListRateBasedRulesResponse _
@@ -2556,18 +2555,18 @@ instance encodeListRateBasedRulesResponse :: Encode ListRateBasedRulesResponse w
 
 -- | Constructs ListRateBasedRulesResponse from required parameters
 newListRateBasedRulesResponse :: ListRateBasedRulesResponse
-newListRateBasedRulesResponse  = ListRateBasedRulesResponse { "NextMarker": (NullOrUndefined Nothing), "Rules": (NullOrUndefined Nothing) }
+newListRateBasedRulesResponse  = ListRateBasedRulesResponse { "NextMarker": Nothing, "Rules": Nothing }
 
 -- | Constructs ListRateBasedRulesResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListRateBasedRulesResponse' :: ( { "NextMarker" :: NullOrUndefined (NextMarker) , "Rules" :: NullOrUndefined (RuleSummaries) } -> {"NextMarker" :: NullOrUndefined (NextMarker) , "Rules" :: NullOrUndefined (RuleSummaries) } ) -> ListRateBasedRulesResponse
-newListRateBasedRulesResponse'  customize = (ListRateBasedRulesResponse <<< customize) { "NextMarker": (NullOrUndefined Nothing), "Rules": (NullOrUndefined Nothing) }
+newListRateBasedRulesResponse' :: ( { "NextMarker" :: Maybe (NextMarker) , "Rules" :: Maybe (RuleSummaries) } -> {"NextMarker" :: Maybe (NextMarker) , "Rules" :: Maybe (RuleSummaries) } ) -> ListRateBasedRulesResponse
+newListRateBasedRulesResponse'  customize = (ListRateBasedRulesResponse <<< customize) { "NextMarker": Nothing, "Rules": Nothing }
 
 
 
 newtype ListRegexMatchSetsRequest = ListRegexMatchSetsRequest 
-  { "NextMarker" :: NullOrUndefined (NextMarker)
-  , "Limit" :: NullOrUndefined (PaginationLimit)
+  { "NextMarker" :: Maybe (NextMarker)
+  , "Limit" :: Maybe (PaginationLimit)
   }
 derive instance newtypeListRegexMatchSetsRequest :: Newtype ListRegexMatchSetsRequest _
 derive instance repGenericListRegexMatchSetsRequest :: Generic ListRegexMatchSetsRequest _
@@ -2577,18 +2576,18 @@ instance encodeListRegexMatchSetsRequest :: Encode ListRegexMatchSetsRequest whe
 
 -- | Constructs ListRegexMatchSetsRequest from required parameters
 newListRegexMatchSetsRequest :: ListRegexMatchSetsRequest
-newListRegexMatchSetsRequest  = ListRegexMatchSetsRequest { "Limit": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing) }
+newListRegexMatchSetsRequest  = ListRegexMatchSetsRequest { "Limit": Nothing, "NextMarker": Nothing }
 
 -- | Constructs ListRegexMatchSetsRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListRegexMatchSetsRequest' :: ( { "NextMarker" :: NullOrUndefined (NextMarker) , "Limit" :: NullOrUndefined (PaginationLimit) } -> {"NextMarker" :: NullOrUndefined (NextMarker) , "Limit" :: NullOrUndefined (PaginationLimit) } ) -> ListRegexMatchSetsRequest
-newListRegexMatchSetsRequest'  customize = (ListRegexMatchSetsRequest <<< customize) { "Limit": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing) }
+newListRegexMatchSetsRequest' :: ( { "NextMarker" :: Maybe (NextMarker) , "Limit" :: Maybe (PaginationLimit) } -> {"NextMarker" :: Maybe (NextMarker) , "Limit" :: Maybe (PaginationLimit) } ) -> ListRegexMatchSetsRequest
+newListRegexMatchSetsRequest'  customize = (ListRegexMatchSetsRequest <<< customize) { "Limit": Nothing, "NextMarker": Nothing }
 
 
 
 newtype ListRegexMatchSetsResponse = ListRegexMatchSetsResponse 
-  { "NextMarker" :: NullOrUndefined (NextMarker)
-  , "RegexMatchSets" :: NullOrUndefined (RegexMatchSetSummaries)
+  { "NextMarker" :: Maybe (NextMarker)
+  , "RegexMatchSets" :: Maybe (RegexMatchSetSummaries)
   }
 derive instance newtypeListRegexMatchSetsResponse :: Newtype ListRegexMatchSetsResponse _
 derive instance repGenericListRegexMatchSetsResponse :: Generic ListRegexMatchSetsResponse _
@@ -2598,18 +2597,18 @@ instance encodeListRegexMatchSetsResponse :: Encode ListRegexMatchSetsResponse w
 
 -- | Constructs ListRegexMatchSetsResponse from required parameters
 newListRegexMatchSetsResponse :: ListRegexMatchSetsResponse
-newListRegexMatchSetsResponse  = ListRegexMatchSetsResponse { "NextMarker": (NullOrUndefined Nothing), "RegexMatchSets": (NullOrUndefined Nothing) }
+newListRegexMatchSetsResponse  = ListRegexMatchSetsResponse { "NextMarker": Nothing, "RegexMatchSets": Nothing }
 
 -- | Constructs ListRegexMatchSetsResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListRegexMatchSetsResponse' :: ( { "NextMarker" :: NullOrUndefined (NextMarker) , "RegexMatchSets" :: NullOrUndefined (RegexMatchSetSummaries) } -> {"NextMarker" :: NullOrUndefined (NextMarker) , "RegexMatchSets" :: NullOrUndefined (RegexMatchSetSummaries) } ) -> ListRegexMatchSetsResponse
-newListRegexMatchSetsResponse'  customize = (ListRegexMatchSetsResponse <<< customize) { "NextMarker": (NullOrUndefined Nothing), "RegexMatchSets": (NullOrUndefined Nothing) }
+newListRegexMatchSetsResponse' :: ( { "NextMarker" :: Maybe (NextMarker) , "RegexMatchSets" :: Maybe (RegexMatchSetSummaries) } -> {"NextMarker" :: Maybe (NextMarker) , "RegexMatchSets" :: Maybe (RegexMatchSetSummaries) } ) -> ListRegexMatchSetsResponse
+newListRegexMatchSetsResponse'  customize = (ListRegexMatchSetsResponse <<< customize) { "NextMarker": Nothing, "RegexMatchSets": Nothing }
 
 
 
 newtype ListRegexPatternSetsRequest = ListRegexPatternSetsRequest 
-  { "NextMarker" :: NullOrUndefined (NextMarker)
-  , "Limit" :: NullOrUndefined (PaginationLimit)
+  { "NextMarker" :: Maybe (NextMarker)
+  , "Limit" :: Maybe (PaginationLimit)
   }
 derive instance newtypeListRegexPatternSetsRequest :: Newtype ListRegexPatternSetsRequest _
 derive instance repGenericListRegexPatternSetsRequest :: Generic ListRegexPatternSetsRequest _
@@ -2619,18 +2618,18 @@ instance encodeListRegexPatternSetsRequest :: Encode ListRegexPatternSetsRequest
 
 -- | Constructs ListRegexPatternSetsRequest from required parameters
 newListRegexPatternSetsRequest :: ListRegexPatternSetsRequest
-newListRegexPatternSetsRequest  = ListRegexPatternSetsRequest { "Limit": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing) }
+newListRegexPatternSetsRequest  = ListRegexPatternSetsRequest { "Limit": Nothing, "NextMarker": Nothing }
 
 -- | Constructs ListRegexPatternSetsRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListRegexPatternSetsRequest' :: ( { "NextMarker" :: NullOrUndefined (NextMarker) , "Limit" :: NullOrUndefined (PaginationLimit) } -> {"NextMarker" :: NullOrUndefined (NextMarker) , "Limit" :: NullOrUndefined (PaginationLimit) } ) -> ListRegexPatternSetsRequest
-newListRegexPatternSetsRequest'  customize = (ListRegexPatternSetsRequest <<< customize) { "Limit": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing) }
+newListRegexPatternSetsRequest' :: ( { "NextMarker" :: Maybe (NextMarker) , "Limit" :: Maybe (PaginationLimit) } -> {"NextMarker" :: Maybe (NextMarker) , "Limit" :: Maybe (PaginationLimit) } ) -> ListRegexPatternSetsRequest
+newListRegexPatternSetsRequest'  customize = (ListRegexPatternSetsRequest <<< customize) { "Limit": Nothing, "NextMarker": Nothing }
 
 
 
 newtype ListRegexPatternSetsResponse = ListRegexPatternSetsResponse 
-  { "NextMarker" :: NullOrUndefined (NextMarker)
-  , "RegexPatternSets" :: NullOrUndefined (RegexPatternSetSummaries)
+  { "NextMarker" :: Maybe (NextMarker)
+  , "RegexPatternSets" :: Maybe (RegexPatternSetSummaries)
   }
 derive instance newtypeListRegexPatternSetsResponse :: Newtype ListRegexPatternSetsResponse _
 derive instance repGenericListRegexPatternSetsResponse :: Generic ListRegexPatternSetsResponse _
@@ -2640,18 +2639,18 @@ instance encodeListRegexPatternSetsResponse :: Encode ListRegexPatternSetsRespon
 
 -- | Constructs ListRegexPatternSetsResponse from required parameters
 newListRegexPatternSetsResponse :: ListRegexPatternSetsResponse
-newListRegexPatternSetsResponse  = ListRegexPatternSetsResponse { "NextMarker": (NullOrUndefined Nothing), "RegexPatternSets": (NullOrUndefined Nothing) }
+newListRegexPatternSetsResponse  = ListRegexPatternSetsResponse { "NextMarker": Nothing, "RegexPatternSets": Nothing }
 
 -- | Constructs ListRegexPatternSetsResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListRegexPatternSetsResponse' :: ( { "NextMarker" :: NullOrUndefined (NextMarker) , "RegexPatternSets" :: NullOrUndefined (RegexPatternSetSummaries) } -> {"NextMarker" :: NullOrUndefined (NextMarker) , "RegexPatternSets" :: NullOrUndefined (RegexPatternSetSummaries) } ) -> ListRegexPatternSetsResponse
-newListRegexPatternSetsResponse'  customize = (ListRegexPatternSetsResponse <<< customize) { "NextMarker": (NullOrUndefined Nothing), "RegexPatternSets": (NullOrUndefined Nothing) }
+newListRegexPatternSetsResponse' :: ( { "NextMarker" :: Maybe (NextMarker) , "RegexPatternSets" :: Maybe (RegexPatternSetSummaries) } -> {"NextMarker" :: Maybe (NextMarker) , "RegexPatternSets" :: Maybe (RegexPatternSetSummaries) } ) -> ListRegexPatternSetsResponse
+newListRegexPatternSetsResponse'  customize = (ListRegexPatternSetsResponse <<< customize) { "NextMarker": Nothing, "RegexPatternSets": Nothing }
 
 
 
 newtype ListRuleGroupsRequest = ListRuleGroupsRequest 
-  { "NextMarker" :: NullOrUndefined (NextMarker)
-  , "Limit" :: NullOrUndefined (PaginationLimit)
+  { "NextMarker" :: Maybe (NextMarker)
+  , "Limit" :: Maybe (PaginationLimit)
   }
 derive instance newtypeListRuleGroupsRequest :: Newtype ListRuleGroupsRequest _
 derive instance repGenericListRuleGroupsRequest :: Generic ListRuleGroupsRequest _
@@ -2661,18 +2660,18 @@ instance encodeListRuleGroupsRequest :: Encode ListRuleGroupsRequest where encod
 
 -- | Constructs ListRuleGroupsRequest from required parameters
 newListRuleGroupsRequest :: ListRuleGroupsRequest
-newListRuleGroupsRequest  = ListRuleGroupsRequest { "Limit": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing) }
+newListRuleGroupsRequest  = ListRuleGroupsRequest { "Limit": Nothing, "NextMarker": Nothing }
 
 -- | Constructs ListRuleGroupsRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListRuleGroupsRequest' :: ( { "NextMarker" :: NullOrUndefined (NextMarker) , "Limit" :: NullOrUndefined (PaginationLimit) } -> {"NextMarker" :: NullOrUndefined (NextMarker) , "Limit" :: NullOrUndefined (PaginationLimit) } ) -> ListRuleGroupsRequest
-newListRuleGroupsRequest'  customize = (ListRuleGroupsRequest <<< customize) { "Limit": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing) }
+newListRuleGroupsRequest' :: ( { "NextMarker" :: Maybe (NextMarker) , "Limit" :: Maybe (PaginationLimit) } -> {"NextMarker" :: Maybe (NextMarker) , "Limit" :: Maybe (PaginationLimit) } ) -> ListRuleGroupsRequest
+newListRuleGroupsRequest'  customize = (ListRuleGroupsRequest <<< customize) { "Limit": Nothing, "NextMarker": Nothing }
 
 
 
 newtype ListRuleGroupsResponse = ListRuleGroupsResponse 
-  { "NextMarker" :: NullOrUndefined (NextMarker)
-  , "RuleGroups" :: NullOrUndefined (RuleGroupSummaries)
+  { "NextMarker" :: Maybe (NextMarker)
+  , "RuleGroups" :: Maybe (RuleGroupSummaries)
   }
 derive instance newtypeListRuleGroupsResponse :: Newtype ListRuleGroupsResponse _
 derive instance repGenericListRuleGroupsResponse :: Generic ListRuleGroupsResponse _
@@ -2682,18 +2681,18 @@ instance encodeListRuleGroupsResponse :: Encode ListRuleGroupsResponse where enc
 
 -- | Constructs ListRuleGroupsResponse from required parameters
 newListRuleGroupsResponse :: ListRuleGroupsResponse
-newListRuleGroupsResponse  = ListRuleGroupsResponse { "NextMarker": (NullOrUndefined Nothing), "RuleGroups": (NullOrUndefined Nothing) }
+newListRuleGroupsResponse  = ListRuleGroupsResponse { "NextMarker": Nothing, "RuleGroups": Nothing }
 
 -- | Constructs ListRuleGroupsResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListRuleGroupsResponse' :: ( { "NextMarker" :: NullOrUndefined (NextMarker) , "RuleGroups" :: NullOrUndefined (RuleGroupSummaries) } -> {"NextMarker" :: NullOrUndefined (NextMarker) , "RuleGroups" :: NullOrUndefined (RuleGroupSummaries) } ) -> ListRuleGroupsResponse
-newListRuleGroupsResponse'  customize = (ListRuleGroupsResponse <<< customize) { "NextMarker": (NullOrUndefined Nothing), "RuleGroups": (NullOrUndefined Nothing) }
+newListRuleGroupsResponse' :: ( { "NextMarker" :: Maybe (NextMarker) , "RuleGroups" :: Maybe (RuleGroupSummaries) } -> {"NextMarker" :: Maybe (NextMarker) , "RuleGroups" :: Maybe (RuleGroupSummaries) } ) -> ListRuleGroupsResponse
+newListRuleGroupsResponse'  customize = (ListRuleGroupsResponse <<< customize) { "NextMarker": Nothing, "RuleGroups": Nothing }
 
 
 
 newtype ListRulesRequest = ListRulesRequest 
-  { "NextMarker" :: NullOrUndefined (NextMarker)
-  , "Limit" :: NullOrUndefined (PaginationLimit)
+  { "NextMarker" :: Maybe (NextMarker)
+  , "Limit" :: Maybe (PaginationLimit)
   }
 derive instance newtypeListRulesRequest :: Newtype ListRulesRequest _
 derive instance repGenericListRulesRequest :: Generic ListRulesRequest _
@@ -2703,18 +2702,18 @@ instance encodeListRulesRequest :: Encode ListRulesRequest where encode = generi
 
 -- | Constructs ListRulesRequest from required parameters
 newListRulesRequest :: ListRulesRequest
-newListRulesRequest  = ListRulesRequest { "Limit": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing) }
+newListRulesRequest  = ListRulesRequest { "Limit": Nothing, "NextMarker": Nothing }
 
 -- | Constructs ListRulesRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListRulesRequest' :: ( { "NextMarker" :: NullOrUndefined (NextMarker) , "Limit" :: NullOrUndefined (PaginationLimit) } -> {"NextMarker" :: NullOrUndefined (NextMarker) , "Limit" :: NullOrUndefined (PaginationLimit) } ) -> ListRulesRequest
-newListRulesRequest'  customize = (ListRulesRequest <<< customize) { "Limit": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing) }
+newListRulesRequest' :: ( { "NextMarker" :: Maybe (NextMarker) , "Limit" :: Maybe (PaginationLimit) } -> {"NextMarker" :: Maybe (NextMarker) , "Limit" :: Maybe (PaginationLimit) } ) -> ListRulesRequest
+newListRulesRequest'  customize = (ListRulesRequest <<< customize) { "Limit": Nothing, "NextMarker": Nothing }
 
 
 
 newtype ListRulesResponse = ListRulesResponse 
-  { "NextMarker" :: NullOrUndefined (NextMarker)
-  , "Rules" :: NullOrUndefined (RuleSummaries)
+  { "NextMarker" :: Maybe (NextMarker)
+  , "Rules" :: Maybe (RuleSummaries)
   }
 derive instance newtypeListRulesResponse :: Newtype ListRulesResponse _
 derive instance repGenericListRulesResponse :: Generic ListRulesResponse _
@@ -2724,18 +2723,18 @@ instance encodeListRulesResponse :: Encode ListRulesResponse where encode = gene
 
 -- | Constructs ListRulesResponse from required parameters
 newListRulesResponse :: ListRulesResponse
-newListRulesResponse  = ListRulesResponse { "NextMarker": (NullOrUndefined Nothing), "Rules": (NullOrUndefined Nothing) }
+newListRulesResponse  = ListRulesResponse { "NextMarker": Nothing, "Rules": Nothing }
 
 -- | Constructs ListRulesResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListRulesResponse' :: ( { "NextMarker" :: NullOrUndefined (NextMarker) , "Rules" :: NullOrUndefined (RuleSummaries) } -> {"NextMarker" :: NullOrUndefined (NextMarker) , "Rules" :: NullOrUndefined (RuleSummaries) } ) -> ListRulesResponse
-newListRulesResponse'  customize = (ListRulesResponse <<< customize) { "NextMarker": (NullOrUndefined Nothing), "Rules": (NullOrUndefined Nothing) }
+newListRulesResponse' :: ( { "NextMarker" :: Maybe (NextMarker) , "Rules" :: Maybe (RuleSummaries) } -> {"NextMarker" :: Maybe (NextMarker) , "Rules" :: Maybe (RuleSummaries) } ) -> ListRulesResponse
+newListRulesResponse'  customize = (ListRulesResponse <<< customize) { "NextMarker": Nothing, "Rules": Nothing }
 
 
 
 newtype ListSizeConstraintSetsRequest = ListSizeConstraintSetsRequest 
-  { "NextMarker" :: NullOrUndefined (NextMarker)
-  , "Limit" :: NullOrUndefined (PaginationLimit)
+  { "NextMarker" :: Maybe (NextMarker)
+  , "Limit" :: Maybe (PaginationLimit)
   }
 derive instance newtypeListSizeConstraintSetsRequest :: Newtype ListSizeConstraintSetsRequest _
 derive instance repGenericListSizeConstraintSetsRequest :: Generic ListSizeConstraintSetsRequest _
@@ -2745,18 +2744,18 @@ instance encodeListSizeConstraintSetsRequest :: Encode ListSizeConstraintSetsReq
 
 -- | Constructs ListSizeConstraintSetsRequest from required parameters
 newListSizeConstraintSetsRequest :: ListSizeConstraintSetsRequest
-newListSizeConstraintSetsRequest  = ListSizeConstraintSetsRequest { "Limit": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing) }
+newListSizeConstraintSetsRequest  = ListSizeConstraintSetsRequest { "Limit": Nothing, "NextMarker": Nothing }
 
 -- | Constructs ListSizeConstraintSetsRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListSizeConstraintSetsRequest' :: ( { "NextMarker" :: NullOrUndefined (NextMarker) , "Limit" :: NullOrUndefined (PaginationLimit) } -> {"NextMarker" :: NullOrUndefined (NextMarker) , "Limit" :: NullOrUndefined (PaginationLimit) } ) -> ListSizeConstraintSetsRequest
-newListSizeConstraintSetsRequest'  customize = (ListSizeConstraintSetsRequest <<< customize) { "Limit": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing) }
+newListSizeConstraintSetsRequest' :: ( { "NextMarker" :: Maybe (NextMarker) , "Limit" :: Maybe (PaginationLimit) } -> {"NextMarker" :: Maybe (NextMarker) , "Limit" :: Maybe (PaginationLimit) } ) -> ListSizeConstraintSetsRequest
+newListSizeConstraintSetsRequest'  customize = (ListSizeConstraintSetsRequest <<< customize) { "Limit": Nothing, "NextMarker": Nothing }
 
 
 
 newtype ListSizeConstraintSetsResponse = ListSizeConstraintSetsResponse 
-  { "NextMarker" :: NullOrUndefined (NextMarker)
-  , "SizeConstraintSets" :: NullOrUndefined (SizeConstraintSetSummaries)
+  { "NextMarker" :: Maybe (NextMarker)
+  , "SizeConstraintSets" :: Maybe (SizeConstraintSetSummaries)
   }
 derive instance newtypeListSizeConstraintSetsResponse :: Newtype ListSizeConstraintSetsResponse _
 derive instance repGenericListSizeConstraintSetsResponse :: Generic ListSizeConstraintSetsResponse _
@@ -2766,19 +2765,19 @@ instance encodeListSizeConstraintSetsResponse :: Encode ListSizeConstraintSetsRe
 
 -- | Constructs ListSizeConstraintSetsResponse from required parameters
 newListSizeConstraintSetsResponse :: ListSizeConstraintSetsResponse
-newListSizeConstraintSetsResponse  = ListSizeConstraintSetsResponse { "NextMarker": (NullOrUndefined Nothing), "SizeConstraintSets": (NullOrUndefined Nothing) }
+newListSizeConstraintSetsResponse  = ListSizeConstraintSetsResponse { "NextMarker": Nothing, "SizeConstraintSets": Nothing }
 
 -- | Constructs ListSizeConstraintSetsResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListSizeConstraintSetsResponse' :: ( { "NextMarker" :: NullOrUndefined (NextMarker) , "SizeConstraintSets" :: NullOrUndefined (SizeConstraintSetSummaries) } -> {"NextMarker" :: NullOrUndefined (NextMarker) , "SizeConstraintSets" :: NullOrUndefined (SizeConstraintSetSummaries) } ) -> ListSizeConstraintSetsResponse
-newListSizeConstraintSetsResponse'  customize = (ListSizeConstraintSetsResponse <<< customize) { "NextMarker": (NullOrUndefined Nothing), "SizeConstraintSets": (NullOrUndefined Nothing) }
+newListSizeConstraintSetsResponse' :: ( { "NextMarker" :: Maybe (NextMarker) , "SizeConstraintSets" :: Maybe (SizeConstraintSetSummaries) } -> {"NextMarker" :: Maybe (NextMarker) , "SizeConstraintSets" :: Maybe (SizeConstraintSetSummaries) } ) -> ListSizeConstraintSetsResponse
+newListSizeConstraintSetsResponse'  customize = (ListSizeConstraintSetsResponse <<< customize) { "NextMarker": Nothing, "SizeConstraintSets": Nothing }
 
 
 
 -- | <p>A request to list the <a>SqlInjectionMatchSet</a> objects created by the current AWS account.</p>
 newtype ListSqlInjectionMatchSetsRequest = ListSqlInjectionMatchSetsRequest 
-  { "NextMarker" :: NullOrUndefined (NextMarker)
-  , "Limit" :: NullOrUndefined (PaginationLimit)
+  { "NextMarker" :: Maybe (NextMarker)
+  , "Limit" :: Maybe (PaginationLimit)
   }
 derive instance newtypeListSqlInjectionMatchSetsRequest :: Newtype ListSqlInjectionMatchSetsRequest _
 derive instance repGenericListSqlInjectionMatchSetsRequest :: Generic ListSqlInjectionMatchSetsRequest _
@@ -2788,19 +2787,19 @@ instance encodeListSqlInjectionMatchSetsRequest :: Encode ListSqlInjectionMatchS
 
 -- | Constructs ListSqlInjectionMatchSetsRequest from required parameters
 newListSqlInjectionMatchSetsRequest :: ListSqlInjectionMatchSetsRequest
-newListSqlInjectionMatchSetsRequest  = ListSqlInjectionMatchSetsRequest { "Limit": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing) }
+newListSqlInjectionMatchSetsRequest  = ListSqlInjectionMatchSetsRequest { "Limit": Nothing, "NextMarker": Nothing }
 
 -- | Constructs ListSqlInjectionMatchSetsRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListSqlInjectionMatchSetsRequest' :: ( { "NextMarker" :: NullOrUndefined (NextMarker) , "Limit" :: NullOrUndefined (PaginationLimit) } -> {"NextMarker" :: NullOrUndefined (NextMarker) , "Limit" :: NullOrUndefined (PaginationLimit) } ) -> ListSqlInjectionMatchSetsRequest
-newListSqlInjectionMatchSetsRequest'  customize = (ListSqlInjectionMatchSetsRequest <<< customize) { "Limit": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing) }
+newListSqlInjectionMatchSetsRequest' :: ( { "NextMarker" :: Maybe (NextMarker) , "Limit" :: Maybe (PaginationLimit) } -> {"NextMarker" :: Maybe (NextMarker) , "Limit" :: Maybe (PaginationLimit) } ) -> ListSqlInjectionMatchSetsRequest
+newListSqlInjectionMatchSetsRequest'  customize = (ListSqlInjectionMatchSetsRequest <<< customize) { "Limit": Nothing, "NextMarker": Nothing }
 
 
 
 -- | <p>The response to a <a>ListSqlInjectionMatchSets</a> request.</p>
 newtype ListSqlInjectionMatchSetsResponse = ListSqlInjectionMatchSetsResponse 
-  { "NextMarker" :: NullOrUndefined (NextMarker)
-  , "SqlInjectionMatchSets" :: NullOrUndefined (SqlInjectionMatchSetSummaries)
+  { "NextMarker" :: Maybe (NextMarker)
+  , "SqlInjectionMatchSets" :: Maybe (SqlInjectionMatchSetSummaries)
   }
 derive instance newtypeListSqlInjectionMatchSetsResponse :: Newtype ListSqlInjectionMatchSetsResponse _
 derive instance repGenericListSqlInjectionMatchSetsResponse :: Generic ListSqlInjectionMatchSetsResponse _
@@ -2810,18 +2809,18 @@ instance encodeListSqlInjectionMatchSetsResponse :: Encode ListSqlInjectionMatch
 
 -- | Constructs ListSqlInjectionMatchSetsResponse from required parameters
 newListSqlInjectionMatchSetsResponse :: ListSqlInjectionMatchSetsResponse
-newListSqlInjectionMatchSetsResponse  = ListSqlInjectionMatchSetsResponse { "NextMarker": (NullOrUndefined Nothing), "SqlInjectionMatchSets": (NullOrUndefined Nothing) }
+newListSqlInjectionMatchSetsResponse  = ListSqlInjectionMatchSetsResponse { "NextMarker": Nothing, "SqlInjectionMatchSets": Nothing }
 
 -- | Constructs ListSqlInjectionMatchSetsResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListSqlInjectionMatchSetsResponse' :: ( { "NextMarker" :: NullOrUndefined (NextMarker) , "SqlInjectionMatchSets" :: NullOrUndefined (SqlInjectionMatchSetSummaries) } -> {"NextMarker" :: NullOrUndefined (NextMarker) , "SqlInjectionMatchSets" :: NullOrUndefined (SqlInjectionMatchSetSummaries) } ) -> ListSqlInjectionMatchSetsResponse
-newListSqlInjectionMatchSetsResponse'  customize = (ListSqlInjectionMatchSetsResponse <<< customize) { "NextMarker": (NullOrUndefined Nothing), "SqlInjectionMatchSets": (NullOrUndefined Nothing) }
+newListSqlInjectionMatchSetsResponse' :: ( { "NextMarker" :: Maybe (NextMarker) , "SqlInjectionMatchSets" :: Maybe (SqlInjectionMatchSetSummaries) } -> {"NextMarker" :: Maybe (NextMarker) , "SqlInjectionMatchSets" :: Maybe (SqlInjectionMatchSetSummaries) } ) -> ListSqlInjectionMatchSetsResponse
+newListSqlInjectionMatchSetsResponse'  customize = (ListSqlInjectionMatchSetsResponse <<< customize) { "NextMarker": Nothing, "SqlInjectionMatchSets": Nothing }
 
 
 
 newtype ListSubscribedRuleGroupsRequest = ListSubscribedRuleGroupsRequest 
-  { "NextMarker" :: NullOrUndefined (NextMarker)
-  , "Limit" :: NullOrUndefined (PaginationLimit)
+  { "NextMarker" :: Maybe (NextMarker)
+  , "Limit" :: Maybe (PaginationLimit)
   }
 derive instance newtypeListSubscribedRuleGroupsRequest :: Newtype ListSubscribedRuleGroupsRequest _
 derive instance repGenericListSubscribedRuleGroupsRequest :: Generic ListSubscribedRuleGroupsRequest _
@@ -2831,18 +2830,18 @@ instance encodeListSubscribedRuleGroupsRequest :: Encode ListSubscribedRuleGroup
 
 -- | Constructs ListSubscribedRuleGroupsRequest from required parameters
 newListSubscribedRuleGroupsRequest :: ListSubscribedRuleGroupsRequest
-newListSubscribedRuleGroupsRequest  = ListSubscribedRuleGroupsRequest { "Limit": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing) }
+newListSubscribedRuleGroupsRequest  = ListSubscribedRuleGroupsRequest { "Limit": Nothing, "NextMarker": Nothing }
 
 -- | Constructs ListSubscribedRuleGroupsRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListSubscribedRuleGroupsRequest' :: ( { "NextMarker" :: NullOrUndefined (NextMarker) , "Limit" :: NullOrUndefined (PaginationLimit) } -> {"NextMarker" :: NullOrUndefined (NextMarker) , "Limit" :: NullOrUndefined (PaginationLimit) } ) -> ListSubscribedRuleGroupsRequest
-newListSubscribedRuleGroupsRequest'  customize = (ListSubscribedRuleGroupsRequest <<< customize) { "Limit": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing) }
+newListSubscribedRuleGroupsRequest' :: ( { "NextMarker" :: Maybe (NextMarker) , "Limit" :: Maybe (PaginationLimit) } -> {"NextMarker" :: Maybe (NextMarker) , "Limit" :: Maybe (PaginationLimit) } ) -> ListSubscribedRuleGroupsRequest
+newListSubscribedRuleGroupsRequest'  customize = (ListSubscribedRuleGroupsRequest <<< customize) { "Limit": Nothing, "NextMarker": Nothing }
 
 
 
 newtype ListSubscribedRuleGroupsResponse = ListSubscribedRuleGroupsResponse 
-  { "NextMarker" :: NullOrUndefined (NextMarker)
-  , "RuleGroups" :: NullOrUndefined (SubscribedRuleGroupSummaries)
+  { "NextMarker" :: Maybe (NextMarker)
+  , "RuleGroups" :: Maybe (SubscribedRuleGroupSummaries)
   }
 derive instance newtypeListSubscribedRuleGroupsResponse :: Newtype ListSubscribedRuleGroupsResponse _
 derive instance repGenericListSubscribedRuleGroupsResponse :: Generic ListSubscribedRuleGroupsResponse _
@@ -2852,18 +2851,18 @@ instance encodeListSubscribedRuleGroupsResponse :: Encode ListSubscribedRuleGrou
 
 -- | Constructs ListSubscribedRuleGroupsResponse from required parameters
 newListSubscribedRuleGroupsResponse :: ListSubscribedRuleGroupsResponse
-newListSubscribedRuleGroupsResponse  = ListSubscribedRuleGroupsResponse { "NextMarker": (NullOrUndefined Nothing), "RuleGroups": (NullOrUndefined Nothing) }
+newListSubscribedRuleGroupsResponse  = ListSubscribedRuleGroupsResponse { "NextMarker": Nothing, "RuleGroups": Nothing }
 
 -- | Constructs ListSubscribedRuleGroupsResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListSubscribedRuleGroupsResponse' :: ( { "NextMarker" :: NullOrUndefined (NextMarker) , "RuleGroups" :: NullOrUndefined (SubscribedRuleGroupSummaries) } -> {"NextMarker" :: NullOrUndefined (NextMarker) , "RuleGroups" :: NullOrUndefined (SubscribedRuleGroupSummaries) } ) -> ListSubscribedRuleGroupsResponse
-newListSubscribedRuleGroupsResponse'  customize = (ListSubscribedRuleGroupsResponse <<< customize) { "NextMarker": (NullOrUndefined Nothing), "RuleGroups": (NullOrUndefined Nothing) }
+newListSubscribedRuleGroupsResponse' :: ( { "NextMarker" :: Maybe (NextMarker) , "RuleGroups" :: Maybe (SubscribedRuleGroupSummaries) } -> {"NextMarker" :: Maybe (NextMarker) , "RuleGroups" :: Maybe (SubscribedRuleGroupSummaries) } ) -> ListSubscribedRuleGroupsResponse
+newListSubscribedRuleGroupsResponse'  customize = (ListSubscribedRuleGroupsResponse <<< customize) { "NextMarker": Nothing, "RuleGroups": Nothing }
 
 
 
 newtype ListWebACLsRequest = ListWebACLsRequest 
-  { "NextMarker" :: NullOrUndefined (NextMarker)
-  , "Limit" :: NullOrUndefined (PaginationLimit)
+  { "NextMarker" :: Maybe (NextMarker)
+  , "Limit" :: Maybe (PaginationLimit)
   }
 derive instance newtypeListWebACLsRequest :: Newtype ListWebACLsRequest _
 derive instance repGenericListWebACLsRequest :: Generic ListWebACLsRequest _
@@ -2873,18 +2872,18 @@ instance encodeListWebACLsRequest :: Encode ListWebACLsRequest where encode = ge
 
 -- | Constructs ListWebACLsRequest from required parameters
 newListWebACLsRequest :: ListWebACLsRequest
-newListWebACLsRequest  = ListWebACLsRequest { "Limit": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing) }
+newListWebACLsRequest  = ListWebACLsRequest { "Limit": Nothing, "NextMarker": Nothing }
 
 -- | Constructs ListWebACLsRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListWebACLsRequest' :: ( { "NextMarker" :: NullOrUndefined (NextMarker) , "Limit" :: NullOrUndefined (PaginationLimit) } -> {"NextMarker" :: NullOrUndefined (NextMarker) , "Limit" :: NullOrUndefined (PaginationLimit) } ) -> ListWebACLsRequest
-newListWebACLsRequest'  customize = (ListWebACLsRequest <<< customize) { "Limit": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing) }
+newListWebACLsRequest' :: ( { "NextMarker" :: Maybe (NextMarker) , "Limit" :: Maybe (PaginationLimit) } -> {"NextMarker" :: Maybe (NextMarker) , "Limit" :: Maybe (PaginationLimit) } ) -> ListWebACLsRequest
+newListWebACLsRequest'  customize = (ListWebACLsRequest <<< customize) { "Limit": Nothing, "NextMarker": Nothing }
 
 
 
 newtype ListWebACLsResponse = ListWebACLsResponse 
-  { "NextMarker" :: NullOrUndefined (NextMarker)
-  , "WebACLs" :: NullOrUndefined (WebACLSummaries)
+  { "NextMarker" :: Maybe (NextMarker)
+  , "WebACLs" :: Maybe (WebACLSummaries)
   }
 derive instance newtypeListWebACLsResponse :: Newtype ListWebACLsResponse _
 derive instance repGenericListWebACLsResponse :: Generic ListWebACLsResponse _
@@ -2894,19 +2893,19 @@ instance encodeListWebACLsResponse :: Encode ListWebACLsResponse where encode = 
 
 -- | Constructs ListWebACLsResponse from required parameters
 newListWebACLsResponse :: ListWebACLsResponse
-newListWebACLsResponse  = ListWebACLsResponse { "NextMarker": (NullOrUndefined Nothing), "WebACLs": (NullOrUndefined Nothing) }
+newListWebACLsResponse  = ListWebACLsResponse { "NextMarker": Nothing, "WebACLs": Nothing }
 
 -- | Constructs ListWebACLsResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListWebACLsResponse' :: ( { "NextMarker" :: NullOrUndefined (NextMarker) , "WebACLs" :: NullOrUndefined (WebACLSummaries) } -> {"NextMarker" :: NullOrUndefined (NextMarker) , "WebACLs" :: NullOrUndefined (WebACLSummaries) } ) -> ListWebACLsResponse
-newListWebACLsResponse'  customize = (ListWebACLsResponse <<< customize) { "NextMarker": (NullOrUndefined Nothing), "WebACLs": (NullOrUndefined Nothing) }
+newListWebACLsResponse' :: ( { "NextMarker" :: Maybe (NextMarker) , "WebACLs" :: Maybe (WebACLSummaries) } -> {"NextMarker" :: Maybe (NextMarker) , "WebACLs" :: Maybe (WebACLSummaries) } ) -> ListWebACLsResponse
+newListWebACLsResponse'  customize = (ListWebACLsResponse <<< customize) { "NextMarker": Nothing, "WebACLs": Nothing }
 
 
 
 -- | <p>A request to list the <a>XssMatchSet</a> objects created by the current AWS account.</p>
 newtype ListXssMatchSetsRequest = ListXssMatchSetsRequest 
-  { "NextMarker" :: NullOrUndefined (NextMarker)
-  , "Limit" :: NullOrUndefined (PaginationLimit)
+  { "NextMarker" :: Maybe (NextMarker)
+  , "Limit" :: Maybe (PaginationLimit)
   }
 derive instance newtypeListXssMatchSetsRequest :: Newtype ListXssMatchSetsRequest _
 derive instance repGenericListXssMatchSetsRequest :: Generic ListXssMatchSetsRequest _
@@ -2916,19 +2915,19 @@ instance encodeListXssMatchSetsRequest :: Encode ListXssMatchSetsRequest where e
 
 -- | Constructs ListXssMatchSetsRequest from required parameters
 newListXssMatchSetsRequest :: ListXssMatchSetsRequest
-newListXssMatchSetsRequest  = ListXssMatchSetsRequest { "Limit": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing) }
+newListXssMatchSetsRequest  = ListXssMatchSetsRequest { "Limit": Nothing, "NextMarker": Nothing }
 
 -- | Constructs ListXssMatchSetsRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListXssMatchSetsRequest' :: ( { "NextMarker" :: NullOrUndefined (NextMarker) , "Limit" :: NullOrUndefined (PaginationLimit) } -> {"NextMarker" :: NullOrUndefined (NextMarker) , "Limit" :: NullOrUndefined (PaginationLimit) } ) -> ListXssMatchSetsRequest
-newListXssMatchSetsRequest'  customize = (ListXssMatchSetsRequest <<< customize) { "Limit": (NullOrUndefined Nothing), "NextMarker": (NullOrUndefined Nothing) }
+newListXssMatchSetsRequest' :: ( { "NextMarker" :: Maybe (NextMarker) , "Limit" :: Maybe (PaginationLimit) } -> {"NextMarker" :: Maybe (NextMarker) , "Limit" :: Maybe (PaginationLimit) } ) -> ListXssMatchSetsRequest
+newListXssMatchSetsRequest'  customize = (ListXssMatchSetsRequest <<< customize) { "Limit": Nothing, "NextMarker": Nothing }
 
 
 
 -- | <p>The response to a <a>ListXssMatchSets</a> request.</p>
 newtype ListXssMatchSetsResponse = ListXssMatchSetsResponse 
-  { "NextMarker" :: NullOrUndefined (NextMarker)
-  , "XssMatchSets" :: NullOrUndefined (XssMatchSetSummaries)
+  { "NextMarker" :: Maybe (NextMarker)
+  , "XssMatchSets" :: Maybe (XssMatchSetSummaries)
   }
 derive instance newtypeListXssMatchSetsResponse :: Newtype ListXssMatchSetsResponse _
 derive instance repGenericListXssMatchSetsResponse :: Generic ListXssMatchSetsResponse _
@@ -2938,12 +2937,12 @@ instance encodeListXssMatchSetsResponse :: Encode ListXssMatchSetsResponse where
 
 -- | Constructs ListXssMatchSetsResponse from required parameters
 newListXssMatchSetsResponse :: ListXssMatchSetsResponse
-newListXssMatchSetsResponse  = ListXssMatchSetsResponse { "NextMarker": (NullOrUndefined Nothing), "XssMatchSets": (NullOrUndefined Nothing) }
+newListXssMatchSetsResponse  = ListXssMatchSetsResponse { "NextMarker": Nothing, "XssMatchSets": Nothing }
 
 -- | Constructs ListXssMatchSetsResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newListXssMatchSetsResponse' :: ( { "NextMarker" :: NullOrUndefined (NextMarker) , "XssMatchSets" :: NullOrUndefined (XssMatchSetSummaries) } -> {"NextMarker" :: NullOrUndefined (NextMarker) , "XssMatchSets" :: NullOrUndefined (XssMatchSetSummaries) } ) -> ListXssMatchSetsResponse
-newListXssMatchSetsResponse'  customize = (ListXssMatchSetsResponse <<< customize) { "NextMarker": (NullOrUndefined Nothing), "XssMatchSets": (NullOrUndefined Nothing) }
+newListXssMatchSetsResponse' :: ( { "NextMarker" :: Maybe (NextMarker) , "XssMatchSets" :: Maybe (XssMatchSetSummaries) } -> {"NextMarker" :: Maybe (NextMarker) , "XssMatchSets" :: Maybe (XssMatchSetSummaries) } ) -> ListXssMatchSetsResponse
+newListXssMatchSetsResponse'  customize = (ListXssMatchSetsResponse <<< customize) { "NextMarker": Nothing, "XssMatchSets": Nothing }
 
 
 
@@ -3147,8 +3146,8 @@ instance encodePutPermissionPolicyResponse :: Encode PutPermissionPolicyResponse
 -- | <p>A <code>RateBasedRule</code> is identical to a regular <a>Rule</a>, with one addition: a <code>RateBasedRule</code> counts the number of requests that arrive from a specified IP address every five minutes. For example, based on recent requests that you've seen from an attacker, you might create a <code>RateBasedRule</code> that includes the following conditions: </p> <ul> <li> <p>The requests come from 192.0.2.44.</p> </li> <li> <p>They contain the value <code>BadBot</code> in the <code>User-Agent</code> header.</p> </li> </ul> <p>In the rule, you also define the rate limit as 15,000.</p> <p>Requests that meet both of these conditions and exceed 15,000 requests every five minutes trigger the rule's action (block or count), which is defined in the web ACL.</p>
 newtype RateBasedRule = RateBasedRule 
   { "RuleId" :: (ResourceId)
-  , "Name" :: NullOrUndefined (ResourceName)
-  , "MetricName" :: NullOrUndefined (MetricName)
+  , "Name" :: Maybe (ResourceName)
+  , "MetricName" :: Maybe (MetricName)
   , "MatchPredicates" :: (Predicates)
   , "RateKey" :: (RateKey)
   , "RateLimit" :: (RateLimit)
@@ -3161,12 +3160,12 @@ instance encodeRateBasedRule :: Encode RateBasedRule where encode = genericEncod
 
 -- | Constructs RateBasedRule from required parameters
 newRateBasedRule :: Predicates -> RateKey -> RateLimit -> ResourceId -> RateBasedRule
-newRateBasedRule _MatchPredicates _RateKey _RateLimit _RuleId = RateBasedRule { "MatchPredicates": _MatchPredicates, "RateKey": _RateKey, "RateLimit": _RateLimit, "RuleId": _RuleId, "MetricName": (NullOrUndefined Nothing), "Name": (NullOrUndefined Nothing) }
+newRateBasedRule _MatchPredicates _RateKey _RateLimit _RuleId = RateBasedRule { "MatchPredicates": _MatchPredicates, "RateKey": _RateKey, "RateLimit": _RateLimit, "RuleId": _RuleId, "MetricName": Nothing, "Name": Nothing }
 
 -- | Constructs RateBasedRule's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newRateBasedRule' :: Predicates -> RateKey -> RateLimit -> ResourceId -> ( { "RuleId" :: (ResourceId) , "Name" :: NullOrUndefined (ResourceName) , "MetricName" :: NullOrUndefined (MetricName) , "MatchPredicates" :: (Predicates) , "RateKey" :: (RateKey) , "RateLimit" :: (RateLimit) } -> {"RuleId" :: (ResourceId) , "Name" :: NullOrUndefined (ResourceName) , "MetricName" :: NullOrUndefined (MetricName) , "MatchPredicates" :: (Predicates) , "RateKey" :: (RateKey) , "RateLimit" :: (RateLimit) } ) -> RateBasedRule
-newRateBasedRule' _MatchPredicates _RateKey _RateLimit _RuleId customize = (RateBasedRule <<< customize) { "MatchPredicates": _MatchPredicates, "RateKey": _RateKey, "RateLimit": _RateLimit, "RuleId": _RuleId, "MetricName": (NullOrUndefined Nothing), "Name": (NullOrUndefined Nothing) }
+newRateBasedRule' :: Predicates -> RateKey -> RateLimit -> ResourceId -> ( { "RuleId" :: (ResourceId) , "Name" :: Maybe (ResourceName) , "MetricName" :: Maybe (MetricName) , "MatchPredicates" :: (Predicates) , "RateKey" :: (RateKey) , "RateLimit" :: (RateLimit) } -> {"RuleId" :: (ResourceId) , "Name" :: Maybe (ResourceName) , "MetricName" :: Maybe (MetricName) , "MatchPredicates" :: (Predicates) , "RateKey" :: (RateKey) , "RateLimit" :: (RateLimit) } ) -> RateBasedRule
+newRateBasedRule' _MatchPredicates _RateKey _RateLimit _RuleId customize = (RateBasedRule <<< customize) { "MatchPredicates": _MatchPredicates, "RateKey": _RateKey, "RateLimit": _RateLimit, "RuleId": _RuleId, "MetricName": Nothing, "Name": Nothing }
 
 
 
@@ -3190,9 +3189,9 @@ instance encodeRateLimit :: Encode RateLimit where encode = genericEncode option
 
 -- | <p>In a <a>GetRegexMatchSet</a> request, <code>RegexMatchSet</code> is a complex type that contains the <code>RegexMatchSetId</code> and <code>Name</code> of a <code>RegexMatchSet</code>, and the values that you specified when you updated the <code>RegexMatchSet</code>.</p> <p> The values are contained in a <code>RegexMatchTuple</code> object, which specify the parts of web requests that you want AWS WAF to inspect and the values that you want AWS WAF to search for. If a <code>RegexMatchSet</code> contains more than one <code>RegexMatchTuple</code> object, a request needs to match the settings in only one <code>ByteMatchTuple</code> to be considered a match.</p>
 newtype RegexMatchSet = RegexMatchSet 
-  { "RegexMatchSetId" :: NullOrUndefined (ResourceId)
-  , "Name" :: NullOrUndefined (ResourceName)
-  , "RegexMatchTuples" :: NullOrUndefined (RegexMatchTuples)
+  { "RegexMatchSetId" :: Maybe (ResourceId)
+  , "Name" :: Maybe (ResourceName)
+  , "RegexMatchTuples" :: Maybe (RegexMatchTuples)
   }
 derive instance newtypeRegexMatchSet :: Newtype RegexMatchSet _
 derive instance repGenericRegexMatchSet :: Generic RegexMatchSet _
@@ -3202,12 +3201,12 @@ instance encodeRegexMatchSet :: Encode RegexMatchSet where encode = genericEncod
 
 -- | Constructs RegexMatchSet from required parameters
 newRegexMatchSet :: RegexMatchSet
-newRegexMatchSet  = RegexMatchSet { "Name": (NullOrUndefined Nothing), "RegexMatchSetId": (NullOrUndefined Nothing), "RegexMatchTuples": (NullOrUndefined Nothing) }
+newRegexMatchSet  = RegexMatchSet { "Name": Nothing, "RegexMatchSetId": Nothing, "RegexMatchTuples": Nothing }
 
 -- | Constructs RegexMatchSet's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newRegexMatchSet' :: ( { "RegexMatchSetId" :: NullOrUndefined (ResourceId) , "Name" :: NullOrUndefined (ResourceName) , "RegexMatchTuples" :: NullOrUndefined (RegexMatchTuples) } -> {"RegexMatchSetId" :: NullOrUndefined (ResourceId) , "Name" :: NullOrUndefined (ResourceName) , "RegexMatchTuples" :: NullOrUndefined (RegexMatchTuples) } ) -> RegexMatchSet
-newRegexMatchSet'  customize = (RegexMatchSet <<< customize) { "Name": (NullOrUndefined Nothing), "RegexMatchSetId": (NullOrUndefined Nothing), "RegexMatchTuples": (NullOrUndefined Nothing) }
+newRegexMatchSet' :: ( { "RegexMatchSetId" :: Maybe (ResourceId) , "Name" :: Maybe (ResourceName) , "RegexMatchTuples" :: Maybe (RegexMatchTuples) } -> {"RegexMatchSetId" :: Maybe (ResourceId) , "Name" :: Maybe (ResourceName) , "RegexMatchTuples" :: Maybe (RegexMatchTuples) } ) -> RegexMatchSet
+newRegexMatchSet'  customize = (RegexMatchSet <<< customize) { "Name": Nothing, "RegexMatchSetId": Nothing, "RegexMatchTuples": Nothing }
 
 
 
@@ -3308,7 +3307,7 @@ instance encodeRegexMatchTuples :: Encode RegexMatchTuples where encode = generi
 -- | <p>The <code>RegexPatternSet</code> specifies the regular expression (regex) pattern that you want AWS WAF to search for, such as <code>B[a@]dB[o0]t</code>. You can then configure AWS WAF to reject those requests.</p>
 newtype RegexPatternSet = RegexPatternSet 
   { "RegexPatternSetId" :: (ResourceId)
-  , "Name" :: NullOrUndefined (ResourceName)
+  , "Name" :: Maybe (ResourceName)
   , "RegexPatternStrings" :: (RegexPatternStrings)
   }
 derive instance newtypeRegexPatternSet :: Newtype RegexPatternSet _
@@ -3319,12 +3318,12 @@ instance encodeRegexPatternSet :: Encode RegexPatternSet where encode = genericE
 
 -- | Constructs RegexPatternSet from required parameters
 newRegexPatternSet :: ResourceId -> RegexPatternStrings -> RegexPatternSet
-newRegexPatternSet _RegexPatternSetId _RegexPatternStrings = RegexPatternSet { "RegexPatternSetId": _RegexPatternSetId, "RegexPatternStrings": _RegexPatternStrings, "Name": (NullOrUndefined Nothing) }
+newRegexPatternSet _RegexPatternSetId _RegexPatternStrings = RegexPatternSet { "RegexPatternSetId": _RegexPatternSetId, "RegexPatternStrings": _RegexPatternStrings, "Name": Nothing }
 
 -- | Constructs RegexPatternSet's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newRegexPatternSet' :: ResourceId -> RegexPatternStrings -> ( { "RegexPatternSetId" :: (ResourceId) , "Name" :: NullOrUndefined (ResourceName) , "RegexPatternStrings" :: (RegexPatternStrings) } -> {"RegexPatternSetId" :: (ResourceId) , "Name" :: NullOrUndefined (ResourceName) , "RegexPatternStrings" :: (RegexPatternStrings) } ) -> RegexPatternSet
-newRegexPatternSet' _RegexPatternSetId _RegexPatternStrings customize = (RegexPatternSet <<< customize) { "RegexPatternSetId": _RegexPatternSetId, "RegexPatternStrings": _RegexPatternStrings, "Name": (NullOrUndefined Nothing) }
+newRegexPatternSet' :: ResourceId -> RegexPatternStrings -> ( { "RegexPatternSetId" :: (ResourceId) , "Name" :: Maybe (ResourceName) , "RegexPatternStrings" :: (RegexPatternStrings) } -> {"RegexPatternSetId" :: (ResourceId) , "Name" :: Maybe (ResourceName) , "RegexPatternStrings" :: (RegexPatternStrings) } ) -> RegexPatternSet
+newRegexPatternSet' _RegexPatternSetId _RegexPatternStrings customize = (RegexPatternSet <<< customize) { "RegexPatternSetId": _RegexPatternSetId, "RegexPatternStrings": _RegexPatternStrings, "Name": Nothing }
 
 
 
@@ -3438,8 +3437,8 @@ instance encodeResourceName :: Encode ResourceName where encode = genericEncode 
 -- | <p>A combination of <a>ByteMatchSet</a>, <a>IPSet</a>, and/or <a>SqlInjectionMatchSet</a> objects that identify the web requests that you want to allow, block, or count. For example, you might create a <code>Rule</code> that includes the following predicates:</p> <ul> <li> <p>An <code>IPSet</code> that causes AWS WAF to search for web requests that originate from the IP address <code>192.0.2.44</code> </p> </li> <li> <p>A <code>ByteMatchSet</code> that causes AWS WAF to search for web requests for which the value of the <code>User-Agent</code> header is <code>BadBot</code>.</p> </li> </ul> <p>To match the settings in this <code>Rule</code>, a request must originate from <code>192.0.2.44</code> AND include a <code>User-Agent</code> header for which the value is <code>BadBot</code>.</p>
 newtype Rule = Rule 
   { "RuleId" :: (ResourceId)
-  , "Name" :: NullOrUndefined (ResourceName)
-  , "MetricName" :: NullOrUndefined (MetricName)
+  , "Name" :: Maybe (ResourceName)
+  , "MetricName" :: Maybe (MetricName)
   , "Predicates" :: (Predicates)
   }
 derive instance newtypeRule :: Newtype Rule _
@@ -3450,20 +3449,20 @@ instance encodeRule :: Encode Rule where encode = genericEncode options
 
 -- | Constructs Rule from required parameters
 newRule :: Predicates -> ResourceId -> Rule
-newRule _Predicates _RuleId = Rule { "Predicates": _Predicates, "RuleId": _RuleId, "MetricName": (NullOrUndefined Nothing), "Name": (NullOrUndefined Nothing) }
+newRule _Predicates _RuleId = Rule { "Predicates": _Predicates, "RuleId": _RuleId, "MetricName": Nothing, "Name": Nothing }
 
 -- | Constructs Rule's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newRule' :: Predicates -> ResourceId -> ( { "RuleId" :: (ResourceId) , "Name" :: NullOrUndefined (ResourceName) , "MetricName" :: NullOrUndefined (MetricName) , "Predicates" :: (Predicates) } -> {"RuleId" :: (ResourceId) , "Name" :: NullOrUndefined (ResourceName) , "MetricName" :: NullOrUndefined (MetricName) , "Predicates" :: (Predicates) } ) -> Rule
-newRule' _Predicates _RuleId customize = (Rule <<< customize) { "Predicates": _Predicates, "RuleId": _RuleId, "MetricName": (NullOrUndefined Nothing), "Name": (NullOrUndefined Nothing) }
+newRule' :: Predicates -> ResourceId -> ( { "RuleId" :: (ResourceId) , "Name" :: Maybe (ResourceName) , "MetricName" :: Maybe (MetricName) , "Predicates" :: (Predicates) } -> {"RuleId" :: (ResourceId) , "Name" :: Maybe (ResourceName) , "MetricName" :: Maybe (MetricName) , "Predicates" :: (Predicates) } ) -> Rule
+newRule' _Predicates _RuleId customize = (Rule <<< customize) { "Predicates": _Predicates, "RuleId": _RuleId, "MetricName": Nothing, "Name": Nothing }
 
 
 
 -- | <p>A collection of predefined rules that you can add to a web ACL.</p> <p>Rule groups are subject to the following limits:</p> <ul> <li> <p>Three rule groups per account. You can request an increase to this limit by contacting customer support.</p> </li> <li> <p>One rule group per web ACL.</p> </li> <li> <p>Ten rules per rule group.</p> </li> </ul>
 newtype RuleGroup = RuleGroup 
   { "RuleGroupId" :: (ResourceId)
-  , "Name" :: NullOrUndefined (ResourceName)
-  , "MetricName" :: NullOrUndefined (MetricName)
+  , "Name" :: Maybe (ResourceName)
+  , "MetricName" :: Maybe (MetricName)
   }
 derive instance newtypeRuleGroup :: Newtype RuleGroup _
 derive instance repGenericRuleGroup :: Generic RuleGroup _
@@ -3473,12 +3472,12 @@ instance encodeRuleGroup :: Encode RuleGroup where encode = genericEncode option
 
 -- | Constructs RuleGroup from required parameters
 newRuleGroup :: ResourceId -> RuleGroup
-newRuleGroup _RuleGroupId = RuleGroup { "RuleGroupId": _RuleGroupId, "MetricName": (NullOrUndefined Nothing), "Name": (NullOrUndefined Nothing) }
+newRuleGroup _RuleGroupId = RuleGroup { "RuleGroupId": _RuleGroupId, "MetricName": Nothing, "Name": Nothing }
 
 -- | Constructs RuleGroup's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newRuleGroup' :: ResourceId -> ( { "RuleGroupId" :: (ResourceId) , "Name" :: NullOrUndefined (ResourceName) , "MetricName" :: NullOrUndefined (MetricName) } -> {"RuleGroupId" :: (ResourceId) , "Name" :: NullOrUndefined (ResourceName) , "MetricName" :: NullOrUndefined (MetricName) } ) -> RuleGroup
-newRuleGroup' _RuleGroupId customize = (RuleGroup <<< customize) { "RuleGroupId": _RuleGroupId, "MetricName": (NullOrUndefined Nothing), "Name": (NullOrUndefined Nothing) }
+newRuleGroup' :: ResourceId -> ( { "RuleGroupId" :: (ResourceId) , "Name" :: Maybe (ResourceName) , "MetricName" :: Maybe (MetricName) } -> {"RuleGroupId" :: (ResourceId) , "Name" :: Maybe (ResourceName) , "MetricName" :: Maybe (MetricName) } ) -> RuleGroup
+newRuleGroup' _RuleGroupId customize = (RuleGroup <<< customize) { "RuleGroupId": _RuleGroupId, "MetricName": Nothing, "Name": Nothing }
 
 
 
@@ -3628,9 +3627,9 @@ instance encodeSampleWeight :: Encode SampleWeight where encode = genericEncode 
 newtype SampledHTTPRequest = SampledHTTPRequest 
   { "Request" :: (HTTPRequest)
   , "Weight" :: (SampleWeight)
-  , "Timestamp" :: NullOrUndefined (Types.Timestamp)
-  , "Action" :: NullOrUndefined (Action)
-  , "RuleWithinRuleGroup" :: NullOrUndefined (ResourceId)
+  , "Timestamp" :: Maybe (Types.Timestamp)
+  , "Action" :: Maybe (Action)
+  , "RuleWithinRuleGroup" :: Maybe (ResourceId)
   }
 derive instance newtypeSampledHTTPRequest :: Newtype SampledHTTPRequest _
 derive instance repGenericSampledHTTPRequest :: Generic SampledHTTPRequest _
@@ -3640,12 +3639,12 @@ instance encodeSampledHTTPRequest :: Encode SampledHTTPRequest where encode = ge
 
 -- | Constructs SampledHTTPRequest from required parameters
 newSampledHTTPRequest :: HTTPRequest -> SampleWeight -> SampledHTTPRequest
-newSampledHTTPRequest _Request _Weight = SampledHTTPRequest { "Request": _Request, "Weight": _Weight, "Action": (NullOrUndefined Nothing), "RuleWithinRuleGroup": (NullOrUndefined Nothing), "Timestamp": (NullOrUndefined Nothing) }
+newSampledHTTPRequest _Request _Weight = SampledHTTPRequest { "Request": _Request, "Weight": _Weight, "Action": Nothing, "RuleWithinRuleGroup": Nothing, "Timestamp": Nothing }
 
 -- | Constructs SampledHTTPRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newSampledHTTPRequest' :: HTTPRequest -> SampleWeight -> ( { "Request" :: (HTTPRequest) , "Weight" :: (SampleWeight) , "Timestamp" :: NullOrUndefined (Types.Timestamp) , "Action" :: NullOrUndefined (Action) , "RuleWithinRuleGroup" :: NullOrUndefined (ResourceId) } -> {"Request" :: (HTTPRequest) , "Weight" :: (SampleWeight) , "Timestamp" :: NullOrUndefined (Types.Timestamp) , "Action" :: NullOrUndefined (Action) , "RuleWithinRuleGroup" :: NullOrUndefined (ResourceId) } ) -> SampledHTTPRequest
-newSampledHTTPRequest' _Request _Weight customize = (SampledHTTPRequest <<< customize) { "Request": _Request, "Weight": _Weight, "Action": (NullOrUndefined Nothing), "RuleWithinRuleGroup": (NullOrUndefined Nothing), "Timestamp": (NullOrUndefined Nothing) }
+newSampledHTTPRequest' :: HTTPRequest -> SampleWeight -> ( { "Request" :: (HTTPRequest) , "Weight" :: (SampleWeight) , "Timestamp" :: Maybe (Types.Timestamp) , "Action" :: Maybe (Action) , "RuleWithinRuleGroup" :: Maybe (ResourceId) } -> {"Request" :: (HTTPRequest) , "Weight" :: (SampleWeight) , "Timestamp" :: Maybe (Types.Timestamp) , "Action" :: Maybe (Action) , "RuleWithinRuleGroup" :: Maybe (ResourceId) } ) -> SampledHTTPRequest
+newSampledHTTPRequest' _Request _Weight customize = (SampledHTTPRequest <<< customize) { "Request": _Request, "Weight": _Weight, "Action": Nothing, "RuleWithinRuleGroup": Nothing, "Timestamp": Nothing }
 
 
 
@@ -3694,7 +3693,7 @@ newSizeConstraint' _ComparisonOperator _FieldToMatch _Size _TextTransformation c
 -- | <p>A complex type that contains <code>SizeConstraint</code> objects, which specify the parts of web requests that you want AWS WAF to inspect the size of. If a <code>SizeConstraintSet</code> contains more than one <code>SizeConstraint</code> object, a request only needs to match one constraint to be considered a match.</p>
 newtype SizeConstraintSet = SizeConstraintSet 
   { "SizeConstraintSetId" :: (ResourceId)
-  , "Name" :: NullOrUndefined (ResourceName)
+  , "Name" :: Maybe (ResourceName)
   , "SizeConstraints" :: (SizeConstraints)
   }
 derive instance newtypeSizeConstraintSet :: Newtype SizeConstraintSet _
@@ -3705,12 +3704,12 @@ instance encodeSizeConstraintSet :: Encode SizeConstraintSet where encode = gene
 
 -- | Constructs SizeConstraintSet from required parameters
 newSizeConstraintSet :: ResourceId -> SizeConstraints -> SizeConstraintSet
-newSizeConstraintSet _SizeConstraintSetId _SizeConstraints = SizeConstraintSet { "SizeConstraintSetId": _SizeConstraintSetId, "SizeConstraints": _SizeConstraints, "Name": (NullOrUndefined Nothing) }
+newSizeConstraintSet _SizeConstraintSetId _SizeConstraints = SizeConstraintSet { "SizeConstraintSetId": _SizeConstraintSetId, "SizeConstraints": _SizeConstraints, "Name": Nothing }
 
 -- | Constructs SizeConstraintSet's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newSizeConstraintSet' :: ResourceId -> SizeConstraints -> ( { "SizeConstraintSetId" :: (ResourceId) , "Name" :: NullOrUndefined (ResourceName) , "SizeConstraints" :: (SizeConstraints) } -> {"SizeConstraintSetId" :: (ResourceId) , "Name" :: NullOrUndefined (ResourceName) , "SizeConstraints" :: (SizeConstraints) } ) -> SizeConstraintSet
-newSizeConstraintSet' _SizeConstraintSetId _SizeConstraints customize = (SizeConstraintSet <<< customize) { "SizeConstraintSetId": _SizeConstraintSetId, "SizeConstraints": _SizeConstraints, "Name": (NullOrUndefined Nothing) }
+newSizeConstraintSet' :: ResourceId -> SizeConstraints -> ( { "SizeConstraintSetId" :: (ResourceId) , "Name" :: Maybe (ResourceName) , "SizeConstraints" :: (SizeConstraints) } -> {"SizeConstraintSetId" :: (ResourceId) , "Name" :: Maybe (ResourceName) , "SizeConstraints" :: (SizeConstraints) } ) -> SizeConstraintSet
+newSizeConstraintSet' _SizeConstraintSetId _SizeConstraints customize = (SizeConstraintSet <<< customize) { "SizeConstraintSetId": _SizeConstraintSetId, "SizeConstraints": _SizeConstraints, "Name": Nothing }
 
 
 
@@ -3788,7 +3787,7 @@ instance encodeSizeConstraints :: Encode SizeConstraints where encode = genericE
 -- | <p>A complex type that contains <code>SqlInjectionMatchTuple</code> objects, which specify the parts of web requests that you want AWS WAF to inspect for snippets of malicious SQL code and, if you want AWS WAF to inspect a header, the name of the header. If a <code>SqlInjectionMatchSet</code> contains more than one <code>SqlInjectionMatchTuple</code> object, a request needs to include snippets of SQL code in only one of the specified parts of the request to be considered a match.</p>
 newtype SqlInjectionMatchSet = SqlInjectionMatchSet 
   { "SqlInjectionMatchSetId" :: (ResourceId)
-  , "Name" :: NullOrUndefined (ResourceName)
+  , "Name" :: Maybe (ResourceName)
   , "SqlInjectionMatchTuples" :: (SqlInjectionMatchTuples)
   }
 derive instance newtypeSqlInjectionMatchSet :: Newtype SqlInjectionMatchSet _
@@ -3799,12 +3798,12 @@ instance encodeSqlInjectionMatchSet :: Encode SqlInjectionMatchSet where encode 
 
 -- | Constructs SqlInjectionMatchSet from required parameters
 newSqlInjectionMatchSet :: ResourceId -> SqlInjectionMatchTuples -> SqlInjectionMatchSet
-newSqlInjectionMatchSet _SqlInjectionMatchSetId _SqlInjectionMatchTuples = SqlInjectionMatchSet { "SqlInjectionMatchSetId": _SqlInjectionMatchSetId, "SqlInjectionMatchTuples": _SqlInjectionMatchTuples, "Name": (NullOrUndefined Nothing) }
+newSqlInjectionMatchSet _SqlInjectionMatchSetId _SqlInjectionMatchTuples = SqlInjectionMatchSet { "SqlInjectionMatchSetId": _SqlInjectionMatchSetId, "SqlInjectionMatchTuples": _SqlInjectionMatchTuples, "Name": Nothing }
 
 -- | Constructs SqlInjectionMatchSet's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newSqlInjectionMatchSet' :: ResourceId -> SqlInjectionMatchTuples -> ( { "SqlInjectionMatchSetId" :: (ResourceId) , "Name" :: NullOrUndefined (ResourceName) , "SqlInjectionMatchTuples" :: (SqlInjectionMatchTuples) } -> {"SqlInjectionMatchSetId" :: (ResourceId) , "Name" :: NullOrUndefined (ResourceName) , "SqlInjectionMatchTuples" :: (SqlInjectionMatchTuples) } ) -> SqlInjectionMatchSet
-newSqlInjectionMatchSet' _SqlInjectionMatchSetId _SqlInjectionMatchTuples customize = (SqlInjectionMatchSet <<< customize) { "SqlInjectionMatchSetId": _SqlInjectionMatchSetId, "SqlInjectionMatchTuples": _SqlInjectionMatchTuples, "Name": (NullOrUndefined Nothing) }
+newSqlInjectionMatchSet' :: ResourceId -> SqlInjectionMatchTuples -> ( { "SqlInjectionMatchSetId" :: (ResourceId) , "Name" :: Maybe (ResourceName) , "SqlInjectionMatchTuples" :: (SqlInjectionMatchTuples) } -> {"SqlInjectionMatchSetId" :: (ResourceId) , "Name" :: Maybe (ResourceName) , "SqlInjectionMatchTuples" :: (SqlInjectionMatchTuples) } ) -> SqlInjectionMatchSet
+newSqlInjectionMatchSet' _SqlInjectionMatchSetId _SqlInjectionMatchTuples customize = (SqlInjectionMatchSet <<< customize) { "SqlInjectionMatchSetId": _SqlInjectionMatchSetId, "SqlInjectionMatchTuples": _SqlInjectionMatchTuples, "Name": Nothing }
 
 
 
@@ -3996,7 +3995,7 @@ newUpdateByteMatchSetRequest' _ByteMatchSetId _ChangeToken _Updates customize = 
 
 
 newtype UpdateByteMatchSetResponse = UpdateByteMatchSetResponse 
-  { "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeUpdateByteMatchSetResponse :: Newtype UpdateByteMatchSetResponse _
 derive instance repGenericUpdateByteMatchSetResponse :: Generic UpdateByteMatchSetResponse _
@@ -4006,12 +4005,12 @@ instance encodeUpdateByteMatchSetResponse :: Encode UpdateByteMatchSetResponse w
 
 -- | Constructs UpdateByteMatchSetResponse from required parameters
 newUpdateByteMatchSetResponse :: UpdateByteMatchSetResponse
-newUpdateByteMatchSetResponse  = UpdateByteMatchSetResponse { "ChangeToken": (NullOrUndefined Nothing) }
+newUpdateByteMatchSetResponse  = UpdateByteMatchSetResponse { "ChangeToken": Nothing }
 
 -- | Constructs UpdateByteMatchSetResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newUpdateByteMatchSetResponse' :: ( { "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> UpdateByteMatchSetResponse
-newUpdateByteMatchSetResponse'  customize = (UpdateByteMatchSetResponse <<< customize) { "ChangeToken": (NullOrUndefined Nothing) }
+newUpdateByteMatchSetResponse' :: ( { "ChangeToken" :: Maybe (ChangeToken) } -> {"ChangeToken" :: Maybe (ChangeToken) } ) -> UpdateByteMatchSetResponse
+newUpdateByteMatchSetResponse'  customize = (UpdateByteMatchSetResponse <<< customize) { "ChangeToken": Nothing }
 
 
 
@@ -4038,7 +4037,7 @@ newUpdateGeoMatchSetRequest' _ChangeToken _GeoMatchSetId _Updates customize = (U
 
 
 newtype UpdateGeoMatchSetResponse = UpdateGeoMatchSetResponse 
-  { "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeUpdateGeoMatchSetResponse :: Newtype UpdateGeoMatchSetResponse _
 derive instance repGenericUpdateGeoMatchSetResponse :: Generic UpdateGeoMatchSetResponse _
@@ -4048,12 +4047,12 @@ instance encodeUpdateGeoMatchSetResponse :: Encode UpdateGeoMatchSetResponse whe
 
 -- | Constructs UpdateGeoMatchSetResponse from required parameters
 newUpdateGeoMatchSetResponse :: UpdateGeoMatchSetResponse
-newUpdateGeoMatchSetResponse  = UpdateGeoMatchSetResponse { "ChangeToken": (NullOrUndefined Nothing) }
+newUpdateGeoMatchSetResponse  = UpdateGeoMatchSetResponse { "ChangeToken": Nothing }
 
 -- | Constructs UpdateGeoMatchSetResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newUpdateGeoMatchSetResponse' :: ( { "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> UpdateGeoMatchSetResponse
-newUpdateGeoMatchSetResponse'  customize = (UpdateGeoMatchSetResponse <<< customize) { "ChangeToken": (NullOrUndefined Nothing) }
+newUpdateGeoMatchSetResponse' :: ( { "ChangeToken" :: Maybe (ChangeToken) } -> {"ChangeToken" :: Maybe (ChangeToken) } ) -> UpdateGeoMatchSetResponse
+newUpdateGeoMatchSetResponse'  customize = (UpdateGeoMatchSetResponse <<< customize) { "ChangeToken": Nothing }
 
 
 
@@ -4080,7 +4079,7 @@ newUpdateIPSetRequest' _ChangeToken _IPSetId _Updates customize = (UpdateIPSetRe
 
 
 newtype UpdateIPSetResponse = UpdateIPSetResponse 
-  { "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeUpdateIPSetResponse :: Newtype UpdateIPSetResponse _
 derive instance repGenericUpdateIPSetResponse :: Generic UpdateIPSetResponse _
@@ -4090,12 +4089,12 @@ instance encodeUpdateIPSetResponse :: Encode UpdateIPSetResponse where encode = 
 
 -- | Constructs UpdateIPSetResponse from required parameters
 newUpdateIPSetResponse :: UpdateIPSetResponse
-newUpdateIPSetResponse  = UpdateIPSetResponse { "ChangeToken": (NullOrUndefined Nothing) }
+newUpdateIPSetResponse  = UpdateIPSetResponse { "ChangeToken": Nothing }
 
 -- | Constructs UpdateIPSetResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newUpdateIPSetResponse' :: ( { "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> UpdateIPSetResponse
-newUpdateIPSetResponse'  customize = (UpdateIPSetResponse <<< customize) { "ChangeToken": (NullOrUndefined Nothing) }
+newUpdateIPSetResponse' :: ( { "ChangeToken" :: Maybe (ChangeToken) } -> {"ChangeToken" :: Maybe (ChangeToken) } ) -> UpdateIPSetResponse
+newUpdateIPSetResponse'  customize = (UpdateIPSetResponse <<< customize) { "ChangeToken": Nothing }
 
 
 
@@ -4123,7 +4122,7 @@ newUpdateRateBasedRuleRequest' _ChangeToken _RateLimit _RuleId _Updates customiz
 
 
 newtype UpdateRateBasedRuleResponse = UpdateRateBasedRuleResponse 
-  { "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeUpdateRateBasedRuleResponse :: Newtype UpdateRateBasedRuleResponse _
 derive instance repGenericUpdateRateBasedRuleResponse :: Generic UpdateRateBasedRuleResponse _
@@ -4133,12 +4132,12 @@ instance encodeUpdateRateBasedRuleResponse :: Encode UpdateRateBasedRuleResponse
 
 -- | Constructs UpdateRateBasedRuleResponse from required parameters
 newUpdateRateBasedRuleResponse :: UpdateRateBasedRuleResponse
-newUpdateRateBasedRuleResponse  = UpdateRateBasedRuleResponse { "ChangeToken": (NullOrUndefined Nothing) }
+newUpdateRateBasedRuleResponse  = UpdateRateBasedRuleResponse { "ChangeToken": Nothing }
 
 -- | Constructs UpdateRateBasedRuleResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newUpdateRateBasedRuleResponse' :: ( { "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> UpdateRateBasedRuleResponse
-newUpdateRateBasedRuleResponse'  customize = (UpdateRateBasedRuleResponse <<< customize) { "ChangeToken": (NullOrUndefined Nothing) }
+newUpdateRateBasedRuleResponse' :: ( { "ChangeToken" :: Maybe (ChangeToken) } -> {"ChangeToken" :: Maybe (ChangeToken) } ) -> UpdateRateBasedRuleResponse
+newUpdateRateBasedRuleResponse'  customize = (UpdateRateBasedRuleResponse <<< customize) { "ChangeToken": Nothing }
 
 
 
@@ -4165,7 +4164,7 @@ newUpdateRegexMatchSetRequest' _ChangeToken _RegexMatchSetId _Updates customize 
 
 
 newtype UpdateRegexMatchSetResponse = UpdateRegexMatchSetResponse 
-  { "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeUpdateRegexMatchSetResponse :: Newtype UpdateRegexMatchSetResponse _
 derive instance repGenericUpdateRegexMatchSetResponse :: Generic UpdateRegexMatchSetResponse _
@@ -4175,12 +4174,12 @@ instance encodeUpdateRegexMatchSetResponse :: Encode UpdateRegexMatchSetResponse
 
 -- | Constructs UpdateRegexMatchSetResponse from required parameters
 newUpdateRegexMatchSetResponse :: UpdateRegexMatchSetResponse
-newUpdateRegexMatchSetResponse  = UpdateRegexMatchSetResponse { "ChangeToken": (NullOrUndefined Nothing) }
+newUpdateRegexMatchSetResponse  = UpdateRegexMatchSetResponse { "ChangeToken": Nothing }
 
 -- | Constructs UpdateRegexMatchSetResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newUpdateRegexMatchSetResponse' :: ( { "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> UpdateRegexMatchSetResponse
-newUpdateRegexMatchSetResponse'  customize = (UpdateRegexMatchSetResponse <<< customize) { "ChangeToken": (NullOrUndefined Nothing) }
+newUpdateRegexMatchSetResponse' :: ( { "ChangeToken" :: Maybe (ChangeToken) } -> {"ChangeToken" :: Maybe (ChangeToken) } ) -> UpdateRegexMatchSetResponse
+newUpdateRegexMatchSetResponse'  customize = (UpdateRegexMatchSetResponse <<< customize) { "ChangeToken": Nothing }
 
 
 
@@ -4207,7 +4206,7 @@ newUpdateRegexPatternSetRequest' _ChangeToken _RegexPatternSetId _Updates custom
 
 
 newtype UpdateRegexPatternSetResponse = UpdateRegexPatternSetResponse 
-  { "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeUpdateRegexPatternSetResponse :: Newtype UpdateRegexPatternSetResponse _
 derive instance repGenericUpdateRegexPatternSetResponse :: Generic UpdateRegexPatternSetResponse _
@@ -4217,12 +4216,12 @@ instance encodeUpdateRegexPatternSetResponse :: Encode UpdateRegexPatternSetResp
 
 -- | Constructs UpdateRegexPatternSetResponse from required parameters
 newUpdateRegexPatternSetResponse :: UpdateRegexPatternSetResponse
-newUpdateRegexPatternSetResponse  = UpdateRegexPatternSetResponse { "ChangeToken": (NullOrUndefined Nothing) }
+newUpdateRegexPatternSetResponse  = UpdateRegexPatternSetResponse { "ChangeToken": Nothing }
 
 -- | Constructs UpdateRegexPatternSetResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newUpdateRegexPatternSetResponse' :: ( { "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> UpdateRegexPatternSetResponse
-newUpdateRegexPatternSetResponse'  customize = (UpdateRegexPatternSetResponse <<< customize) { "ChangeToken": (NullOrUndefined Nothing) }
+newUpdateRegexPatternSetResponse' :: ( { "ChangeToken" :: Maybe (ChangeToken) } -> {"ChangeToken" :: Maybe (ChangeToken) } ) -> UpdateRegexPatternSetResponse
+newUpdateRegexPatternSetResponse'  customize = (UpdateRegexPatternSetResponse <<< customize) { "ChangeToken": Nothing }
 
 
 
@@ -4249,7 +4248,7 @@ newUpdateRuleGroupRequest' _ChangeToken _RuleGroupId _Updates customize = (Updat
 
 
 newtype UpdateRuleGroupResponse = UpdateRuleGroupResponse 
-  { "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeUpdateRuleGroupResponse :: Newtype UpdateRuleGroupResponse _
 derive instance repGenericUpdateRuleGroupResponse :: Generic UpdateRuleGroupResponse _
@@ -4259,12 +4258,12 @@ instance encodeUpdateRuleGroupResponse :: Encode UpdateRuleGroupResponse where e
 
 -- | Constructs UpdateRuleGroupResponse from required parameters
 newUpdateRuleGroupResponse :: UpdateRuleGroupResponse
-newUpdateRuleGroupResponse  = UpdateRuleGroupResponse { "ChangeToken": (NullOrUndefined Nothing) }
+newUpdateRuleGroupResponse  = UpdateRuleGroupResponse { "ChangeToken": Nothing }
 
 -- | Constructs UpdateRuleGroupResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newUpdateRuleGroupResponse' :: ( { "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> UpdateRuleGroupResponse
-newUpdateRuleGroupResponse'  customize = (UpdateRuleGroupResponse <<< customize) { "ChangeToken": (NullOrUndefined Nothing) }
+newUpdateRuleGroupResponse' :: ( { "ChangeToken" :: Maybe (ChangeToken) } -> {"ChangeToken" :: Maybe (ChangeToken) } ) -> UpdateRuleGroupResponse
+newUpdateRuleGroupResponse'  customize = (UpdateRuleGroupResponse <<< customize) { "ChangeToken": Nothing }
 
 
 
@@ -4291,7 +4290,7 @@ newUpdateRuleRequest' _ChangeToken _RuleId _Updates customize = (UpdateRuleReque
 
 
 newtype UpdateRuleResponse = UpdateRuleResponse 
-  { "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeUpdateRuleResponse :: Newtype UpdateRuleResponse _
 derive instance repGenericUpdateRuleResponse :: Generic UpdateRuleResponse _
@@ -4301,12 +4300,12 @@ instance encodeUpdateRuleResponse :: Encode UpdateRuleResponse where encode = ge
 
 -- | Constructs UpdateRuleResponse from required parameters
 newUpdateRuleResponse :: UpdateRuleResponse
-newUpdateRuleResponse  = UpdateRuleResponse { "ChangeToken": (NullOrUndefined Nothing) }
+newUpdateRuleResponse  = UpdateRuleResponse { "ChangeToken": Nothing }
 
 -- | Constructs UpdateRuleResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newUpdateRuleResponse' :: ( { "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> UpdateRuleResponse
-newUpdateRuleResponse'  customize = (UpdateRuleResponse <<< customize) { "ChangeToken": (NullOrUndefined Nothing) }
+newUpdateRuleResponse' :: ( { "ChangeToken" :: Maybe (ChangeToken) } -> {"ChangeToken" :: Maybe (ChangeToken) } ) -> UpdateRuleResponse
+newUpdateRuleResponse'  customize = (UpdateRuleResponse <<< customize) { "ChangeToken": Nothing }
 
 
 
@@ -4333,7 +4332,7 @@ newUpdateSizeConstraintSetRequest' _ChangeToken _SizeConstraintSetId _Updates cu
 
 
 newtype UpdateSizeConstraintSetResponse = UpdateSizeConstraintSetResponse 
-  { "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeUpdateSizeConstraintSetResponse :: Newtype UpdateSizeConstraintSetResponse _
 derive instance repGenericUpdateSizeConstraintSetResponse :: Generic UpdateSizeConstraintSetResponse _
@@ -4343,12 +4342,12 @@ instance encodeUpdateSizeConstraintSetResponse :: Encode UpdateSizeConstraintSet
 
 -- | Constructs UpdateSizeConstraintSetResponse from required parameters
 newUpdateSizeConstraintSetResponse :: UpdateSizeConstraintSetResponse
-newUpdateSizeConstraintSetResponse  = UpdateSizeConstraintSetResponse { "ChangeToken": (NullOrUndefined Nothing) }
+newUpdateSizeConstraintSetResponse  = UpdateSizeConstraintSetResponse { "ChangeToken": Nothing }
 
 -- | Constructs UpdateSizeConstraintSetResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newUpdateSizeConstraintSetResponse' :: ( { "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> UpdateSizeConstraintSetResponse
-newUpdateSizeConstraintSetResponse'  customize = (UpdateSizeConstraintSetResponse <<< customize) { "ChangeToken": (NullOrUndefined Nothing) }
+newUpdateSizeConstraintSetResponse' :: ( { "ChangeToken" :: Maybe (ChangeToken) } -> {"ChangeToken" :: Maybe (ChangeToken) } ) -> UpdateSizeConstraintSetResponse
+newUpdateSizeConstraintSetResponse'  customize = (UpdateSizeConstraintSetResponse <<< customize) { "ChangeToken": Nothing }
 
 
 
@@ -4377,7 +4376,7 @@ newUpdateSqlInjectionMatchSetRequest' _ChangeToken _SqlInjectionMatchSetId _Upda
 
 -- | <p>The response to an <a>UpdateSqlInjectionMatchSets</a> request.</p>
 newtype UpdateSqlInjectionMatchSetResponse = UpdateSqlInjectionMatchSetResponse 
-  { "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeUpdateSqlInjectionMatchSetResponse :: Newtype UpdateSqlInjectionMatchSetResponse _
 derive instance repGenericUpdateSqlInjectionMatchSetResponse :: Generic UpdateSqlInjectionMatchSetResponse _
@@ -4387,20 +4386,20 @@ instance encodeUpdateSqlInjectionMatchSetResponse :: Encode UpdateSqlInjectionMa
 
 -- | Constructs UpdateSqlInjectionMatchSetResponse from required parameters
 newUpdateSqlInjectionMatchSetResponse :: UpdateSqlInjectionMatchSetResponse
-newUpdateSqlInjectionMatchSetResponse  = UpdateSqlInjectionMatchSetResponse { "ChangeToken": (NullOrUndefined Nothing) }
+newUpdateSqlInjectionMatchSetResponse  = UpdateSqlInjectionMatchSetResponse { "ChangeToken": Nothing }
 
 -- | Constructs UpdateSqlInjectionMatchSetResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newUpdateSqlInjectionMatchSetResponse' :: ( { "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> UpdateSqlInjectionMatchSetResponse
-newUpdateSqlInjectionMatchSetResponse'  customize = (UpdateSqlInjectionMatchSetResponse <<< customize) { "ChangeToken": (NullOrUndefined Nothing) }
+newUpdateSqlInjectionMatchSetResponse' :: ( { "ChangeToken" :: Maybe (ChangeToken) } -> {"ChangeToken" :: Maybe (ChangeToken) } ) -> UpdateSqlInjectionMatchSetResponse
+newUpdateSqlInjectionMatchSetResponse'  customize = (UpdateSqlInjectionMatchSetResponse <<< customize) { "ChangeToken": Nothing }
 
 
 
 newtype UpdateWebACLRequest = UpdateWebACLRequest 
   { "WebACLId" :: (ResourceId)
   , "ChangeToken" :: (ChangeToken)
-  , "Updates" :: NullOrUndefined (WebACLUpdates)
-  , "DefaultAction" :: NullOrUndefined (WafAction)
+  , "Updates" :: Maybe (WebACLUpdates)
+  , "DefaultAction" :: Maybe (WafAction)
   }
 derive instance newtypeUpdateWebACLRequest :: Newtype UpdateWebACLRequest _
 derive instance repGenericUpdateWebACLRequest :: Generic UpdateWebACLRequest _
@@ -4410,17 +4409,17 @@ instance encodeUpdateWebACLRequest :: Encode UpdateWebACLRequest where encode = 
 
 -- | Constructs UpdateWebACLRequest from required parameters
 newUpdateWebACLRequest :: ChangeToken -> ResourceId -> UpdateWebACLRequest
-newUpdateWebACLRequest _ChangeToken _WebACLId = UpdateWebACLRequest { "ChangeToken": _ChangeToken, "WebACLId": _WebACLId, "DefaultAction": (NullOrUndefined Nothing), "Updates": (NullOrUndefined Nothing) }
+newUpdateWebACLRequest _ChangeToken _WebACLId = UpdateWebACLRequest { "ChangeToken": _ChangeToken, "WebACLId": _WebACLId, "DefaultAction": Nothing, "Updates": Nothing }
 
 -- | Constructs UpdateWebACLRequest's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newUpdateWebACLRequest' :: ChangeToken -> ResourceId -> ( { "WebACLId" :: (ResourceId) , "ChangeToken" :: (ChangeToken) , "Updates" :: NullOrUndefined (WebACLUpdates) , "DefaultAction" :: NullOrUndefined (WafAction) } -> {"WebACLId" :: (ResourceId) , "ChangeToken" :: (ChangeToken) , "Updates" :: NullOrUndefined (WebACLUpdates) , "DefaultAction" :: NullOrUndefined (WafAction) } ) -> UpdateWebACLRequest
-newUpdateWebACLRequest' _ChangeToken _WebACLId customize = (UpdateWebACLRequest <<< customize) { "ChangeToken": _ChangeToken, "WebACLId": _WebACLId, "DefaultAction": (NullOrUndefined Nothing), "Updates": (NullOrUndefined Nothing) }
+newUpdateWebACLRequest' :: ChangeToken -> ResourceId -> ( { "WebACLId" :: (ResourceId) , "ChangeToken" :: (ChangeToken) , "Updates" :: Maybe (WebACLUpdates) , "DefaultAction" :: Maybe (WafAction) } -> {"WebACLId" :: (ResourceId) , "ChangeToken" :: (ChangeToken) , "Updates" :: Maybe (WebACLUpdates) , "DefaultAction" :: Maybe (WafAction) } ) -> UpdateWebACLRequest
+newUpdateWebACLRequest' _ChangeToken _WebACLId customize = (UpdateWebACLRequest <<< customize) { "ChangeToken": _ChangeToken, "WebACLId": _WebACLId, "DefaultAction": Nothing, "Updates": Nothing }
 
 
 
 newtype UpdateWebACLResponse = UpdateWebACLResponse 
-  { "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeUpdateWebACLResponse :: Newtype UpdateWebACLResponse _
 derive instance repGenericUpdateWebACLResponse :: Generic UpdateWebACLResponse _
@@ -4430,12 +4429,12 @@ instance encodeUpdateWebACLResponse :: Encode UpdateWebACLResponse where encode 
 
 -- | Constructs UpdateWebACLResponse from required parameters
 newUpdateWebACLResponse :: UpdateWebACLResponse
-newUpdateWebACLResponse  = UpdateWebACLResponse { "ChangeToken": (NullOrUndefined Nothing) }
+newUpdateWebACLResponse  = UpdateWebACLResponse { "ChangeToken": Nothing }
 
 -- | Constructs UpdateWebACLResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newUpdateWebACLResponse' :: ( { "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> UpdateWebACLResponse
-newUpdateWebACLResponse'  customize = (UpdateWebACLResponse <<< customize) { "ChangeToken": (NullOrUndefined Nothing) }
+newUpdateWebACLResponse' :: ( { "ChangeToken" :: Maybe (ChangeToken) } -> {"ChangeToken" :: Maybe (ChangeToken) } ) -> UpdateWebACLResponse
+newUpdateWebACLResponse'  customize = (UpdateWebACLResponse <<< customize) { "ChangeToken": Nothing }
 
 
 
@@ -4464,7 +4463,7 @@ newUpdateXssMatchSetRequest' _ChangeToken _Updates _XssMatchSetId customize = (U
 
 -- | <p>The response to an <a>UpdateXssMatchSets</a> request.</p>
 newtype UpdateXssMatchSetResponse = UpdateXssMatchSetResponse 
-  { "ChangeToken" :: NullOrUndefined (ChangeToken)
+  { "ChangeToken" :: Maybe (ChangeToken)
   }
 derive instance newtypeUpdateXssMatchSetResponse :: Newtype UpdateXssMatchSetResponse _
 derive instance repGenericUpdateXssMatchSetResponse :: Generic UpdateXssMatchSetResponse _
@@ -4474,18 +4473,18 @@ instance encodeUpdateXssMatchSetResponse :: Encode UpdateXssMatchSetResponse whe
 
 -- | Constructs UpdateXssMatchSetResponse from required parameters
 newUpdateXssMatchSetResponse :: UpdateXssMatchSetResponse
-newUpdateXssMatchSetResponse  = UpdateXssMatchSetResponse { "ChangeToken": (NullOrUndefined Nothing) }
+newUpdateXssMatchSetResponse  = UpdateXssMatchSetResponse { "ChangeToken": Nothing }
 
 -- | Constructs UpdateXssMatchSetResponse's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newUpdateXssMatchSetResponse' :: ( { "ChangeToken" :: NullOrUndefined (ChangeToken) } -> {"ChangeToken" :: NullOrUndefined (ChangeToken) } ) -> UpdateXssMatchSetResponse
-newUpdateXssMatchSetResponse'  customize = (UpdateXssMatchSetResponse <<< customize) { "ChangeToken": (NullOrUndefined Nothing) }
+newUpdateXssMatchSetResponse' :: ( { "ChangeToken" :: Maybe (ChangeToken) } -> {"ChangeToken" :: Maybe (ChangeToken) } ) -> UpdateXssMatchSetResponse
+newUpdateXssMatchSetResponse'  customize = (UpdateXssMatchSetResponse <<< customize) { "ChangeToken": Nothing }
 
 
 
 -- | <p>The name specified is invalid.</p>
 newtype WAFDisallowedNameException = WAFDisallowedNameException 
-  { "message" :: NullOrUndefined (ErrorMessage')
+  { "message" :: Maybe (ErrorMessage')
   }
 derive instance newtypeWAFDisallowedNameException :: Newtype WAFDisallowedNameException _
 derive instance repGenericWAFDisallowedNameException :: Generic WAFDisallowedNameException _
@@ -4495,18 +4494,18 @@ instance encodeWAFDisallowedNameException :: Encode WAFDisallowedNameException w
 
 -- | Constructs WAFDisallowedNameException from required parameters
 newWAFDisallowedNameException :: WAFDisallowedNameException
-newWAFDisallowedNameException  = WAFDisallowedNameException { "message": (NullOrUndefined Nothing) }
+newWAFDisallowedNameException  = WAFDisallowedNameException { "message": Nothing }
 
 -- | Constructs WAFDisallowedNameException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newWAFDisallowedNameException' :: ( { "message" :: NullOrUndefined (ErrorMessage') } -> {"message" :: NullOrUndefined (ErrorMessage') } ) -> WAFDisallowedNameException
-newWAFDisallowedNameException'  customize = (WAFDisallowedNameException <<< customize) { "message": (NullOrUndefined Nothing) }
+newWAFDisallowedNameException' :: ( { "message" :: Maybe (ErrorMessage') } -> {"message" :: Maybe (ErrorMessage') } ) -> WAFDisallowedNameException
+newWAFDisallowedNameException'  customize = (WAFDisallowedNameException <<< customize) { "message": Nothing }
 
 
 
 -- | <p>The operation failed because of a system problem, even though the request was valid. Retry your request.</p>
 newtype WAFInternalErrorException = WAFInternalErrorException 
-  { "message" :: NullOrUndefined (ErrorMessage')
+  { "message" :: Maybe (ErrorMessage')
   }
 derive instance newtypeWAFInternalErrorException :: Newtype WAFInternalErrorException _
 derive instance repGenericWAFInternalErrorException :: Generic WAFInternalErrorException _
@@ -4516,12 +4515,12 @@ instance encodeWAFInternalErrorException :: Encode WAFInternalErrorException whe
 
 -- | Constructs WAFInternalErrorException from required parameters
 newWAFInternalErrorException :: WAFInternalErrorException
-newWAFInternalErrorException  = WAFInternalErrorException { "message": (NullOrUndefined Nothing) }
+newWAFInternalErrorException  = WAFInternalErrorException { "message": Nothing }
 
 -- | Constructs WAFInternalErrorException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newWAFInternalErrorException' :: ( { "message" :: NullOrUndefined (ErrorMessage') } -> {"message" :: NullOrUndefined (ErrorMessage') } ) -> WAFInternalErrorException
-newWAFInternalErrorException'  customize = (WAFInternalErrorException <<< customize) { "message": (NullOrUndefined Nothing) }
+newWAFInternalErrorException' :: ( { "message" :: Maybe (ErrorMessage') } -> {"message" :: Maybe (ErrorMessage') } ) -> WAFInternalErrorException
+newWAFInternalErrorException'  customize = (WAFInternalErrorException <<< customize) { "message": Nothing }
 
 
 
@@ -4537,7 +4536,7 @@ instance encodeWAFInvalidAccountException :: Encode WAFInvalidAccountException w
 
 -- | <p>The operation failed because there was nothing to do. For example:</p> <ul> <li> <p>You tried to remove a <code>Rule</code> from a <code>WebACL</code>, but the <code>Rule</code> isn't in the specified <code>WebACL</code>.</p> </li> <li> <p>You tried to remove an IP address from an <code>IPSet</code>, but the IP address isn't in the specified <code>IPSet</code>.</p> </li> <li> <p>You tried to remove a <code>ByteMatchTuple</code> from a <code>ByteMatchSet</code>, but the <code>ByteMatchTuple</code> isn't in the specified <code>WebACL</code>.</p> </li> <li> <p>You tried to add a <code>Rule</code> to a <code>WebACL</code>, but the <code>Rule</code> already exists in the specified <code>WebACL</code>.</p> </li> <li> <p>You tried to add an IP address to an <code>IPSet</code>, but the IP address already exists in the specified <code>IPSet</code>.</p> </li> <li> <p>You tried to add a <code>ByteMatchTuple</code> to a <code>ByteMatchSet</code>, but the <code>ByteMatchTuple</code> already exists in the specified <code>WebACL</code>.</p> </li> </ul>
 newtype WAFInvalidOperationException = WAFInvalidOperationException 
-  { "message" :: NullOrUndefined (ErrorMessage')
+  { "message" :: Maybe (ErrorMessage')
   }
 derive instance newtypeWAFInvalidOperationException :: Newtype WAFInvalidOperationException _
 derive instance repGenericWAFInvalidOperationException :: Generic WAFInvalidOperationException _
@@ -4547,20 +4546,20 @@ instance encodeWAFInvalidOperationException :: Encode WAFInvalidOperationExcepti
 
 -- | Constructs WAFInvalidOperationException from required parameters
 newWAFInvalidOperationException :: WAFInvalidOperationException
-newWAFInvalidOperationException  = WAFInvalidOperationException { "message": (NullOrUndefined Nothing) }
+newWAFInvalidOperationException  = WAFInvalidOperationException { "message": Nothing }
 
 -- | Constructs WAFInvalidOperationException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newWAFInvalidOperationException' :: ( { "message" :: NullOrUndefined (ErrorMessage') } -> {"message" :: NullOrUndefined (ErrorMessage') } ) -> WAFInvalidOperationException
-newWAFInvalidOperationException'  customize = (WAFInvalidOperationException <<< customize) { "message": (NullOrUndefined Nothing) }
+newWAFInvalidOperationException' :: ( { "message" :: Maybe (ErrorMessage') } -> {"message" :: Maybe (ErrorMessage') } ) -> WAFInvalidOperationException
+newWAFInvalidOperationException'  customize = (WAFInvalidOperationException <<< customize) { "message": Nothing }
 
 
 
 -- | <p>The operation failed because AWS WAF didn't recognize a parameter in the request. For example:</p> <ul> <li> <p>You specified an invalid parameter name.</p> </li> <li> <p>You specified an invalid value.</p> </li> <li> <p>You tried to update an object (<code>ByteMatchSet</code>, <code>IPSet</code>, <code>Rule</code>, or <code>WebACL</code>) using an action other than <code>INSERT</code> or <code>DELETE</code>.</p> </li> <li> <p>You tried to create a <code>WebACL</code> with a <code>DefaultAction</code> <code>Type</code> other than <code>ALLOW</code>, <code>BLOCK</code>, or <code>COUNT</code>.</p> </li> <li> <p>You tried to create a <code>RateBasedRule</code> with a <code>RateKey</code> value other than <code>IP</code>.</p> </li> <li> <p>You tried to update a <code>WebACL</code> with a <code>WafAction</code> <code>Type</code> other than <code>ALLOW</code>, <code>BLOCK</code>, or <code>COUNT</code>.</p> </li> <li> <p>You tried to update a <code>ByteMatchSet</code> with a <code>FieldToMatch</code> <code>Type</code> other than HEADER, METHOD, QUERY_STRING, URI, or BODY.</p> </li> <li> <p>You tried to update a <code>ByteMatchSet</code> with a <code>Field</code> of <code>HEADER</code> but no value for <code>Data</code>.</p> </li> <li> <p>Your request references an ARN that is malformed, or corresponds to a resource with which a web ACL cannot be associated.</p> </li> </ul>
 newtype WAFInvalidParameterException = WAFInvalidParameterException 
-  { "field" :: NullOrUndefined (ParameterExceptionField)
-  , "parameter" :: NullOrUndefined (ParameterExceptionParameter)
-  , "reason" :: NullOrUndefined (ParameterExceptionReason)
+  { "field" :: Maybe (ParameterExceptionField)
+  , "parameter" :: Maybe (ParameterExceptionParameter)
+  , "reason" :: Maybe (ParameterExceptionReason)
   }
 derive instance newtypeWAFInvalidParameterException :: Newtype WAFInvalidParameterException _
 derive instance repGenericWAFInvalidParameterException :: Generic WAFInvalidParameterException _
@@ -4570,18 +4569,18 @@ instance encodeWAFInvalidParameterException :: Encode WAFInvalidParameterExcepti
 
 -- | Constructs WAFInvalidParameterException from required parameters
 newWAFInvalidParameterException :: WAFInvalidParameterException
-newWAFInvalidParameterException  = WAFInvalidParameterException { "field": (NullOrUndefined Nothing), "parameter": (NullOrUndefined Nothing), "reason": (NullOrUndefined Nothing) }
+newWAFInvalidParameterException  = WAFInvalidParameterException { "field": Nothing, "parameter": Nothing, "reason": Nothing }
 
 -- | Constructs WAFInvalidParameterException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newWAFInvalidParameterException' :: ( { "field" :: NullOrUndefined (ParameterExceptionField) , "parameter" :: NullOrUndefined (ParameterExceptionParameter) , "reason" :: NullOrUndefined (ParameterExceptionReason) } -> {"field" :: NullOrUndefined (ParameterExceptionField) , "parameter" :: NullOrUndefined (ParameterExceptionParameter) , "reason" :: NullOrUndefined (ParameterExceptionReason) } ) -> WAFInvalidParameterException
-newWAFInvalidParameterException'  customize = (WAFInvalidParameterException <<< customize) { "field": (NullOrUndefined Nothing), "parameter": (NullOrUndefined Nothing), "reason": (NullOrUndefined Nothing) }
+newWAFInvalidParameterException' :: ( { "field" :: Maybe (ParameterExceptionField) , "parameter" :: Maybe (ParameterExceptionParameter) , "reason" :: Maybe (ParameterExceptionReason) } -> {"field" :: Maybe (ParameterExceptionField) , "parameter" :: Maybe (ParameterExceptionParameter) , "reason" :: Maybe (ParameterExceptionReason) } ) -> WAFInvalidParameterException
+newWAFInvalidParameterException'  customize = (WAFInvalidParameterException <<< customize) { "field": Nothing, "parameter": Nothing, "reason": Nothing }
 
 
 
 -- | <p>The operation failed because the specified policy is not in the proper format. </p> <p>The policy is subject to the following restrictions:</p> <ul> <li> <p>You can attach only one policy with each <code>PutPermissionPolicy</code> request.</p> </li> <li> <p>The policy must include an <code>Effect</code>, <code>Action</code> and <code>Principal</code>. </p> </li> <li> <p> <code>Effect</code> must specify <code>Allow</code>.</p> </li> <li> <p>The <code>Action</code> in the policy must be <code>waf:UpdateWebACL</code> or <code>waf-regional:UpdateWebACL</code>. Any extra or wildcard actions in the policy will be rejected.</p> </li> <li> <p>The policy cannot include a <code>Resource</code> parameter.</p> </li> <li> <p>The ARN in the request must be a valid WAF RuleGroup ARN and the RuleGroup must exist in the same region.</p> </li> <li> <p>The user making the request must be the owner of the RuleGroup.</p> </li> <li> <p>Your policy must be composed using IAM Policy version 2012-10-17.</p> </li> </ul>
 newtype WAFInvalidPermissionPolicyException = WAFInvalidPermissionPolicyException 
-  { "message" :: NullOrUndefined (ErrorMessage')
+  { "message" :: Maybe (ErrorMessage')
   }
 derive instance newtypeWAFInvalidPermissionPolicyException :: Newtype WAFInvalidPermissionPolicyException _
 derive instance repGenericWAFInvalidPermissionPolicyException :: Generic WAFInvalidPermissionPolicyException _
@@ -4591,18 +4590,18 @@ instance encodeWAFInvalidPermissionPolicyException :: Encode WAFInvalidPermissio
 
 -- | Constructs WAFInvalidPermissionPolicyException from required parameters
 newWAFInvalidPermissionPolicyException :: WAFInvalidPermissionPolicyException
-newWAFInvalidPermissionPolicyException  = WAFInvalidPermissionPolicyException { "message": (NullOrUndefined Nothing) }
+newWAFInvalidPermissionPolicyException  = WAFInvalidPermissionPolicyException { "message": Nothing }
 
 -- | Constructs WAFInvalidPermissionPolicyException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newWAFInvalidPermissionPolicyException' :: ( { "message" :: NullOrUndefined (ErrorMessage') } -> {"message" :: NullOrUndefined (ErrorMessage') } ) -> WAFInvalidPermissionPolicyException
-newWAFInvalidPermissionPolicyException'  customize = (WAFInvalidPermissionPolicyException <<< customize) { "message": (NullOrUndefined Nothing) }
+newWAFInvalidPermissionPolicyException' :: ( { "message" :: Maybe (ErrorMessage') } -> {"message" :: Maybe (ErrorMessage') } ) -> WAFInvalidPermissionPolicyException
+newWAFInvalidPermissionPolicyException'  customize = (WAFInvalidPermissionPolicyException <<< customize) { "message": Nothing }
 
 
 
 -- | <p>The regular expression (regex) you specified in <code>RegexPatternString</code> is invalid.</p>
 newtype WAFInvalidRegexPatternException = WAFInvalidRegexPatternException 
-  { "message" :: NullOrUndefined (ErrorMessage')
+  { "message" :: Maybe (ErrorMessage')
   }
 derive instance newtypeWAFInvalidRegexPatternException :: Newtype WAFInvalidRegexPatternException _
 derive instance repGenericWAFInvalidRegexPatternException :: Generic WAFInvalidRegexPatternException _
@@ -4612,18 +4611,18 @@ instance encodeWAFInvalidRegexPatternException :: Encode WAFInvalidRegexPatternE
 
 -- | Constructs WAFInvalidRegexPatternException from required parameters
 newWAFInvalidRegexPatternException :: WAFInvalidRegexPatternException
-newWAFInvalidRegexPatternException  = WAFInvalidRegexPatternException { "message": (NullOrUndefined Nothing) }
+newWAFInvalidRegexPatternException  = WAFInvalidRegexPatternException { "message": Nothing }
 
 -- | Constructs WAFInvalidRegexPatternException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newWAFInvalidRegexPatternException' :: ( { "message" :: NullOrUndefined (ErrorMessage') } -> {"message" :: NullOrUndefined (ErrorMessage') } ) -> WAFInvalidRegexPatternException
-newWAFInvalidRegexPatternException'  customize = (WAFInvalidRegexPatternException <<< customize) { "message": (NullOrUndefined Nothing) }
+newWAFInvalidRegexPatternException' :: ( { "message" :: Maybe (ErrorMessage') } -> {"message" :: Maybe (ErrorMessage') } ) -> WAFInvalidRegexPatternException
+newWAFInvalidRegexPatternException'  customize = (WAFInvalidRegexPatternException <<< customize) { "message": Nothing }
 
 
 
 -- | <p>The operation exceeds a resource limit, for example, the maximum number of <code>WebACL</code> objects that you can create for an AWS account. For more information, see <a href="http://docs.aws.amazon.com/waf/latest/developerguide/limits.html">Limits</a> in the <i>AWS WAF Developer Guide</i>.</p>
 newtype WAFLimitsExceededException = WAFLimitsExceededException 
-  { "message" :: NullOrUndefined (ErrorMessage')
+  { "message" :: Maybe (ErrorMessage')
   }
 derive instance newtypeWAFLimitsExceededException :: Newtype WAFLimitsExceededException _
 derive instance repGenericWAFLimitsExceededException :: Generic WAFLimitsExceededException _
@@ -4633,18 +4632,18 @@ instance encodeWAFLimitsExceededException :: Encode WAFLimitsExceededException w
 
 -- | Constructs WAFLimitsExceededException from required parameters
 newWAFLimitsExceededException :: WAFLimitsExceededException
-newWAFLimitsExceededException  = WAFLimitsExceededException { "message": (NullOrUndefined Nothing) }
+newWAFLimitsExceededException  = WAFLimitsExceededException { "message": Nothing }
 
 -- | Constructs WAFLimitsExceededException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newWAFLimitsExceededException' :: ( { "message" :: NullOrUndefined (ErrorMessage') } -> {"message" :: NullOrUndefined (ErrorMessage') } ) -> WAFLimitsExceededException
-newWAFLimitsExceededException'  customize = (WAFLimitsExceededException <<< customize) { "message": (NullOrUndefined Nothing) }
+newWAFLimitsExceededException' :: ( { "message" :: Maybe (ErrorMessage') } -> {"message" :: Maybe (ErrorMessage') } ) -> WAFLimitsExceededException
+newWAFLimitsExceededException'  customize = (WAFLimitsExceededException <<< customize) { "message": Nothing }
 
 
 
 -- | <p>The operation failed because you tried to delete an object that isn't empty. For example:</p> <ul> <li> <p>You tried to delete a <code>WebACL</code> that still contains one or more <code>Rule</code> objects.</p> </li> <li> <p>You tried to delete a <code>Rule</code> that still contains one or more <code>ByteMatchSet</code> objects or other predicates.</p> </li> <li> <p>You tried to delete a <code>ByteMatchSet</code> that contains one or more <code>ByteMatchTuple</code> objects.</p> </li> <li> <p>You tried to delete an <code>IPSet</code> that references one or more IP addresses.</p> </li> </ul>
 newtype WAFNonEmptyEntityException = WAFNonEmptyEntityException 
-  { "message" :: NullOrUndefined (ErrorMessage')
+  { "message" :: Maybe (ErrorMessage')
   }
 derive instance newtypeWAFNonEmptyEntityException :: Newtype WAFNonEmptyEntityException _
 derive instance repGenericWAFNonEmptyEntityException :: Generic WAFNonEmptyEntityException _
@@ -4654,18 +4653,18 @@ instance encodeWAFNonEmptyEntityException :: Encode WAFNonEmptyEntityException w
 
 -- | Constructs WAFNonEmptyEntityException from required parameters
 newWAFNonEmptyEntityException :: WAFNonEmptyEntityException
-newWAFNonEmptyEntityException  = WAFNonEmptyEntityException { "message": (NullOrUndefined Nothing) }
+newWAFNonEmptyEntityException  = WAFNonEmptyEntityException { "message": Nothing }
 
 -- | Constructs WAFNonEmptyEntityException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newWAFNonEmptyEntityException' :: ( { "message" :: NullOrUndefined (ErrorMessage') } -> {"message" :: NullOrUndefined (ErrorMessage') } ) -> WAFNonEmptyEntityException
-newWAFNonEmptyEntityException'  customize = (WAFNonEmptyEntityException <<< customize) { "message": (NullOrUndefined Nothing) }
+newWAFNonEmptyEntityException' :: ( { "message" :: Maybe (ErrorMessage') } -> {"message" :: Maybe (ErrorMessage') } ) -> WAFNonEmptyEntityException
+newWAFNonEmptyEntityException'  customize = (WAFNonEmptyEntityException <<< customize) { "message": Nothing }
 
 
 
 -- | <p>The operation failed because you tried to add an object to or delete an object from another object that doesn't exist. For example:</p> <ul> <li> <p>You tried to add a <code>Rule</code> to or delete a <code>Rule</code> from a <code>WebACL</code> that doesn't exist.</p> </li> <li> <p>You tried to add a <code>ByteMatchSet</code> to or delete a <code>ByteMatchSet</code> from a <code>Rule</code> that doesn't exist.</p> </li> <li> <p>You tried to add an IP address to or delete an IP address from an <code>IPSet</code> that doesn't exist.</p> </li> <li> <p>You tried to add a <code>ByteMatchTuple</code> to or delete a <code>ByteMatchTuple</code> from a <code>ByteMatchSet</code> that doesn't exist.</p> </li> </ul>
 newtype WAFNonexistentContainerException = WAFNonexistentContainerException 
-  { "message" :: NullOrUndefined (ErrorMessage')
+  { "message" :: Maybe (ErrorMessage')
   }
 derive instance newtypeWAFNonexistentContainerException :: Newtype WAFNonexistentContainerException _
 derive instance repGenericWAFNonexistentContainerException :: Generic WAFNonexistentContainerException _
@@ -4675,18 +4674,18 @@ instance encodeWAFNonexistentContainerException :: Encode WAFNonexistentContaine
 
 -- | Constructs WAFNonexistentContainerException from required parameters
 newWAFNonexistentContainerException :: WAFNonexistentContainerException
-newWAFNonexistentContainerException  = WAFNonexistentContainerException { "message": (NullOrUndefined Nothing) }
+newWAFNonexistentContainerException  = WAFNonexistentContainerException { "message": Nothing }
 
 -- | Constructs WAFNonexistentContainerException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newWAFNonexistentContainerException' :: ( { "message" :: NullOrUndefined (ErrorMessage') } -> {"message" :: NullOrUndefined (ErrorMessage') } ) -> WAFNonexistentContainerException
-newWAFNonexistentContainerException'  customize = (WAFNonexistentContainerException <<< customize) { "message": (NullOrUndefined Nothing) }
+newWAFNonexistentContainerException' :: ( { "message" :: Maybe (ErrorMessage') } -> {"message" :: Maybe (ErrorMessage') } ) -> WAFNonexistentContainerException
+newWAFNonexistentContainerException'  customize = (WAFNonexistentContainerException <<< customize) { "message": Nothing }
 
 
 
 -- | <p>The operation failed because the referenced object doesn't exist.</p>
 newtype WAFNonexistentItemException = WAFNonexistentItemException 
-  { "message" :: NullOrUndefined (ErrorMessage')
+  { "message" :: Maybe (ErrorMessage')
   }
 derive instance newtypeWAFNonexistentItemException :: Newtype WAFNonexistentItemException _
 derive instance repGenericWAFNonexistentItemException :: Generic WAFNonexistentItemException _
@@ -4696,18 +4695,18 @@ instance encodeWAFNonexistentItemException :: Encode WAFNonexistentItemException
 
 -- | Constructs WAFNonexistentItemException from required parameters
 newWAFNonexistentItemException :: WAFNonexistentItemException
-newWAFNonexistentItemException  = WAFNonexistentItemException { "message": (NullOrUndefined Nothing) }
+newWAFNonexistentItemException  = WAFNonexistentItemException { "message": Nothing }
 
 -- | Constructs WAFNonexistentItemException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newWAFNonexistentItemException' :: ( { "message" :: NullOrUndefined (ErrorMessage') } -> {"message" :: NullOrUndefined (ErrorMessage') } ) -> WAFNonexistentItemException
-newWAFNonexistentItemException'  customize = (WAFNonexistentItemException <<< customize) { "message": (NullOrUndefined Nothing) }
+newWAFNonexistentItemException' :: ( { "message" :: Maybe (ErrorMessage') } -> {"message" :: Maybe (ErrorMessage') } ) -> WAFNonexistentItemException
+newWAFNonexistentItemException'  customize = (WAFNonexistentItemException <<< customize) { "message": Nothing }
 
 
 
 -- | <p>The operation failed because you tried to delete an object that is still in use. For example:</p> <ul> <li> <p>You tried to delete a <code>ByteMatchSet</code> that is still referenced by a <code>Rule</code>.</p> </li> <li> <p>You tried to delete a <code>Rule</code> that is still referenced by a <code>WebACL</code>.</p> </li> </ul>
 newtype WAFReferencedItemException = WAFReferencedItemException 
-  { "message" :: NullOrUndefined (ErrorMessage')
+  { "message" :: Maybe (ErrorMessage')
   }
 derive instance newtypeWAFReferencedItemException :: Newtype WAFReferencedItemException _
 derive instance repGenericWAFReferencedItemException :: Generic WAFReferencedItemException _
@@ -4717,18 +4716,18 @@ instance encodeWAFReferencedItemException :: Encode WAFReferencedItemException w
 
 -- | Constructs WAFReferencedItemException from required parameters
 newWAFReferencedItemException :: WAFReferencedItemException
-newWAFReferencedItemException  = WAFReferencedItemException { "message": (NullOrUndefined Nothing) }
+newWAFReferencedItemException  = WAFReferencedItemException { "message": Nothing }
 
 -- | Constructs WAFReferencedItemException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newWAFReferencedItemException' :: ( { "message" :: NullOrUndefined (ErrorMessage') } -> {"message" :: NullOrUndefined (ErrorMessage') } ) -> WAFReferencedItemException
-newWAFReferencedItemException'  customize = (WAFReferencedItemException <<< customize) { "message": (NullOrUndefined Nothing) }
+newWAFReferencedItemException' :: ( { "message" :: Maybe (ErrorMessage') } -> {"message" :: Maybe (ErrorMessage') } ) -> WAFReferencedItemException
+newWAFReferencedItemException'  customize = (WAFReferencedItemException <<< customize) { "message": Nothing }
 
 
 
 -- | <p>The operation failed because you tried to create, update, or delete an object by using a change token that has already been used.</p>
 newtype WAFStaleDataException = WAFStaleDataException 
-  { "message" :: NullOrUndefined (ErrorMessage')
+  { "message" :: Maybe (ErrorMessage')
   }
 derive instance newtypeWAFStaleDataException :: Newtype WAFStaleDataException _
 derive instance repGenericWAFStaleDataException :: Generic WAFStaleDataException _
@@ -4738,18 +4737,18 @@ instance encodeWAFStaleDataException :: Encode WAFStaleDataException where encod
 
 -- | Constructs WAFStaleDataException from required parameters
 newWAFStaleDataException :: WAFStaleDataException
-newWAFStaleDataException  = WAFStaleDataException { "message": (NullOrUndefined Nothing) }
+newWAFStaleDataException  = WAFStaleDataException { "message": Nothing }
 
 -- | Constructs WAFStaleDataException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newWAFStaleDataException' :: ( { "message" :: NullOrUndefined (ErrorMessage') } -> {"message" :: NullOrUndefined (ErrorMessage') } ) -> WAFStaleDataException
-newWAFStaleDataException'  customize = (WAFStaleDataException <<< customize) { "message": (NullOrUndefined Nothing) }
+newWAFStaleDataException' :: ( { "message" :: Maybe (ErrorMessage') } -> {"message" :: Maybe (ErrorMessage') } ) -> WAFStaleDataException
+newWAFStaleDataException'  customize = (WAFStaleDataException <<< customize) { "message": Nothing }
 
 
 
 -- | <p>The specified subscription does not exist.</p>
 newtype WAFSubscriptionNotFoundException = WAFSubscriptionNotFoundException 
-  { "message" :: NullOrUndefined (ErrorMessage')
+  { "message" :: Maybe (ErrorMessage')
   }
 derive instance newtypeWAFSubscriptionNotFoundException :: Newtype WAFSubscriptionNotFoundException _
 derive instance repGenericWAFSubscriptionNotFoundException :: Generic WAFSubscriptionNotFoundException _
@@ -4759,12 +4758,12 @@ instance encodeWAFSubscriptionNotFoundException :: Encode WAFSubscriptionNotFoun
 
 -- | Constructs WAFSubscriptionNotFoundException from required parameters
 newWAFSubscriptionNotFoundException :: WAFSubscriptionNotFoundException
-newWAFSubscriptionNotFoundException  = WAFSubscriptionNotFoundException { "message": (NullOrUndefined Nothing) }
+newWAFSubscriptionNotFoundException  = WAFSubscriptionNotFoundException { "message": Nothing }
 
 -- | Constructs WAFSubscriptionNotFoundException's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newWAFSubscriptionNotFoundException' :: ( { "message" :: NullOrUndefined (ErrorMessage') } -> {"message" :: NullOrUndefined (ErrorMessage') } ) -> WAFSubscriptionNotFoundException
-newWAFSubscriptionNotFoundException'  customize = (WAFSubscriptionNotFoundException <<< customize) { "message": (NullOrUndefined Nothing) }
+newWAFSubscriptionNotFoundException' :: ( { "message" :: Maybe (ErrorMessage') } -> {"message" :: Maybe (ErrorMessage') } ) -> WAFSubscriptionNotFoundException
+newWAFSubscriptionNotFoundException'  customize = (WAFSubscriptionNotFoundException <<< customize) { "message": Nothing }
 
 
 
@@ -4840,8 +4839,8 @@ instance encodeWafRuleType :: Encode WafRuleType where encode = genericEncode op
 -- | <p>Contains the <code>Rules</code> that identify the requests that you want to allow, block, or count. In a <code>WebACL</code>, you also specify a default action (<code>ALLOW</code> or <code>BLOCK</code>), and the action for each <code>Rule</code> that you add to a <code>WebACL</code>, for example, block requests from specified IP addresses or block requests from specified referrers. You also associate the <code>WebACL</code> with a CloudFront distribution to identify the requests that you want AWS WAF to filter. If you add more than one <code>Rule</code> to a <code>WebACL</code>, a request needs to match only one of the specifications to be allowed, blocked, or counted. For more information, see <a>UpdateWebACL</a>.</p>
 newtype WebACL = WebACL 
   { "WebACLId" :: (ResourceId)
-  , "Name" :: NullOrUndefined (ResourceName)
-  , "MetricName" :: NullOrUndefined (MetricName)
+  , "Name" :: Maybe (ResourceName)
+  , "MetricName" :: Maybe (MetricName)
   , "DefaultAction" :: (WafAction)
   , "Rules" :: (ActivatedRules)
   }
@@ -4853,12 +4852,12 @@ instance encodeWebACL :: Encode WebACL where encode = genericEncode options
 
 -- | Constructs WebACL from required parameters
 newWebACL :: WafAction -> ActivatedRules -> ResourceId -> WebACL
-newWebACL _DefaultAction _Rules _WebACLId = WebACL { "DefaultAction": _DefaultAction, "Rules": _Rules, "WebACLId": _WebACLId, "MetricName": (NullOrUndefined Nothing), "Name": (NullOrUndefined Nothing) }
+newWebACL _DefaultAction _Rules _WebACLId = WebACL { "DefaultAction": _DefaultAction, "Rules": _Rules, "WebACLId": _WebACLId, "MetricName": Nothing, "Name": Nothing }
 
 -- | Constructs WebACL's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newWebACL' :: WafAction -> ActivatedRules -> ResourceId -> ( { "WebACLId" :: (ResourceId) , "Name" :: NullOrUndefined (ResourceName) , "MetricName" :: NullOrUndefined (MetricName) , "DefaultAction" :: (WafAction) , "Rules" :: (ActivatedRules) } -> {"WebACLId" :: (ResourceId) , "Name" :: NullOrUndefined (ResourceName) , "MetricName" :: NullOrUndefined (MetricName) , "DefaultAction" :: (WafAction) , "Rules" :: (ActivatedRules) } ) -> WebACL
-newWebACL' _DefaultAction _Rules _WebACLId customize = (WebACL <<< customize) { "DefaultAction": _DefaultAction, "Rules": _Rules, "WebACLId": _WebACLId, "MetricName": (NullOrUndefined Nothing), "Name": (NullOrUndefined Nothing) }
+newWebACL' :: WafAction -> ActivatedRules -> ResourceId -> ( { "WebACLId" :: (ResourceId) , "Name" :: Maybe (ResourceName) , "MetricName" :: Maybe (MetricName) , "DefaultAction" :: (WafAction) , "Rules" :: (ActivatedRules) } -> {"WebACLId" :: (ResourceId) , "Name" :: Maybe (ResourceName) , "MetricName" :: Maybe (MetricName) , "DefaultAction" :: (WafAction) , "Rules" :: (ActivatedRules) } ) -> WebACL
+newWebACL' _DefaultAction _Rules _WebACLId customize = (WebACL <<< customize) { "DefaultAction": _DefaultAction, "Rules": _Rules, "WebACLId": _WebACLId, "MetricName": Nothing, "Name": Nothing }
 
 
 
@@ -4927,7 +4926,7 @@ instance encodeWebACLUpdates :: Encode WebACLUpdates where encode = genericEncod
 -- | <p>A complex type that contains <code>XssMatchTuple</code> objects, which specify the parts of web requests that you want AWS WAF to inspect for cross-site scripting attacks and, if you want AWS WAF to inspect a header, the name of the header. If a <code>XssMatchSet</code> contains more than one <code>XssMatchTuple</code> object, a request needs to include cross-site scripting attacks in only one of the specified parts of the request to be considered a match.</p>
 newtype XssMatchSet = XssMatchSet 
   { "XssMatchSetId" :: (ResourceId)
-  , "Name" :: NullOrUndefined (ResourceName)
+  , "Name" :: Maybe (ResourceName)
   , "XssMatchTuples" :: (XssMatchTuples)
   }
 derive instance newtypeXssMatchSet :: Newtype XssMatchSet _
@@ -4938,12 +4937,12 @@ instance encodeXssMatchSet :: Encode XssMatchSet where encode = genericEncode op
 
 -- | Constructs XssMatchSet from required parameters
 newXssMatchSet :: ResourceId -> XssMatchTuples -> XssMatchSet
-newXssMatchSet _XssMatchSetId _XssMatchTuples = XssMatchSet { "XssMatchSetId": _XssMatchSetId, "XssMatchTuples": _XssMatchTuples, "Name": (NullOrUndefined Nothing) }
+newXssMatchSet _XssMatchSetId _XssMatchTuples = XssMatchSet { "XssMatchSetId": _XssMatchSetId, "XssMatchTuples": _XssMatchTuples, "Name": Nothing }
 
 -- | Constructs XssMatchSet's fields from required parameters
 --   This may be useful if you need to immediately overwrite some of the optional values
-newXssMatchSet' :: ResourceId -> XssMatchTuples -> ( { "XssMatchSetId" :: (ResourceId) , "Name" :: NullOrUndefined (ResourceName) , "XssMatchTuples" :: (XssMatchTuples) } -> {"XssMatchSetId" :: (ResourceId) , "Name" :: NullOrUndefined (ResourceName) , "XssMatchTuples" :: (XssMatchTuples) } ) -> XssMatchSet
-newXssMatchSet' _XssMatchSetId _XssMatchTuples customize = (XssMatchSet <<< customize) { "XssMatchSetId": _XssMatchSetId, "XssMatchTuples": _XssMatchTuples, "Name": (NullOrUndefined Nothing) }
+newXssMatchSet' :: ResourceId -> XssMatchTuples -> ( { "XssMatchSetId" :: (ResourceId) , "Name" :: Maybe (ResourceName) , "XssMatchTuples" :: (XssMatchTuples) } -> {"XssMatchSetId" :: (ResourceId) , "Name" :: Maybe (ResourceName) , "XssMatchTuples" :: (XssMatchTuples) } ) -> XssMatchSet
+newXssMatchSet' _XssMatchSetId _XssMatchTuples customize = (XssMatchSet <<< customize) { "XssMatchSetId": _XssMatchSetId, "XssMatchTuples": _XssMatchTuples, "Name": Nothing }
 
 
 
